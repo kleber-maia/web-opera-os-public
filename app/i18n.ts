@@ -5,15 +5,15 @@ export type Locale = (typeof SUPPORTED_LOCALES)[number];
 const en = {
   meta: {
     title: "BobbyOS — Your company. Its own intelligence.",
-    description: "Bobby is the private AI agent inside BobbyOS, turning conversation into structured company work with memory, web execution, and automation.",
-    ogDescription: "Bobby learns the company, works inside BobbyOS, navigates the web, and automates repeatable tasks.",
+    description: "BobbyOS is a self-hosted operating system for your company, with Bobby—a private AI agent—embedded inside.",
+    ogDescription: "BobbyOS evolves with the business through Bobby, its embedded private AI agent.",
   },
   language: { label: "Language", en: "English", pt: "Português (Brasil)", es: "Español (Latinoamérica)" },
   nav: { aria: "Main navigation", homeAria: "BobbyOS home", system: "The system", work: "How it works", modules: "Modules", ownership: "Ownership", access: "Early access" },
   hero: {
-    kickerOne: "Bobby · Private AI agent", kickerTwo: "Company-owned operating system",
+    kickerOne: "Bobby · Private AI agent", kickerTwo: "Self-hosted company OS",
     lineOne: "Your company.", lineTwo: "Its own ", emphasis: "intelligence.",
-    lede: "BobbyOS brings Bobby—your private AI agent—together with company memory, a connected information system, web access, and automations. The agent uses them to understand and operate the business, all inside one company-owned operating system.",
+    lede: "BobbyOS is a self-hosted operating system for your company, with Bobby—a private AI agent—embedded inside. Bobby learns how the business works, operates across the system and the web, and helps BobbyOS evolve as the company changes.",
     stageAria: "The parts of BobbyOS working as one", status: "Online", context: "Working across the company",
     message: "I found two campaigns spending without qualified pipeline. I compared Ads, Pipeline, and the current budget policy.",
     actionLabel: "Prepared action", actionTitle: "Pause Broad Prospecting", approval: "Waiting for your approval", checked: "Context checked",
@@ -22,7 +22,7 @@ const en = {
   systemParts: [
     ["Bobby", "Private agent embedded in BobbyOS", "part-agent"],
     ["Company memory", "Gives Bobby durable company context", "part-memory"],
-    ["Information system", "Work, records, knowledge, workflows", "part-system"],
+    ["Information system", "Created and extended by the company", "part-system"],
     ["Own computer", "A persistent place to operate", "part-computer"],
     ["Open web", "Research and real task execution", "part-web"],
     ["Task automation", "Turns repeatable work into systems", "part-automation"],
@@ -42,7 +42,7 @@ const en = {
   ],
   layers: [
     ["The intelligence", "Bobby, your private AI agent", "The agent isn’t a chatbot waiting in another tab. Embedded in BobbyOS, Bobby learns each company, sees the current screen, uses the open web, and executes or automates real work with approval.", "violet"],
-    ["The information system", "One connected place to run the company", "Customer conversations, relationships, sales, advertising, projects, knowledge, and company records live as connected modules—not scattered subscriptions. BobbyOS can change as the company does.", "cyan"],
+    ["The information system", "A system the company can shape", "BobbyOS holds company work and information in connected, adaptable structures. The company can create new modules and workflows as its needs change.", "cyan"],
     ["The foundation", "A computer of its own", "The agent has a persistent place to work, remember, automate, and improve the information system. The business gets infrastructure that belongs to it—not another rented seat.", "lime"],
     ["The reach", "The open web", "BobbyOS holds the durable context. Bobby can also research, navigate, and operate browser-based tools—bringing the outside world back into one trusted company operating system.", "coral"],
   ],
@@ -76,7 +76,7 @@ const en = {
     newCapability: "New company capability", module: "Vendor onboarding", moduleBody: "Connected to Relationships, Boards, Knowledge, and files.", appears: "Appears inside your BobbyOS",
   },
   modulesSection: {
-    kicker: "A useful system from day one", title: "Every part speaks the same company language.", body: "The modules are distinct working spaces, connected by shared context, permissions, activity, and the embedded agent.", aria: "BobbyOS modules",
+    kicker: "Starting points, not limits", title: "BobbyOS evolves with the company.", body: "These modules are examples of what the system can do today. Your company can create its own modules, workflows, and capabilities as new needs emerge—with Bobby helping turn them into working parts of BobbyOS.", aria: "Examples of BobbyOS modules",
     workspaceKicker: "One installation. Many companies.", workspaceTitle: "Every workspace keeps its own memory, work, identity, and files.", workspaceBody: "Bobby follows the company you are in. Shared administration stays centralized. Business context stays inside its boundary.", workspaceAria: "Three separate company workspaces", workspaceTypes: ["Retail", "Design", "Services"], sharedAdmin: "Shared administration",
   },
   modules: [["Home", "The operating picture"], ["Inbox", "Every customer conversation"], ["Pipeline", "Sales work in motion"], ["Relationships", "People, companies, and history"], ["Ads", "Performance and guarded action"], ["Boards", "Flexible work management"], ["Knowledge", "The company source of truth"]],
@@ -93,15 +93,15 @@ export type Copy = typeof en;
 const ptBR: Copy = {
   meta: {
     title: "BobbyOS — Sua empresa. Com inteligência própria.",
-    description: "Bobby é o agente privado de IA dentro do BobbyOS, transformando conversas em trabalho empresarial estruturado com memória, acesso à web e automação.",
-    ogDescription: "Bobby aprende sobre a empresa, trabalha dentro do BobbyOS, navega na web e automatiza tarefas repetitivas.",
+    description: "O BobbyOS é um sistema operacional hospedado pela própria empresa, com Bobby — um agente privado de IA — integrado.",
+    ogDescription: "O BobbyOS evolui com o negócio por meio de Bobby, seu agente privado de IA integrado.",
   },
   language: { label: "Idioma", en: "English", pt: "Português (Brasil)", es: "Español (Latinoamérica)" },
   nav: { aria: "Navegação principal", homeAria: "Página inicial do BobbyOS", system: "O sistema", work: "Como funciona", modules: "Módulos", ownership: "Controle", access: "Acesso antecipado" },
   hero: {
-    kickerOne: "Bobby · Agente privado de IA", kickerTwo: "Sistema operacional próprio da empresa",
+    kickerOne: "Bobby · Agente privado de IA", kickerTwo: "Sistema operacional com hospedagem própria",
     lineOne: "Sua empresa.", lineTwo: "Com inteligência ", emphasis: "própria.",
-    lede: "O BobbyOS reúne Bobby — seu agente privado de IA —, a memória da empresa, um sistema de informação conectado, acesso à web e automações. O agente usa tudo isso para entender e operar o negócio, dentro de um único sistema operacional próprio da empresa.",
+    lede: "O BobbyOS é um sistema operacional hospedado pela própria empresa, com Bobby — um agente privado de IA — integrado. Bobby aprende como o negócio funciona, atua no sistema e na web e ajuda o BobbyOS a evoluir conforme a empresa muda.",
     stageAria: "As partes do BobbyOS funcionando como uma só", status: "Online", context: "Trabalhando em toda a empresa",
     message: "Encontrei duas campanhas gerando gastos sem oportunidades qualificadas no pipeline. Comparei Anúncios, Pipeline e a política de orçamento atual.",
     actionLabel: "Ação preparada", actionTitle: "Pausar prospecção ampla", approval: "Aguardando sua aprovação", checked: "Contexto verificado",
@@ -110,7 +110,7 @@ const ptBR: Copy = {
   systemParts: [
     ["Bobby", "Agente privado integrado ao BobbyOS", "part-agent"],
     ["Memória da empresa", "Dá a Bobby contexto empresarial duradouro", "part-memory"],
-    ["Sistema de informação", "Trabalho, registros, conhecimento e fluxos", "part-system"],
+    ["Sistema de informação", "Criado e ampliado pela empresa", "part-system"],
     ["Computador próprio", "Um ambiente persistente para operar", "part-computer"],
     ["Web aberta", "Pesquisa e execução de tarefas reais", "part-web"],
     ["Automação de tarefas", "Transforma trabalhos repetitivos em sistemas", "part-automation"],
@@ -130,7 +130,7 @@ const ptBR: Copy = {
   ],
   layers: [
     ["A inteligência", "Bobby, seu agente privado de IA", "O agente não é um chatbot esperando em outra aba. Integrado ao BobbyOS, Bobby aprende sobre cada empresa, vê a tela atual, usa a web aberta e executa ou automatiza trabalhos reais mediante aprovação.", "violet"],
-    ["O sistema de informação", "Um lugar conectado para administrar a empresa", "Conversas com clientes, relacionamentos, vendas, publicidade, projetos, conhecimento e registros vivem em módulos conectados — não em assinaturas dispersas. O BobbyOS evolui junto com a empresa.", "cyan"],
+    ["O sistema de informação", "Um sistema que a empresa pode moldar", "O BobbyOS organiza o trabalho e as informações da empresa em estruturas conectadas e adaptáveis. A empresa pode criar novos módulos e fluxos conforme suas necessidades mudam.", "cyan"],
     ["A base", "Um computador próprio", "O agente tem um ambiente persistente para trabalhar, lembrar, automatizar e melhorar o sistema de informação. A empresa ganha uma infraestrutura que é sua — não mais uma licença alugada.", "lime"],
     ["O alcance", "A web aberta", "O BobbyOS guarda o contexto duradouro. Bobby também pode pesquisar, navegar e operar ferramentas no navegador — trazendo o mundo externo para um único sistema operacional confiável da empresa.", "coral"],
   ],
@@ -164,7 +164,7 @@ const ptBR: Copy = {
     newCapability: "Nova capacidade da empresa", module: "Integração de fornecedores", moduleBody: "Conectado a Relacionamentos, Quadros, Conhecimento e arquivos.", appears: "Disponível dentro do seu BobbyOS",
   },
   modulesSection: {
-    kicker: "Um sistema útil desde o primeiro dia", title: "Todas as partes falam a mesma língua da empresa.", body: "Os módulos são espaços de trabalho distintos, conectados por contexto, permissões, atividades e pelo agente integrado.", aria: "Módulos do BobbyOS",
+    kicker: "Pontos de partida, não limites", title: "O BobbyOS evolui com a empresa.", body: "Estes módulos são exemplos do que o sistema pode fazer hoje. Sua empresa pode criar seus próprios módulos, fluxos e capacidades conforme novas necessidades surgem — com Bobby ajudando a transformá-los em partes funcionais do BobbyOS.", aria: "Exemplos de módulos do BobbyOS",
     workspaceKicker: "Uma instalação. Muitas empresas.", workspaceTitle: "Cada espaço mantém sua própria memória, trabalho, identidade e arquivos.", workspaceBody: "Bobby acompanha a empresa em que você está. A administração compartilhada continua centralizada. O contexto do negócio permanece dentro dos seus limites.", workspaceAria: "Três espaços de trabalho separados", workspaceTypes: ["Varejo", "Design", "Serviços"], sharedAdmin: "Administração compartilhada",
   },
   modules: [["Início", "A visão operacional"], ["Caixa de entrada", "Todas as conversas com clientes"], ["Pipeline", "O trabalho de vendas em movimento"], ["Relacionamentos", "Pessoas, empresas e histórico"], ["Anúncios", "Desempenho e ações controladas"], ["Quadros", "Gestão flexível do trabalho"], ["Conhecimento", "A fonte da verdade da empresa"]],
@@ -179,15 +179,15 @@ const ptBR: Copy = {
 const es419: Copy = {
   meta: {
     title: "BobbyOS — Tu empresa. Con inteligencia propia.",
-    description: "Bobby es el agente privado de IA dentro de BobbyOS, convirtiendo conversaciones en trabajo empresarial estructurado con memoria, acceso web y automatización.",
-    ogDescription: "Bobby aprende sobre la empresa, trabaja dentro de BobbyOS, navega por la web y automatiza tareas repetitivas.",
+    description: "BobbyOS es un sistema operativo autoalojado para tu empresa, con Bobby —un agente privado de IA— integrado.",
+    ogDescription: "BobbyOS evoluciona con el negocio a través de Bobby, su agente privado de IA integrado.",
   },
   language: { label: "Idioma", en: "English", pt: "Português (Brasil)", es: "Español (Latinoamérica)" },
   nav: { aria: "Navegación principal", homeAria: "Inicio de BobbyOS", system: "El sistema", work: "Cómo funciona", modules: "Módulos", ownership: "Control", access: "Acceso anticipado" },
   hero: {
-    kickerOne: "Bobby · Agente privado de IA", kickerTwo: "Sistema operativo propio de la empresa",
+    kickerOne: "Bobby · Agente privado de IA", kickerTwo: "Sistema operativo autoalojado",
     lineOne: "Tu empresa.", lineTwo: "Con inteligencia ", emphasis: "propia.",
-    lede: "BobbyOS reúne a Bobby —tu agente privado de IA— con la memoria empresarial, un sistema de información conectado, acceso web y automatizaciones. El agente usa todo esto para entender y operar el negocio, dentro de un único sistema operativo propio de la empresa.",
+    lede: "BobbyOS es un sistema operativo autoalojado para tu empresa, con Bobby —un agente privado de IA— integrado. Bobby aprende cómo funciona el negocio, trabaja en el sistema y en la web, y ayuda a que BobbyOS evolucione junto con la empresa.",
     stageAria: "Las partes de BobbyOS funcionando como una sola", status: "En línea", context: "Trabajando en toda la empresa",
     message: "Encontré dos campañas con gastos pero sin oportunidades calificadas en el pipeline. Comparé Anuncios, Pipeline y la política de presupuesto actual.",
     actionLabel: "Acción preparada", actionTitle: "Pausar prospección amplia", approval: "Esperando tu aprobación", checked: "Contexto verificado",
@@ -196,7 +196,7 @@ const es419: Copy = {
   systemParts: [
     ["Bobby", "Agente privado integrado en BobbyOS", "part-agent"],
     ["Memoria de la empresa", "Le da a Bobby contexto empresarial duradero", "part-memory"],
-    ["Sistema de información", "Trabajo, registros, conocimiento y flujos", "part-system"],
+    ["Sistema de información", "Creado y ampliado por la empresa", "part-system"],
     ["Computadora propia", "Un entorno persistente para operar", "part-computer"],
     ["Web abierta", "Investigación y ejecución de tareas reales", "part-web"],
     ["Automatización de tareas", "Convierte el trabajo repetitivo en sistemas", "part-automation"],
@@ -216,7 +216,7 @@ const es419: Copy = {
   ],
   layers: [
     ["La inteligencia", "Bobby, tu agente privado de IA", "El agente no es un chatbot esperando en otra pestaña. Integrado en BobbyOS, Bobby aprende de cada empresa, ve la pantalla actual, usa la web abierta y ejecuta o automatiza trabajo real con aprobación.", "violet"],
-    ["El sistema de información", "Un lugar conectado para dirigir la empresa", "Las conversaciones con clientes, las relaciones, las ventas, la publicidad, los proyectos, el conocimiento y los registros viven en módulos conectados, no en suscripciones dispersas. BobbyOS evoluciona junto con la empresa.", "cyan"],
+    ["El sistema de información", "Un sistema que la empresa puede moldear", "BobbyOS organiza el trabajo y la información de la empresa en estructuras conectadas y adaptables. La empresa puede crear nuevos módulos y flujos a medida que cambian sus necesidades.", "cyan"],
     ["La base", "Una computadora propia", "El agente tiene un entorno persistente para trabajar, recordar, automatizar y mejorar el sistema de información. La empresa obtiene infraestructura propia, no otro asiento rentado.", "lime"],
     ["El alcance", "La web abierta", "BobbyOS conserva el contexto duradero. Bobby también puede investigar, navegar y operar herramientas en el navegador, llevando el mundo exterior a un único sistema operativo empresarial confiable.", "coral"],
   ],
@@ -250,7 +250,7 @@ const es419: Copy = {
     newCapability: "Nueva capacidad empresarial", module: "Incorporación de proveedores", moduleBody: "Conectado con Relaciones, Tableros, Conocimiento y archivos.", appears: "Disponible dentro de tu BobbyOS",
   },
   modulesSection: {
-    kicker: "Un sistema útil desde el primer día", title: "Cada parte habla el mismo idioma de la empresa.", body: "Los módulos son espacios de trabajo distintos, conectados por contexto compartido, permisos, actividad y el agente integrado.", aria: "Módulos de BobbyOS",
+    kicker: "Puntos de partida, no límites", title: "BobbyOS evoluciona con la empresa.", body: "Estos módulos son ejemplos de lo que el sistema puede hacer hoy. Tu empresa puede crear sus propios módulos, flujos y capacidades a medida que surgen nuevas necesidades, con Bobby ayudando a convertirlos en partes funcionales de BobbyOS.", aria: "Ejemplos de módulos de BobbyOS",
     workspaceKicker: "Una instalación. Muchas empresas.", workspaceTitle: "Cada espacio conserva su propia memoria, trabajo, identidad y archivos.", workspaceBody: "Bobby sigue a la empresa en la que estás. La administración compartida permanece centralizada. El contexto empresarial se mantiene dentro de sus límites.", workspaceAria: "Tres espacios de trabajo separados", workspaceTypes: ["Comercio", "Diseño", "Servicios"], sharedAdmin: "Administración compartida",
   },
   modules: [["Inicio", "La visión operativa"], ["Bandeja de entrada", "Cada conversación con clientes"], ["Pipeline", "El trabajo de ventas en marcha"], ["Relaciones", "Personas, empresas e historial"], ["Anuncios", "Rendimiento y acciones controladas"], ["Tableros", "Gestión flexible del trabajo"], ["Conocimiento", "La fuente de verdad de la empresa"]],
