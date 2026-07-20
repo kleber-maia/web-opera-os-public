@@ -1,84 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { CSSProperties } from "react";
-
-const systemParts = [
-  { label: "Private AI employee", detail: "Works inside the CompanyOS interface", className: "part-agent" },
-  { label: "Company memory", detail: "Learns each company. Never forgets.", className: "part-memory" },
-  { label: "Company operating system", detail: "Work, records, knowledge, workflows", className: "part-system" },
-  { label: "Own computer", detail: "A persistent place to operate", className: "part-computer" },
-  { label: "Open web", detail: "Research and real task execution", className: "part-web" },
-  { label: "Task automation", detail: "Turns repeatable work into systems", className: "part-automation" },
-];
-
-const agentCapabilities = [
-  {
-    number: "01",
-    eyebrow: "Company memory",
-    title: "Learns each company. Never forgets.",
-    body: "Customers, decisions, standards, history, and working preferences become durable company context. Every workspace keeps its own memory and boundaries.",
-  },
-  {
-    number: "02",
-    eyebrow: "Inside the interface",
-    title: "Your words become structured company work.",
-    body: "The agent lives inside CompanyOS, understands the screen you are viewing, and creates or updates Boards, cards, records, knowledge, schedules, and more from the same conversation.",
-  },
-  {
-    number: "03",
-    eyebrow: "Open-web operator",
-    title: "Navigates the web like a real employee.",
-    body: "It can research, compare, navigate websites, and complete browser-based tasks—then bring the evidence and results back into the company system.",
-  },
-  {
-    number: "04",
-    eyebrow: "Task automation",
-    title: "Automates any repeatable process.",
-    body: "Turn recurring research, follow-up, record work, and multi-step operations into supervised automations that keep running from the company’s own computer.",
-  },
-];
-
-const layers = [
-  {
-    number: "01",
-    eyebrow: "The intelligence",
-    title: "A private AI employee",
-    body: "Not a chatbot waiting in another tab. The agent lives inside CompanyOS, learns each company, sees the current screen, uses the open web, and executes or automates real work with approval.",
-    accent: "violet",
-  },
-  {
-    number: "02",
-    eyebrow: "The company system",
-    title: "One connected place to run the company",
-    body: "Customer conversations, relationships, sales, advertising, projects, knowledge, and company records live as connected modules—not scattered subscriptions. The system can change as the company does.",
-    accent: "cyan",
-  },
-  {
-    number: "03",
-    eyebrow: "The foundation",
-    title: "A computer of its own",
-    body: "The agent has a persistent place to work, remember, automate, and improve the software. The business gets infrastructure that belongs to it—not another rented seat.",
-    accent: "lime",
-  },
-  {
-    number: "04",
-    eyebrow: "The reach",
-    title: "The open web",
-    body: "CompanyOS holds the durable context. The agent can also research, navigate, and operate browser-based tools—bringing the outside world back into one trusted company system.",
-    accent: "coral",
-  },
-];
-
-const modules = [
-  ["Home", "The operating picture"],
-  ["Inbox", "Every customer conversation"],
-  ["Pipeline", "Sales work in motion"],
-  ["Relationships", "People, companies, and history"],
-  ["Ads", "Performance and guarded action"],
-  ["Boards", "Flexible work management"],
-  ["Knowledge", "The company source of truth"],
-];
+import { COPY, normalizeLocale } from "./i18n";
+import type { Locale } from "./i18n";
 
 const sparkleStyles = Array.from({ length: 54 }, (_, index) => {
   const x = (index * 37 + 11) % 100;
@@ -93,8 +18,52 @@ const sparkleStyles = Array.from({ length: 54 }, (_, index) => {
   } as CSSProperties;
 });
 
+function getInitialLocale(): Locale {
+  const urlLocale = normalizeLocale(new URLSearchParams(window.location.search).get("lang"));
+  if (urlLocale) return urlLocale;
+
+  try {
+    const savedLocale = normalizeLocale(window.localStorage.getItem("companyos-locale"));
+    if (savedLocale) return savedLocale;
+  } catch {
+    // Storage can be unavailable in privacy-restricted browser contexts.
+  }
+
+  return normalizeLocale(window.navigator.language) ?? "en";
+}
+
 export default function Home() {
   const heroRef = useRef<HTMLElement>(null);
+  const [locale, setLocale] = useState<Locale>(getInitialLocale);
+  const copy = COPY[locale];
+  const systemParts = copy.systemParts as Array<[string, string, string]>;
+  const capabilities = copy.capabilities as Array<[string, string, string]>;
+  const layers = copy.layers as Array<[string, string, string, string]>;
+  const workflowSteps = copy.work.steps as Array<[string, string]>;
+  const projectSummary = copy.structure.summary as Array<[string, string]>;
+  const projectColumns = copy.structure.columns as Array<[string, Array<[string, string]>]>;
+  const developmentHistory = copy.development.historyItems as Array<[string, string]>;
+  const modules = copy.modules as Array<[string, string]>;
+  const ownershipProofs = copy.ownership.proofs as Array<[string, string]>;
+
+  useEffect(() => {
+    document.documentElement.lang = locale;
+    document.title = copy.meta.title;
+    document.querySelector('meta[name="description"]')?.setAttribute("content", copy.meta.description);
+    document.querySelector('meta[property="og:title"]')?.setAttribute("content", copy.meta.title);
+    document.querySelector('meta[property="og:description"]')?.setAttribute("content", copy.meta.ogDescription);
+    document.querySelector('meta[property="og:locale"]')?.setAttribute("content", locale === "pt-BR" ? "pt_BR" : locale === "es-419" ? "es_419" : "en_US");
+
+    const url = new URL(window.location.href);
+    url.searchParams.set("lang", locale);
+    window.history.replaceState({}, "", url);
+
+    try {
+      window.localStorage.setItem("companyos-locale", locale);
+    } catch {
+      // The selected language still works for the current visit.
+    }
+  }, [copy, locale]);
 
   useEffect(() => {
     const hero = heroRef.current;
@@ -154,26 +123,34 @@ export default function Home() {
           ))}
         </div>
 
-        <nav className="site-nav" aria-label="Main navigation">
-          <a className="brand" href="#top" aria-label="CompanyOS home">CompanyOS</a>
+        <nav className="site-nav" aria-label={copy.nav.aria}>
+          <a className="brand" href="#top" aria-label={copy.nav.homeAria}>CompanyOS</a>
           <div className="nav-links">
-            <a href="#system">The system</a>
-            <a href="#work">How it works</a>
-            <a href="#modules">Modules</a>
-            <a href="#ownership">Ownership</a>
+            <a href="#system">{copy.nav.system}</a>
+            <a href="#work">{copy.nav.work}</a>
+            <a href="#modules">{copy.nav.modules}</a>
+            <a href="#ownership">{copy.nav.ownership}</a>
           </div>
-          <span className="access-label"><i /> Early access</span>
+          <div className="nav-actions">
+            <label className="language-picker">
+              <span>{copy.language.label}</span>
+              <select value={locale} onChange={(event) => setLocale(event.target.value as Locale)} aria-label={copy.language.label}>
+                <option value="en">{copy.language.en}</option>
+                <option value="pt-BR">{copy.language.pt}</option>
+                <option value="es-419">{copy.language.es}</option>
+              </select>
+            </label>
+            <span className="access-label"><i /> {copy.nav.access}</span>
+          </div>
         </nav>
 
         <div className="hero-copy">
-          <p className="hero-kicker"><span>Private AI employee</span><i /><span>Company operating system</span></p>
-          <h1>Your company.<br />Its own <em>intelligence.</em></h1>
-          <p className="hero-lede">
-            CompanyOS gives a private AI employee the memory, software, web access, and automations to understand and operate the business—all inside one company-owned system.
-          </p>
+          <p className="hero-kicker"><span>{copy.hero.kickerOne}</span><i /><span>{copy.hero.kickerTwo}</span></p>
+          <h1>{copy.hero.lineOne}<br />{copy.hero.lineTwo}<em>{copy.hero.emphasis}</em></h1>
+          <p className="hero-lede">{copy.hero.lede}</p>
         </div>
 
-        <div className="system-stage" aria-label="The parts of CompanyOS working as one">
+        <div className="system-stage" aria-label={copy.hero.stageAria}>
           <div className="stage-rings" aria-hidden="true"><i /><i /><i /></div>
           <div className="signal signal-one" aria-hidden="true" />
           <div className="signal signal-two" aria-hidden="true" />
@@ -184,69 +161,69 @@ export default function Home() {
           <div className="company-core">
             <div className="core-header">
               <span>CompanyOS</span>
-              <span className="core-status"><i /> Online</span>
+              <span className="core-status"><i /> {copy.hero.status}</span>
             </div>
             <div className="core-body">
-              <p className="core-context">Working across the company</p>
+              <p className="core-context">{copy.hero.context}</p>
               <div className="agent-message">
                 <span className="agent-avatar">AI</span>
-                <p>I found two campaigns spending without qualified pipeline. I compared Ads, Pipeline, and the current budget policy.</p>
+                <p>{copy.hero.message}</p>
               </div>
               <div className="agent-action">
-                <span>Prepared action</span>
-                <strong>Pause Broad Prospecting</strong>
-                <small>Waiting for your approval</small>
+                <span>{copy.hero.actionLabel}</span>
+                <strong>{copy.hero.actionTitle}</strong>
+                <small>{copy.hero.approval}</small>
               </div>
-              <div className="context-track" aria-label="Context checked">
-                <span>Ads</span><i /><span>Pipeline</span><i /><span>Knowledge</span>
+              <div className="context-track" aria-label={copy.hero.checked}>
+                <span>{copy.hero.contextItems[0]}</span><i /><span>{copy.hero.contextItems[1]}</span><i /><span>{copy.hero.contextItems[2]}</span>
               </div>
             </div>
           </div>
 
-          {systemParts.map((part) => (
-            <div className={`system-part ${part.className}`} key={part.label}>
+          {systemParts.map(([label, detail, className]) => (
+            <div className={`system-part ${className}`} key={className}>
               <span className="part-orb" aria-hidden="true"><i /></span>
-              <div><strong>{part.label}</strong><small>{part.detail}</small></div>
+              <div><strong>{label}</strong><small>{detail}</small></div>
             </div>
           ))}
         </div>
 
-        <a className="scroll-cue" href="#system"><span>Enter the system</span><i aria-hidden="true" /></a>
+        <a className="scroll-cue" href="#system"><span>{copy.hero.scroll}</span><i aria-hidden="true" /></a>
       </section>
 
       <section className="system-section" id="system">
         <div className="section-intro reveal">
-          <p className="section-kicker">A different kind of stack</p>
-          <h2>The agent is only powerful because the whole system belongs together.</h2>
-          <p>Each layer makes the others more useful. Memory compounds. Software adapts. The agent gains the context and tools to become a real part of the company.</p>
+          <p className="section-kicker">{copy.system.kicker}</p>
+          <h2>{copy.system.title}</h2>
+          <p>{copy.system.body}</p>
         </div>
 
-        <div className="agent-capabilities reveal" aria-label="Flagship AI employee capabilities">
+        <div className="agent-capabilities reveal" aria-label={copy.system.capabilitiesAria}>
           <div className="capability-heading">
-            <p className="section-kicker">The agent advantage</p>
-            <h3>It knows the company—and has the tools to do the work.</h3>
-            <p>One continuous employee across company memory, daily operations, the open web, and automation.</p>
+            <p className="section-kicker">{copy.system.advantage}</p>
+            <h3>{copy.system.advantageTitle}</h3>
+            <p>{copy.system.advantageBody}</p>
           </div>
           <div className="capability-grid">
-            {agentCapabilities.map((capability) => (
-              <article className="capability-item" key={capability.number}>
-                <div className="capability-meta"><span>{capability.number}</span><i aria-hidden="true" /></div>
-                <p>{capability.eyebrow}</p>
-                <h4>{capability.title}</h4>
-                <small>{capability.body}</small>
+            {capabilities.map(([eyebrow, title, body], index) => (
+              <article className="capability-item" key={index}>
+                <div className="capability-meta"><span>{String(index + 1).padStart(2, "0")}</span><i aria-hidden="true" /></div>
+                <p>{eyebrow}</p>
+                <h4>{title}</h4>
+                <small>{body}</small>
               </article>
             ))}
           </div>
         </div>
 
         <div className="layer-stack">
-          {layers.map((layer, index) => (
-            <article className={`layer-card layer-${layer.accent} reveal`} key={layer.number} style={{ "--layer-top": `${20 + index * 15}px` } as CSSProperties}>
-              <div className="layer-number">{layer.number}</div>
+          {layers.map(([eyebrow, title, body, accent], index) => (
+            <article className={`layer-card layer-${accent} reveal`} key={accent} style={{ "--layer-top": `${20 + index * 15}px` } as CSSProperties}>
+              <div className="layer-number">{String(index + 1).padStart(2, "0")}</div>
               <div className="layer-copy">
-                <p>{layer.eyebrow}</p>
-                <h3>{layer.title}</h3>
-                <span>{layer.body}</span>
+                <p>{eyebrow}</p>
+                <h3>{title}</h3>
+                <span>{body}</span>
               </div>
               <div className="layer-visual" aria-hidden="true">
                 <span className="layer-sphere"><i /><i /><i /></span>
@@ -258,85 +235,72 @@ export default function Home() {
 
       <section className="work-section" id="work">
         <div className="work-heading reveal">
-          <p className="section-kicker">One request. The whole company moves.</p>
-          <h2>It doesn’t answer beside your work. It works <em>through</em> it.</h2>
+          <p className="section-kicker">{copy.work.kicker}</p>
+          <h2>{copy.work.titleBefore}<em>{copy.work.emphasis}</em>{copy.work.titleAfter}</h2>
         </div>
 
         <div className="workflow reveal">
           <div className="workflow-question">
-            <span>You</span>
-            <p>“Which campaigns are wasting money—and what should we do next?”</p>
+            <span>{copy.work.you}</span>
+            <p>{copy.work.question}</p>
           </div>
           <div className="workflow-rail" aria-hidden="true">
             <span className="rail-light" />
           </div>
           <div className="workflow-steps">
-            <div><span>01</span><strong>Reads Ads</strong><small>Spend, CPA, pacing, provider state</small></div>
-            <div><span>02</span><strong>Checks Pipeline</strong><small>Qualified value and won revenue</small></div>
-            <div><span>03</span><strong>Uses Knowledge</strong><small>Budget policy and company context</small></div>
-            <div><span>04</span><strong>Prepares action</strong><small>Exact change, impact, and limits</small></div>
+            {workflowSteps.map(([title, detail], index) => (
+              <div key={title}><span>{String(index + 1).padStart(2, "0")}</span><strong>{title}</strong><small>{detail}</small></div>
+            ))}
           </div>
           <div className="workflow-result">
             <div>
-              <span>Recommended action</span>
-              <strong>Pause Broad Prospecting</strong>
-              <small>$213 spent · 0 qualified opportunities</small>
+              <span>{copy.work.recommended}</span>
+              <strong>{copy.work.action}</strong>
+              <small>{copy.work.result}</small>
             </div>
-            <button type="button" aria-label="Example approval control">Approve change</button>
-            <p>Nothing changes without a human confirmation.</p>
+            <button type="button" aria-label={copy.work.approveAria}>{copy.work.approve}</button>
+            <p>{copy.work.confirmation}</p>
           </div>
         </div>
 
         <div className="structure-story reveal">
           <div className="structure-copy">
-            <p className="section-kicker">Conversation becomes the interface</p>
-            <h3>Describe the project. The agent builds the working structure.</h3>
-            <p>A few sentences become durable company data: a Board, the right cards, practical checklists, owners, dependencies, and a schedule. Keep talking and the agent keeps the system current.</p>
+            <p className="section-kicker">{copy.structure.kicker}</p>
+            <h3>{copy.structure.title}</h3>
+            <p>{copy.structure.body}</p>
             <div className="structure-prompt">
-              <span>You</span>
-              <p>“We’re opening a second location in eight weeks. Organize permits, suppliers, hiring, launch marketing, and opening-day readiness. Maya owns it.”</p>
+              <span>{copy.work.you}</span>
+              <p>{copy.structure.prompt}</p>
             </div>
           </div>
 
-          <div className="structure-output" aria-label="A project created inside CompanyOS from a conversation">
+          <div className="structure-output" aria-label={copy.structure.outputAria}>
             <div className="structure-topbar">
-              <span>Created inside Boards</span>
-              <small><i /> Ready for review</small>
+              <span>{copy.structure.created}</span>
+              <small><i /> {copy.structure.ready}</small>
             </div>
             <div className="created-board-heading">
               <div>
-                <span>New company project</span>
-                <h4>Second location launch</h4>
+                <span>{copy.structure.newProject}</span>
+                <h4>{copy.structure.project}</h4>
               </div>
-              <small>Owner · Maya Chen</small>
+              <small>{copy.structure.owner}</small>
             </div>
             <div className="created-summary">
-              <span><strong>14</strong> cards</span>
-              <span><strong>37</strong> checklist items</span>
-              <span><strong>5</strong> owners</span>
-              <span><strong>8</strong> weeks scheduled</span>
+              {projectSummary.map(([value, label]) => <span key={label}><strong>{value}</strong> {label}</span>)}
             </div>
             <div className="created-columns">
-              <div>
-                <p>Plan</p>
-                <article><strong>Confirm permit milestones</strong><small>6 checklist items · Maya</small></article>
-                <article><strong>Finalize opening budget</strong><small>4 checklist items · Finance</small></article>
-              </div>
-              <div>
-                <p>In progress</p>
-                <article><strong>Build supplier shortlist</strong><small>Due week 2 · Operations</small></article>
-                <article><strong>Draft hiring plan</strong><small>Due week 3 · Maya</small></article>
-              </div>
-              <div>
-                <p>Scheduled</p>
-                <article><strong>Launch local campaign</strong><small>Starts week 5 · Marketing</small></article>
-                <article><strong>Opening-day readiness</strong><small>12 checklist items · Team</small></article>
-              </div>
+              {projectColumns.map(([heading, cards]) => (
+                <div key={heading}>
+                  <p>{heading}</p>
+                  {cards.map(([title, detail]) => <article key={title}><strong>{title}</strong><small>{detail}</small></article>)}
+                </div>
+              ))}
             </div>
             <div className="structure-update">
-              <span>Later</span>
-              <p>“The permit is delayed one week.”</p>
-              <small>Schedule and dependent cards updated</small>
+              <span>{copy.structure.later}</span>
+              <p>{copy.structure.update}</p>
+              <small>{copy.structure.updated}</small>
             </div>
           </div>
         </div>
@@ -345,41 +309,38 @@ export default function Home() {
       <section className="development-section">
         <div className="development-aura" aria-hidden="true" />
         <div className="development-copy reveal">
-          <p className="section-kicker">Development mode · Built to change</p>
-          <h2>The same AI employee becomes your software development team.</h2>
-          <p>Describe what the company needs in the same chat. The agent clarifies the workflow, coordinates the build, asks for decisions, and returns a tested improvement for review. Nothing reaches Production without your approval.</p>
+          <p className="section-kicker">{copy.development.kicker}</p>
+          <h2>{copy.development.title}</h2>
+          <p>{copy.development.body}</p>
         </div>
 
         <div className="development-console reveal">
           <div className="console-topbar">
             <span>CompanyOS</span>
-            <strong>Development mode</strong>
-            <span className="console-ready"><i /> Agent connected</span>
+            <strong>{copy.development.mode}</strong>
+            <span className="console-ready"><i /> {copy.development.connected}</span>
           </div>
           <div className="console-grid">
             <div className="console-history">
-              <p>Development history</p>
-              <h3>Ready for the next improvement</h3>
-              <div className="history-line active"><i /><span><strong>Vendor onboarding</strong><small>New workflow · in progress</small></span></div>
-              <div className="history-line"><i /><span><strong>Unified customer inbox</strong><small>Saved improvement</small></span></div>
-              <div className="history-line"><i /><span><strong>Ads action controls</strong><small>Saved improvement</small></span></div>
+              <p>{copy.development.history}</p>
+              <h3>{copy.development.next}</h3>
+              {developmentHistory.map(([title, detail], index) => (
+                <div className={`history-line${index === 0 ? " active" : ""}`} key={title}><i /><span><strong>{title}</strong><small>{detail}</small></span></div>
+              ))}
             </div>
             <div className="console-chat">
-              <div className="chat-user">Add a vendor onboarding flow with owner approval and document collection.</div>
-              <div className="chat-agent"><span>AI</span><p>I’ll coordinate this as your software team: a connected module sharing people, files, permissions, activity, and company memory. I’ll bring back a working version for review.</p></div>
+              <div className="chat-user">{copy.development.user}</div>
+              <div className="chat-agent"><span>AI</span><p>{copy.development.agent}</p></div>
               <div className="build-progress">
-                <span><i /> Workflow clarified</span>
-                <span><i /> Records and permissions built</span>
-                <span><i /> Desktop and mobile UI created</span>
-                <span className="working"><i /> Testing and preparing review</span>
+                {copy.development.progress.map((item, index) => <span className={index === copy.development.progress.length - 1 ? "working" : undefined} key={item}><i /> {item}</span>)}
               </div>
             </div>
             <div className="new-module">
-              <span>New company capability</span>
+              <span>{copy.development.newCapability}</span>
               <div className="module-glyph" aria-hidden="true"><i /><i /><i /></div>
-              <h3>Vendor onboarding</h3>
-              <p>Connected to Relationships, Boards, Knowledge, and files.</p>
-              <small><i /> Appears inside your CompanyOS</small>
+              <h3>{copy.development.module}</h3>
+              <p>{copy.development.moduleBody}</p>
+              <small><i /> {copy.development.appears}</small>
             </div>
           </div>
         </div>
@@ -387,11 +348,11 @@ export default function Home() {
 
       <section className="modules-section" id="modules">
         <div className="modules-heading reveal">
-          <p className="section-kicker">A useful system from day one</p>
-          <h2>Every part speaks the same company language.</h2>
-          <p>The modules are distinct working spaces, connected by shared context, permissions, activity, and the private agent.</p>
+          <p className="section-kicker">{copy.modulesSection.kicker}</p>
+          <h2>{copy.modulesSection.title}</h2>
+          <p>{copy.modulesSection.body}</p>
         </div>
-        <div className="module-marquee" aria-label="CompanyOS modules">
+        <div className="module-marquee" aria-label={copy.modulesSection.aria}>
           <div className="module-track">
             {[...modules, ...modules].map(([name, detail], index) => (
               <div className="module-item" key={`${name}-${index}`} aria-hidden={index >= modules.length}>
@@ -405,15 +366,15 @@ export default function Home() {
 
         <div className="workspace-story reveal">
           <div className="workspace-copy">
-            <p className="section-kicker">One installation. Many companies.</p>
-            <h3>Every workspace keeps its own memory, work, identity, and files.</h3>
-            <p>The agent follows the company you are in. Shared administration stays centralized. Business context stays inside its boundary.</p>
+            <p className="section-kicker">{copy.modulesSection.workspaceKicker}</p>
+            <h3>{copy.modulesSection.workspaceTitle}</h3>
+            <p>{copy.modulesSection.workspaceBody}</p>
           </div>
-          <div className="workspace-universe" aria-label="Three separate company workspaces">
-            <div className="workspace-orbit orbit-a"><span>North & Coast<small>Retail</small></span></div>
-            <div className="workspace-orbit orbit-b"><span>Vela Studio<small>Design</small></span></div>
-            <div className="workspace-orbit orbit-c"><span>Fieldwork<small>Services</small></span></div>
-            <div className="workspace-center"><span>CompanyOS<small>Shared administration</small></span></div>
+          <div className="workspace-universe" aria-label={copy.modulesSection.workspaceAria}>
+            <div className="workspace-orbit orbit-a"><span>North & Coast<small>{copy.modulesSection.workspaceTypes[0]}</small></span></div>
+            <div className="workspace-orbit orbit-b"><span>Vela Studio<small>{copy.modulesSection.workspaceTypes[1]}</small></span></div>
+            <div className="workspace-orbit orbit-c"><span>Fieldwork<small>{copy.modulesSection.workspaceTypes[2]}</small></span></div>
+            <div className="workspace-center"><span>CompanyOS<small>{copy.modulesSection.sharedAdmin}</small></span></div>
           </div>
         </div>
       </section>
@@ -423,20 +384,17 @@ export default function Home() {
           {sparkleStyles.slice(0, 28).map((style, index) => <span className="sparkle" style={style} key={index} />)}
         </div>
         <div className="ownership-copy reveal">
-          <p className="section-kicker">The compounding advantage</p>
-          <h2>Your software.<br />Your data.<br />Your <em>AI employee.</em></h2>
-          <p>CompanyOS keeps the system close to the business and the business in control—without locking its future to one SaaS vendor or one AI model.</p>
+          <p className="section-kicker">{copy.ownership.kicker}</p>
+          <h2>{copy.ownership.lineOne}<br />{copy.ownership.lineTwo}<br />{copy.ownership.lineThree}<em>{copy.ownership.emphasis}</em></h2>
+          <p>{copy.ownership.body}</p>
         </div>
         <div className="ownership-proof reveal">
-          <div><span>01</span><strong>Self-hosted</strong><small>Runs on company-controlled infrastructure.</small></div>
-          <div><span>02</span><strong>Private by design</strong><small>Company records stay in the company system.</small></div>
-          <div><span>03</span><strong>Model freedom</strong><small>Choose the AI provider and model that fits.</small></div>
-          <div><span>04</span><strong>Built to endure</strong><small>Backups, encrypted credentials, and signed updates.</small></div>
+          {ownershipProofs.map(([title, detail], index) => <div key={title}><span>{String(index + 1).padStart(2, "0")}</span><strong>{title}</strong><small>{detail}</small></div>)}
         </div>
         <div className="closing-mark reveal">
           <p className="closing-brand">CompanyOS</p>
-          <h3>Not another SaaS.<br />A company system that becomes yours.</h3>
-          <small>Early access · By approval</small>
+          <h3>{copy.ownership.closing}<br />{copy.ownership.closingSecond}</h3>
+          <small>{copy.ownership.access}</small>
         </div>
       </section>
     </main>
