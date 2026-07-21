@@ -18,6 +18,12 @@ const sparkleStyles = Array.from({ length: 54 }, (_, index) => {
   } as CSSProperties;
 });
 
+const orbitParticleStyles = Array.from({ length: 18 }, (_, index) => ({
+  "--particle-angle": `${index * 20}deg`,
+  "--particle-distance": `${336 + (index % 3) * 54}px`,
+  "--particle-delay": `${index * -0.38}s`,
+} as CSSProperties));
+
 function getInitialLocale(): Locale {
   const urlLocale = normalizeLocale(new URLSearchParams(window.location.search).get("lang"));
   if (urlLocale) return urlLocale;
@@ -81,8 +87,8 @@ export default function Home() {
       hero.style.setProperty("--py-l", `${(y * 18).toFixed(2)}px`);
       hero.style.setProperty("--px-n", `${(x * -20).toFixed(2)}px`);
       hero.style.setProperty("--py-n", `${(y * -14).toFixed(2)}px`);
-      hero.style.setProperty("--rx", `${(y * -2).toFixed(2)}deg`);
-      hero.style.setProperty("--ry", `${(x * 2.5).toFixed(2)}deg`);
+      hero.style.setProperty("--rx", `${(y * -4).toFixed(2)}deg`);
+      hero.style.setProperty("--ry", `${(x * 5.5).toFixed(2)}deg`);
     };
 
     const onPointerLeave = () => {
@@ -151,12 +157,39 @@ export default function Home() {
         </div>
 
         <div className="system-stage" aria-label={copy.hero.stageAria}>
-          <div className="stage-rings" aria-hidden="true"><i /><i /><i /></div>
-          <div className="signal signal-one" aria-hidden="true" />
-          <div className="signal signal-two" aria-hidden="true" />
-          <div className="signal signal-three" aria-hidden="true" />
-          <div className="signal signal-four" aria-hidden="true" />
-          <div className="core-glow" aria-hidden="true" />
+          <div className="orbit-haze" aria-hidden="true" />
+          <div className="cross-orbit" aria-hidden="true"><i /><i /><span /></div>
+          <div className="orbital-scene">
+            <div className="stage-rings" aria-hidden="true"><i /><i /><i /><i /></div>
+            <div className="orbit-spokes" aria-hidden="true">
+              {systemParts.map(([, , className], index) => (
+                <i key={className} style={{ "--spoke-angle": `${index * 60}deg`, "--signal-delay": `${index * -0.7}s` } as CSSProperties} />
+              ))}
+            </div>
+            <div className="orbit-particles" aria-hidden="true">
+              {orbitParticleStyles.map((style, index) => <i key={index} style={style} />)}
+            </div>
+            {systemParts.map(([label, detail, className], index) => (
+              <div
+                className={`orbiting-part ${className}`}
+                key={className}
+                style={{
+                  "--orbit-phase": `${index * 60}deg`,
+                  "--orbit-phase-end": `${index * 60 + 360}deg`,
+                  "--orbit-phase-neg": `${index * -60}deg`,
+                  "--orbit-phase-neg-end": `${index * -60 - 360}deg`,
+                } as CSSProperties}
+              >
+                <div className="part-billboard">
+                  <div className="system-part">
+                    <span className="part-orb" aria-hidden="true"><i /></span>
+                    <div><strong>{label}</strong><small>{detail}</small></div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="core-glow" aria-hidden="true"><i /></div>
 
           <div className="company-core">
             <div className="core-header">
@@ -180,12 +213,6 @@ export default function Home() {
             </div>
           </div>
 
-          {systemParts.map(([label, detail, className]) => (
-            <div className={`system-part ${className}`} key={className}>
-              <span className="part-orb" aria-hidden="true"><i /></span>
-              <div><strong>{label}</strong><small>{detail}</small></div>
-            </div>
-          ))}
         </div>
 
         <a className="scroll-cue" href="#system"><span>{copy.hero.scroll}</span><i aria-hidden="true" /></a>
