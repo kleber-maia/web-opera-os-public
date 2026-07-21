@@ -8,10 +8,11 @@ test("the GitHub Pages artifact is complete and static", () => {
   assert.ok(existsSync("dist/CNAME"));
   assert.ok(existsSync("dist/.nojekyll"));
   assert.ok(existsSync("dist/distribution/agent.txt"));
+  assert.equal(readFileSync("dist/CNAME", "utf8").trim(), "operaos.ai");
 
   const html = readFileSync("dist/index.html", "utf8");
   assert.match(html, /<div id="root"><\/div>/);
-  assert.match(html, /BobbyOS/);
+  assert.match(html, /OperaOS/);
   assert.match(html, /hreflang="pt-BR"/);
   assert.match(html, /hreflang="es-419"/);
   assert.doesNotMatch(html, /\/api\//);
@@ -23,5 +24,5 @@ test("the GitHub Pages artifact is complete and static", () => {
 
   assert.match(javascript, /Português \(Brasil\)/);
   assert.match(javascript, /Español \(Latinoamérica\)/);
-  assert.match(javascript, /companyos-locale/);
+  assert.match(javascript, /operaos-locale/);
 });

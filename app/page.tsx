@@ -23,7 +23,7 @@ function getInitialLocale(): Locale {
   if (urlLocale) return urlLocale;
 
   try {
-    const savedLocale = normalizeLocale(window.localStorage.getItem("companyos-locale"));
+    const savedLocale = normalizeLocale(window.localStorage.getItem("operaos-locale"));
     if (savedLocale) return savedLocale;
   } catch {
     // Storage can be unavailable in privacy-restricted browser contexts.
@@ -59,7 +59,7 @@ export default function Home() {
     window.history.replaceState({}, "", url);
 
     try {
-      window.localStorage.setItem("companyos-locale", locale);
+      window.localStorage.setItem("operaos-locale", locale);
     } catch {
       // The selected language still works for the current visit.
     }
@@ -124,7 +124,7 @@ export default function Home() {
         </div>
 
         <nav className="site-nav" aria-label={copy.nav.aria}>
-          <a className="brand" href="#top" aria-label={copy.nav.homeAria}>BobbyOS</a>
+          <a className="brand" href="#top" aria-label={copy.nav.homeAria}>OperaOS</a>
           <div className="nav-links">
             <a href="#system">{copy.nav.system}</a>
             <a href="#work">{copy.nav.work}</a>
@@ -160,13 +160,13 @@ export default function Home() {
 
           <div className="company-core">
             <div className="core-header">
-              <span>BobbyOS</span>
+              <span>OperaOS</span>
               <span className="core-status"><i /> {copy.hero.status}</span>
             </div>
             <div className="core-body">
               <p className="core-context">{copy.hero.context}</p>
               <div className="agent-message">
-                <span className="agent-avatar">Bobby</span>
+                <span className="agent-avatar">Opera</span>
                 <p>{copy.hero.message}</p>
               </div>
               <div className="agent-action">
@@ -316,7 +316,7 @@ export default function Home() {
 
         <div className="development-console reveal">
           <div className="console-topbar">
-            <span>BobbyOS</span>
+            <span>OperaOS</span>
             <strong>{copy.development.mode}</strong>
             <span className="console-ready"><i /> {copy.development.connected}</span>
           </div>
@@ -330,7 +330,7 @@ export default function Home() {
             </div>
             <div className="console-chat">
               <div className="chat-user">{copy.development.user}</div>
-              <div className="chat-agent"><span>Bobby</span><p>{copy.development.agent}</p></div>
+              <div className="chat-agent"><span>Opera</span><p>{copy.development.agent}</p></div>
               <div className="build-progress">
                 {copy.development.progress.map((item, index) => <span className={index === copy.development.progress.length - 1 ? "working" : undefined} key={item}><i /> {item}</span>)}
               </div>
@@ -374,7 +374,7 @@ export default function Home() {
             <div className="workspace-orbit orbit-a"><span>North & Coast<small>{copy.modulesSection.workspaceTypes[0]}</small></span></div>
             <div className="workspace-orbit orbit-b"><span>Vela Studio<small>{copy.modulesSection.workspaceTypes[1]}</small></span></div>
             <div className="workspace-orbit orbit-c"><span>Fieldwork<small>{copy.modulesSection.workspaceTypes[2]}</small></span></div>
-            <div className="workspace-center"><span>BobbyOS<small>{copy.modulesSection.sharedAdmin}</small></span></div>
+            <div className="workspace-center"><span>OperaOS<small>{copy.modulesSection.sharedAdmin}</small></span></div>
           </div>
         </div>
       </section>
@@ -392,7 +392,7 @@ export default function Home() {
           {ownershipProofs.map(([title, detail], index) => <div key={title}><span>{String(index + 1).padStart(2, "0")}</span><strong>{title}</strong><small>{detail}</small></div>)}
         </div>
         <div className="closing-mark reveal">
-          <p className="closing-brand">BobbyOS</p>
+          <p className="closing-brand">OperaOS</p>
           <h3>{copy.ownership.closing}<br />{copy.ownership.closingSecond}</h3>
           <small>{copy.ownership.access}</small>
         </div>
