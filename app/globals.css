@@ -121,6 +121,7 @@ button { font: inherit; }
 
 .system-stage {
   --orbit-radius: 360px;
+  --orbit-duration: 56s;
   position: relative;
   z-index: 2;
   width: min(1320px, 98vw);
@@ -146,7 +147,7 @@ button { font: inherit; }
   transform-style: preserve-3d;
   transform: translate3d(-50%,-50%,0) rotateX(67deg) rotateZ(-7deg);
 }
-.stage-rings { position: absolute; inset: 0; border-radius: 50%; transform-style: preserve-3d; animation: orbit-drift 38s linear infinite; }
+.stage-rings { position: absolute; inset: 0; border-radius: 50%; transform-style: preserve-3d; animation: orbit-drift 72s linear infinite; }
 .stage-rings i { position: absolute; border: 1px solid rgba(255,255,255,.09); border-radius: 50%; }
 .stage-rings i:nth-child(1) { inset: 18px; border-color: rgba(118,224,255,.18); box-shadow: 0 0 28px rgba(56,200,255,.04), inset 0 0 34px rgba(118,224,255,.025); }
 .stage-rings i:nth-child(2) { inset: 94px; border-style: dashed; border-color: rgba(174,139,255,.16); }
@@ -189,7 +190,7 @@ button { font: inherit; }
   width: 690px; height: 410px;
   transform-style: preserve-3d;
   transform: translate3d(-50%,-50%,-80px) rotateX(71deg) rotateY(64deg) rotateZ(15deg);
-  animation: cross-drift 16s ease-in-out infinite alternate;
+  animation: cross-drift 28s ease-in-out infinite alternate;
 }
 .cross-orbit i { position: absolute; inset: 0; border: 1px solid rgba(133,115,255,.13); border-radius: 50%; }
 .cross-orbit i:nth-child(2) { inset: 72px 120px; border-color: rgba(79,220,247,.12); border-style: dashed; }
@@ -229,13 +230,13 @@ button { font: inherit; }
   width: 0; height: 0;
   transform-style: preserve-3d;
   transform: rotateZ(var(--orbit-phase));
-  animation: orbit-turn 28s linear infinite;
+  animation: orbit-turn var(--orbit-duration) linear infinite;
 }
 .part-billboard {
   width: max-content;
   transform-style: preserve-3d;
   transform: translateX(var(--orbit-radius)) rotateZ(var(--orbit-phase-neg)) rotateX(-67deg) rotateZ(7deg);
-  animation: orbit-counter 28s linear infinite;
+  animation: orbit-counter var(--orbit-duration) linear infinite;
 }
 .system-part { display: flex; align-items: center; gap: 10px; width: 232px; padding: 11px 14px 11px 10px; border: 1px solid rgba(255,255,255,.13); border-radius: 15px; background: linear-gradient(135deg, #151620, #090a11); box-shadow: 0 18px 42px rgba(0,0,0,.34), inset 0 1px 0 rgba(255,255,255,.05); backface-visibility: hidden; -webkit-backface-visibility: hidden; transition: border-color .2s ease, background .2s ease, box-shadow .2s ease; }
 .system-part:hover { border-color: rgba(255,255,255,.38); background: rgba(20,22,35,.92); box-shadow: 0 20px 48px rgba(0,0,0,.42), 0 0 28px rgba(100,213,255,.08); }
