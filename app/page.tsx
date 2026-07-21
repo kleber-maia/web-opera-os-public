@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import type { CSSProperties } from "react";
 import { COPY, normalizeLocale } from "./i18n";
 import type { Locale } from "./i18n";
@@ -39,7 +39,6 @@ function getInitialLocale(): Locale {
 }
 
 export default function Home() {
-  const heroRef = useRef<HTMLElement>(null);
   const [locale, setLocale] = useState<Locale>(getInitialLocale);
   const copy = COPY[locale];
   const systemParts = copy.systemParts as Array<[string, string, string]>;
@@ -72,31 +71,6 @@ export default function Home() {
   }, [copy, locale]);
 
   useEffect(() => {
-    const hero = heroRef.current;
-    if (!hero) return;
-
-    const onPointerMove = (event: PointerEvent) => {
-      const bounds = hero.getBoundingClientRect();
-      const x = ((event.clientX - bounds.left) / bounds.width - 0.5) * 2;
-      const y = ((event.clientY - bounds.top) / bounds.height - 0.5) * 2;
-      hero.style.setProperty("--px-s", `${(x * 10).toFixed(2)}px`);
-      hero.style.setProperty("--py-s", `${(y * 7).toFixed(2)}px`);
-      hero.style.setProperty("--px-m", `${(x * 18).toFixed(2)}px`);
-      hero.style.setProperty("--py-m", `${(y * 12).toFixed(2)}px`);
-      hero.style.setProperty("--px-l", `${(x * 27).toFixed(2)}px`);
-      hero.style.setProperty("--py-l", `${(y * 18).toFixed(2)}px`);
-      hero.style.setProperty("--px-n", `${(x * -20).toFixed(2)}px`);
-      hero.style.setProperty("--py-n", `${(y * -14).toFixed(2)}px`);
-      hero.style.setProperty("--rx", `${(y * -4).toFixed(2)}deg`);
-      hero.style.setProperty("--ry", `${(x * 5.5).toFixed(2)}deg`);
-    };
-
-    const onPointerLeave = () => {
-      ["--px-s", "--py-s", "--px-m", "--py-m", "--px-l", "--py-l", "--px-n", "--py-n"].forEach((name) => hero.style.setProperty(name, "0px"));
-      hero.style.setProperty("--rx", "0deg");
-      hero.style.setProperty("--ry", "0deg");
-    };
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -107,19 +81,15 @@ export default function Home() {
     );
 
     document.querySelectorAll<HTMLElement>(".reveal").forEach((element) => observer.observe(element));
-    hero.addEventListener("pointermove", onPointerMove);
-    hero.addEventListener("pointerleave", onPointerLeave);
 
     return () => {
       observer.disconnect();
-      hero.removeEventListener("pointermove", onPointerMove);
-      hero.removeEventListener("pointerleave", onPointerLeave);
     };
   }, []);
 
   return (
     <main>
-      <section className="hero" ref={heroRef} id="top">
+      <section className="hero" id="top">
         <div className="aurora aurora-one" aria-hidden="true" />
         <div className="aurora aurora-two" aria-hidden="true" />
         <div className="aurora aurora-three" aria-hidden="true" />
