@@ -142,6 +142,7 @@ button { font: inherit; }
 }
 .orbital-scene {
   position: absolute;
+  z-index: 1;
   top: 48%; left: 50%;
   width: 900px; height: 900px;
   transform-style: preserve-3d;
@@ -423,8 +424,8 @@ button { font: inherit; }
 }
 
 @media (max-width: 640px) {
-  .hero { min-height: 920px; }.site-nav{padding:18px 0}.nav-actions{gap:0}.language-picker select{max-width:158px;padding-left:9px}.access-label{display:none}.hero-copy{margin-top:68px}.hero-kicker{font-size:11px;gap:9px}.hero h1{font-size:clamp(48px,13vw,64px)}.hero-lede{font-size:16px;margin-top:25px}
-  .system-stage { --orbit-radius: 130px; width: 900px; margin-left: -450px; transform: scale(.61); margin-top: 45px; }.system-part{width:190px}.system-part small{display:none}
+  .hero { min-height: 0; padding-bottom: 18px; }.site-nav{padding:18px 0}.nav-actions{gap:0}.language-picker select{max-width:158px;padding-left:9px}.access-label{display:none}.hero-copy{margin-top:68px}.hero-kicker{font-size:11px;gap:9px}.hero h1{font-size:clamp(48px,13vw,64px)}.hero-lede{font-size:16px;margin-top:25px}
+  .system-stage { --orbit-radius: 240px; width: 760px; height: 520px; left: 50%; margin: 0 0 0 -380px; transform: none; }.company-core{width:350px;border-radius:24px}.system-part{width:250px}.system-part small{display:block;line-height:1.35}
   .system-section,.work-section,.development-section,.modules-section,.ownership-section{padding-top:100px;padding-bottom:100px}
   .section-intro{margin-bottom:55px}.section-intro h2,.work-heading h2,.development-copy h2,.modules-heading h2{font-size:40px}.layer-card{position:relative;top:auto;grid-template-columns:44px 1fr;min-height:340px;border-radius:20px}.layer-number{padding:22px 14px}.layer-copy{padding:34px 24px}.layer-copy h3{font-size:35px}.layer-visual{display:none}
   .agent-capabilities{margin-bottom:80px}.capability-heading{padding:32px 0 40px}.capability-heading h3{font-size:34px}.capability-grid{grid-template-columns:1fr}.capability-item{min-height:0;padding:28px 4px 32px;border-right:0;border-bottom:1px solid #d7d9de}.capability-item:last-child{border-bottom:0}.capability-meta{margin-bottom:34px}.capability-item h4{font-size:20px}.capability-item small{font-size:14px}
