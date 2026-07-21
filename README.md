@@ -51,6 +51,14 @@ The workflow in `.github/workflows/pages.yml` builds and publishes `dist/` after
 
 After pushing, wait for the **Deploy GitHub Pages** workflow to succeed and verify the canonical URL serves the new content. A successful Git push alone does not mean the public page has finished deploying.
 
+## Production hostnames
+
+- `https://operaos.ai` is the static GitHub Pages website. Cloudflare DNS points the apex directly to the four GitHub Pages IPv4 addresses with proxying disabled.
+- `https://app.operaos.ai` is routed through the `operaos-app` Cloudflare Tunnel to the local service on port `3000`.
+- `https://dev.operaos.ai` is routed through the `operaos-dev` Cloudflare Tunnel to the local service on port `3100`.
+
+The two tunnels run as persistent macOS user services. Their configurations are `~/.cloudflared/operaos-app.yml` and `~/.cloudflared/operaos-dev.yml`; their LaunchAgent labels are `ai.operaos.cloudflared.app` and `ai.operaos.cloudflared.dev`.
+
 ## Copy conventions
 
 - OperaOS is the self-hosted company operating system.

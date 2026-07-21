@@ -11,6 +11,15 @@
 - The production website is static. It does not need a persistent application or development server.
 - Do not create a separate hosted preview or use Sites hosting unless the user explicitly requests one.
 
+## Production hostnames and tunnels
+
+- `operaos.ai` is served by GitHub Pages. It uses the four GitHub Pages apex `A` records in Cloudflare DNS with proxying disabled; it is not a Cloudflare Tunnel route.
+- `app.operaos.ai` is a proxied Cloudflare Tunnel route through `operaos-app` to `http://127.0.0.1:3000`.
+- `dev.operaos.ai` is a proxied Cloudflare Tunnel route through `operaos-dev` to `http://127.0.0.1:3100`.
+- Tunnel configs live at `~/.cloudflared/operaos-app.yml` and `~/.cloudflared/operaos-dev.yml`.
+- The tunnels run persistently through the `ai.operaos.cloudflared.app` and `ai.operaos.cloudflared.dev` user LaunchAgents.
+- Before changing tunnel routes, verify both local ports, both active tunnel connectors, the Cloudflare DNS records, and the public HTTPS responses.
+
 ## Development previews
 
 - Start `npm run dev` only when a development preview is useful or requested.
