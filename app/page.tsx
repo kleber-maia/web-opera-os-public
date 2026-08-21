@@ -5,6 +5,16 @@ import type { CSSProperties, PointerEvent as ReactPointerEvent } from "react";
 import { COPY, normalizeLocale } from "./i18n";
 import type { Locale } from "./i18n";
 
+type PricingPlan = {
+  name: string;
+  tag: string;
+  price: string;
+  cadence: string;
+  accent: string;
+  description: string;
+  details: Array<[string, string]>;
+};
+
 const sparkleStyles = Array.from({ length: 54 }, (_, index) => {
   const x = (index * 37 + 11) % 100;
   const y = (index * 61 + 7) % 100;
@@ -51,6 +61,7 @@ export default function Home() {
   const projectColumns = copy.structure.columns as Array<[string, Array<[string, string]>]>;
   const developmentHistory = copy.development.historyItems as Array<[string, string]>;
   const modules = copy.modules as Array<[string, string]>;
+  const pricingPlans = copy.pricing.plans as PricingPlan[];
   const ownershipProofs = copy.ownership.proofs as Array<[string, string]>;
 
   useEffect(() => {
@@ -127,6 +138,7 @@ export default function Home() {
             <a href="#system">{copy.nav.system}</a>
             <a href="#work">{copy.nav.work}</a>
             <a href="#modules">{copy.nav.modules}</a>
+            <a href="#pricing">{copy.nav.pricing}</a>
             <a href="#ownership">{copy.nav.ownership}</a>
           </div>
           <div className="nav-actions">
@@ -401,6 +413,55 @@ export default function Home() {
             <div className="workspace-orbit orbit-c"><span>Fieldwork<small>{copy.modulesSection.workspaceTypes[2]}</small></span></div>
             <div className="workspace-center"><span>OperateOS<small>{copy.modulesSection.sharedAdmin}</small></span></div>
           </div>
+        </div>
+      </section>
+
+      <section className="pricing-section" id="pricing">
+        <div className="pricing-aura" aria-hidden="true" />
+        <div className="pricing-heading reveal">
+          <p className="section-kicker">{copy.pricing.kicker}</p>
+          <h2>{copy.pricing.title}</h2>
+          <p>{copy.pricing.body}</p>
+        </div>
+
+        <div className="pricing-promise reveal">
+          <div>
+            <p className="pricing-label">{copy.pricing.promiseLabel}</p>
+            <p className="pricing-promise-copy">{copy.pricing.promise}</p>
+          </div>
+          <span className="pricing-promise-mark" aria-hidden="true"><i /></span>
+        </div>
+
+        <div className="pricing-plans" role="list" aria-label={copy.pricing.plansAria}>
+          {pricingPlans.map((plan, index) => (
+            <article className={`pricing-card pricing-${plan.accent} reveal`} key={plan.name} role="listitem" aria-labelledby={`pricing-${plan.accent}-title`}>
+              <div className="pricing-card-top">
+                <span className="pricing-index">{String(index + 1).padStart(2, "0")}</span>
+                <span className="pricing-plan-tag">{plan.tag}</span>
+              </div>
+              <h3 id={`pricing-${plan.accent}-title`}>{plan.name}</h3>
+              <div className="pricing-price"><strong>{plan.price}</strong><span>{plan.cadence}</span></div>
+              <p className="pricing-plan-description">{plan.description}</p>
+              <dl className="pricing-details" aria-label={`${plan.name} ${copy.pricing.detailsLabel}`}>
+                {plan.details.map(([label, value]) => (
+                  <div key={label}><dt>{label}</dt><dd>{value}</dd></div>
+                ))}
+              </dl>
+            </article>
+          ))}
+        </div>
+
+        <div className="pricing-states reveal">
+          <article className="pricing-state pricing-state-active">
+            <p className="pricing-label">{copy.pricing.active.label}</p>
+            <h3>{copy.pricing.active.title}</h3>
+            <p>{copy.pricing.active.body}</p>
+          </article>
+          <article className="pricing-state pricing-state-local">
+            <p className="pricing-label">{copy.pricing.local.label}</p>
+            <h3>{copy.pricing.local.title}</h3>
+            <p>{copy.pricing.local.body}</p>
+          </article>
         </div>
       </section>
 

@@ -9,7 +9,7 @@ const en = {
     ogDescription: "Ask Operator in AI Chat or through Telegram, WhatsApp, iMessage, and other messaging channels. Operator researches, acts across the web and connected systems, and brings results back into OperateOS.",
   },
   language: { label: "Language", en: "English", pt: "Português (Brasil)", es: "Español (Latinoamérica)" },
-  nav: { aria: "Main navigation", homeAria: "OperateOS home", system: "The system", work: "How it works", modules: "Modules", ownership: "Ownership", access: "Early access" },
+  nav: { aria: "Main navigation", homeAria: "OperateOS home", system: "The system", work: "How it works", modules: "Modules", pricing: "Pricing", ownership: "Ownership", access: "Early access" },
   hero: {
     kickerOne: "Operator · An AI agent with a computer of its own", kickerTwo: "Self-hosted business operating system",
     lineOne: "Your business.", lineTwo: "Ask Operator. ", emphasis: "Get work done.",
@@ -80,6 +80,26 @@ const en = {
     workspaceKicker: "One installation. Many businesses.", workspaceTitle: "Every workspace keeps its own memory, work, identity, and files.", workspaceBody: "Operator works within the business you are in. Your business can extend its workspace as needs change. Shared administration stays centralized, while business context stays inside its boundary.", workspaceAria: "Three separate business workspaces", workspaceTypes: ["Retail", "Design", "Services"], sharedAdmin: "Shared administration",
   },
   modules: [["Home", "The operating picture"], ["Inbox", "Every customer conversation"], ["Pipeline", "Sales work in motion"], ["Relationships", "People, businesses, and history"], ["Ads", "Performance and guarded action"], ["Boards", "Flexible work management"], ["Knowledge", "The business source of truth"]],
+  pricing: {
+    kicker: "The subscription that keeps work moving", title: "Your installation stays yours.", body: "Choose the level of active Operator support that fits the business. Starter and Business run on your machine; Enterprise is the hosted, managed option.",
+    promiseLabel: "The ownership promise", promise: "OperateOS stays yours. Your subscription keeps Operator active, connected, updated, and ready to work. Cancel anytime—your data and installation remain available; Operator, automations, integrations, updates, and support simply pause until you reactivate.", plansAria: "OperateOS plans", detailsLabel: "Plan details",
+    plans: [
+      {
+        name: "Starter", tag: "One business", price: "$500", cadence: "per year", accent: "violet", description: "An annual subscription for one business—not priced per business.",
+        details: [["Deployment", "Self-hosted"], ["Machine", "You own the machine"], ["Business limit", "1 business"], ["Core features", "All core features while active"], ["AI credits", "Included AI credit allowance"], ["Additional credits", "Top-ups available"], ["Updates", "Included while active"], ["Support", "Standard"], ["After cancellation", "Local Mode: installation, data, modules, and history remain available. Operator, automations, integrations, updates, and support pause until reactivation."]],
+      },
+      {
+        name: "Business", tag: "Priced by business", price: "$250", cadence: "per business / month", accent: "cyan", description: "A monthly subscription for each business on your self-hosted installation.",
+        details: [["Deployment", "Self-hosted"], ["Machine", "You own the machine"], ["Business limit", "Priced per business"], ["Core features", "All core features while active"], ["AI credits", "Included AI credit allowance"], ["Additional credits", "Top-ups available"], ["Updates", "Included while active"], ["Support", "Priority"], ["After cancellation", "Local Mode: installation, data, modules, and history remain available. Operator, automations, integrations, updates, and support pause until reactivation."]],
+      },
+      {
+        name: "Enterprise", tag: "Hosted / managed", price: "Custom", cadence: "under consultation", accent: "lime", description: "A hosted and managed option shaped with your business.",
+        details: [["Deployment", "Hosted / managed"], ["Machine", "Managed for you"], ["Business limit", "Defined in consultation"], ["Core features", "Core features and tailored capabilities"], ["AI credits", "Allowance defined in consultation"], ["Additional credits", "Defined in consultation"], ["Updates", "Included under the plan"], ["Support", "Dedicated support + SLA"], ["After cancellation", "Service terms and data handling defined in consultation."]],
+      },
+    ],
+    active: { label: "Active subscription", title: "Everything active, with the support level of your plan.", body: "Starter and Business include all core features, an included AI credit allowance, updates, and support while active. Additional AI credits are available as top-ups. Business support is priority; Enterprise includes dedicated support and an SLA." },
+    local: { label: "Local Mode", title: "What remains after a self-hosted plan pauses.", body: "If Starter or Business is not active, your installation, data, modules, and history remain available in Local Mode. Operator, automations, integrations, updates, and support pause until you reactivate." },
+  },
   ownership: {
     kicker: "The compounding advantage", lineOne: "Your operating system.", lineTwo: "Your data.", lineThree: "Your ", emphasis: "Operator.",
     body: "With OperateOS, the business controls its operating system, its data, and how Operator works inside it—without locking its future to one SaaS vendor or one AI model.",
@@ -97,7 +117,7 @@ const ptBR: Copy = {
     ogDescription: "Pergunte ao Operator no AI Chat ou pelo Telegram, WhatsApp, iMessage e outros canais de mensagens. O Operator pesquisa, age na web e em sistemas conectados e traz os resultados de volta para o OperateOS.",
   },
   language: { label: "Idioma", en: "English", pt: "Português (Brasil)", es: "Español (Latinoamérica)" },
-  nav: { aria: "Navegação principal", homeAria: "Página inicial do OperateOS", system: "O sistema", work: "Como funciona", modules: "Módulos", ownership: "Controle", access: "Acesso antecipado" },
+  nav: { aria: "Navegação principal", homeAria: "Página inicial do OperateOS", system: "O sistema", work: "Como funciona", modules: "Módulos", pricing: "Preços", ownership: "Controle", access: "Acesso antecipado" },
   hero: {
     kickerOne: "Operator · Um agente de IA com seu próprio computador", kickerTwo: "Sistema operacional do negócio com hospedagem própria",
     lineOne: "Seu negócio.", lineTwo: "Pergunte ao Operator. ", emphasis: "O trabalho avança.",
@@ -168,6 +188,26 @@ const ptBR: Copy = {
     workspaceKicker: "Uma instalação. Muitos negócios.", workspaceTitle: "Cada espaço mantém sua própria memória, trabalho, identidade e arquivos.", workspaceBody: "O Operator trabalha dentro do negócio em que você está. Seu negócio pode ampliar o espaço conforme as necessidades mudam. A administração compartilhada continua centralizada, enquanto o contexto do negócio permanece dentro dos seus limites.", workspaceAria: "Três espaços de trabalho separados para negócios", workspaceTypes: ["Varejo", "Design", "Serviços"], sharedAdmin: "Administração compartilhada",
   },
   modules: [["Início", "A visão operacional"], ["Caixa de entrada", "Todas as conversas com clientes"], ["Pipeline", "O trabalho de vendas em movimento"], ["Relacionamentos", "Pessoas, negócios e histórico"], ["Anúncios", "Desempenho e ações controladas"], ["Quadros", "Gestão flexível do trabalho"], ["Conhecimento", "A fonte da verdade do negócio"]],
+  pricing: {
+    kicker: "A assinatura que mantém o trabalho em movimento", title: "Sua instalação continua sendo sua.", body: "Escolha o nível de suporte ativo do Operator que combina com o negócio. Starter e Business rodam na sua máquina; Enterprise é a opção hospedada e gerenciada.",
+    promiseLabel: "A promessa de controle", promise: "Seu OperateOS continua sendo seu. Sua assinatura mantém o Operator ativo, conectado, atualizado e pronto para trabalhar. Cancele quando quiser — seus dados e sua instalação continuam disponíveis; o Operator, as automações, as integrações, as atualizações e o suporte simplesmente ficam pausados até você reativar.", plansAria: "Planos do OperateOS", detailsLabel: "Detalhes do plano",
+    plans: [
+      {
+        name: "Starter", tag: "Um negócio", price: "US$ 500", cadence: "por ano", accent: "violet", description: "Uma assinatura anual para um negócio — não é cobrada por negócio.",
+        details: [["Implantação", "Hospedagem própria"], ["Máquina", "Você é dono da máquina"], ["Limite de negócios", "1 negócio"], ["Recursos essenciais", "Todos os recursos essenciais enquanto ativo"], ["Créditos de IA", "Franquia de créditos de IA incluída"], ["Créditos adicionais", "Recargas disponíveis"], ["Atualizações", "Incluídas enquanto ativo"], ["Suporte", "Padrão"], ["Após o cancelamento", "Modo Local: instalação, dados, módulos e histórico continuam disponíveis. Operator, automações, integrações, atualizações e suporte ficam pausados até a reativação."]],
+      },
+      {
+        name: "Business", tag: "Cobrado por negócio", price: "US$ 250", cadence: "por negócio / mês", accent: "cyan", description: "Uma assinatura mensal para cada negócio na sua instalação com hospedagem própria.",
+        details: [["Implantação", "Hospedagem própria"], ["Máquina", "Você é dono da máquina"], ["Limite de negócios", "Cobrado por negócio"], ["Recursos essenciais", "Todos os recursos essenciais enquanto ativo"], ["Créditos de IA", "Franquia de créditos de IA incluída"], ["Créditos adicionais", "Recargas disponíveis"], ["Atualizações", "Incluídas enquanto ativo"], ["Suporte", "Prioritário"], ["Após o cancelamento", "Modo Local: instalação, dados, módulos e histórico continuam disponíveis. Operator, automações, integrações, atualizações e suporte ficam pausados até a reativação."]],
+      },
+      {
+        name: "Enterprise", tag: "Hospedado / gerenciado", price: "Personalizado", cadence: "sob consulta", accent: "lime", description: "Uma opção hospedada e gerenciada, definida com o seu negócio.",
+        details: [["Implantação", "Hospedado / gerenciado"], ["Máquina", "Infraestrutura gerenciada"], ["Limite de negócios", "Definido em consulta"], ["Recursos essenciais", "Recursos essenciais e capacidades sob medida"], ["Créditos de IA", "Franquia definida em consulta"], ["Créditos adicionais", "Definidos em consulta"], ["Atualizações", "Incluídas conforme o plano"], ["Suporte", "Dedicado + SLA"], ["Após o cancelamento", "Termos de serviço e dados definidos em consulta."]],
+      },
+    ],
+    active: { label: "Assinatura ativa", title: "Tudo ativo, com o nível de suporte do seu plano.", body: "Starter e Business incluem todos os recursos essenciais, uma franquia de créditos de IA, atualizações e suporte enquanto estiverem ativos. Créditos de IA adicionais podem ser comprados como recargas. O suporte do Business é prioritário; Enterprise inclui suporte dedicado e SLA." },
+    local: { label: "Modo Local", title: "O que permanece quando um plano auto-hospedado é pausado.", body: "Se Starter ou Business não estiver ativo, sua instalação, seus dados, módulos e histórico continuam disponíveis no Modo Local. O Operator, as automações, as integrações, as atualizações e o suporte ficam pausados até você reativar." },
+  },
   ownership: {
     kicker: "A vantagem que se acumula", lineOne: "Seu sistema operacional.", lineTwo: "Seus dados.", lineThree: "Seu ", emphasis: "Operator.",
     body: "Com o OperateOS, o negócio controla seu sistema operacional, seus dados e a forma como o Operator trabalha dentro dele — sem prender o futuro a um único fornecedor de SaaS ou modelo de IA.",
@@ -183,7 +223,7 @@ const es419: Copy = {
     ogDescription: "Pregúntale a Operator en AI Chat o por Telegram, WhatsApp, iMessage y otros canales de mensajería. Operator investiga, actúa en la web y en sistemas conectados, y devuelve los resultados a OperateOS.",
   },
   language: { label: "Idioma", en: "English", pt: "Português (Brasil)", es: "Español (Latinoamérica)" },
-  nav: { aria: "Navegación principal", homeAria: "Inicio de OperateOS", system: "El sistema", work: "Cómo funciona", modules: "Módulos", ownership: "Control", access: "Acceso anticipado" },
+  nav: { aria: "Navegación principal", homeAria: "Inicio de OperateOS", system: "El sistema", work: "Cómo funciona", modules: "Módulos", pricing: "Precios", ownership: "Control", access: "Acceso anticipado" },
   hero: {
     kickerOne: "Operator · Un agente de IA con su propia computadora", kickerTwo: "Sistema operativo autoalojado para el negocio",
     lineOne: "Tu negocio.", lineTwo: "Pregúntale a Operator. ", emphasis: "El trabajo avanza.",
@@ -254,6 +294,26 @@ const es419: Copy = {
     workspaceKicker: "Una instalación. Muchos negocios.", workspaceTitle: "Cada espacio conserva su propia memoria, trabajo, identidad y archivos.", workspaceBody: "Operator trabaja dentro del negocio en el que estás. Tu negocio puede ampliar el espacio a medida que cambian las necesidades. La administración compartida permanece centralizada, mientras el contexto del negocio se mantiene dentro de sus límites.", workspaceAria: "Tres espacios de trabajo separados para negocios", workspaceTypes: ["Comercio", "Diseño", "Servicios"], sharedAdmin: "Administración compartida",
   },
   modules: [["Inicio", "La visión operativa"], ["Bandeja de entrada", "Cada conversación con clientes"], ["Pipeline", "El trabajo de ventas en marcha"], ["Relaciones", "Personas, negocios e historial"], ["Anuncios", "Rendimiento y acciones controladas"], ["Tableros", "Gestión flexible del trabajo"], ["Conocimiento", "La fuente de verdad del negocio"]],
+  pricing: {
+    kicker: "La suscripción que mantiene el trabajo en marcha", title: "Tu instalación sigue siendo tuya.", body: "Elige el nivel de soporte activo de Operator que necesita tu negocio. Starter y Business funcionan en tu máquina; Enterprise es la opción alojada y administrada.",
+    promiseLabel: "La promesa de propiedad", promise: "OperateOS sigue siendo tuyo. Tu suscripción mantiene a Operator activo, conectado, actualizado y listo para trabajar. Cancela cuando quieras: tus datos y tu instalación siguen disponibles; Operator, las automatizaciones, las integraciones, las actualizaciones y el soporte simplemente quedan en pausa hasta que reactives el servicio.", plansAria: "Planes de OperateOS", detailsLabel: "Detalles del plan",
+    plans: [
+      {
+        name: "Starter", tag: "Un negocio", price: "US$ 500", cadence: "por año", accent: "violet", description: "Una suscripción anual para un negocio; no se cobra por negocio.",
+        details: [["Implementación", "Autoalojado"], ["Máquina", "La máquina es tuya"], ["Límite de negocios", "1 negocio"], ["Funciones esenciales", "Todas las funciones esenciales mientras está activo"], ["Créditos de IA", "Asignación de créditos de IA incluida"], ["Créditos adicionales", "Recargas disponibles"], ["Actualizaciones", "Incluidas mientras está activo"], ["Soporte", "Estándar"], ["Después de cancelar", "Modo Local: la instalación, los datos, los módulos y el historial siguen disponibles. Operator, las automatizaciones, las integraciones, las actualizaciones y el soporte quedan en pausa hasta la reactivación."]],
+      },
+      {
+        name: "Business", tag: "Cobrado por negocio", price: "US$ 250", cadence: "por negocio / mes", accent: "cyan", description: "Una suscripción mensual por cada negocio en tu instalación autoalojada.",
+        details: [["Implementación", "Autoalojado"], ["Máquina", "La máquina es tuya"], ["Límite de negocios", "Cobrado por negocio"], ["Funciones esenciales", "Todas las funciones esenciales mientras está activo"], ["Créditos de IA", "Asignación de créditos de IA incluida"], ["Créditos adicionales", "Recargas disponibles"], ["Actualizaciones", "Incluidas mientras está activo"], ["Soporte", "Prioritario"], ["Después de cancelar", "Modo Local: la instalación, los datos, los módulos y el historial siguen disponibles. Operator, las automatizaciones, las integraciones, las actualizaciones y el soporte quedan en pausa hasta la reactivación."]],
+      },
+      {
+        name: "Enterprise", tag: "Alojado / administrado", price: "Personalizado", cadence: "bajo consulta", accent: "lime", description: "Una opción alojada y administrada, definida con tu negocio.",
+        details: [["Implementación", "Alojado / administrado"], ["Máquina", "Infraestructura administrada"], ["Límite de negocios", "Se define en consulta"], ["Funciones esenciales", "Funciones esenciales y capacidades a medida"], ["Créditos de IA", "Asignación definida en consulta"], ["Créditos adicionales", "Se define en consulta"], ["Actualizaciones", "Incluidas según el plan"], ["Soporte", "Dedicado + SLA"], ["Después de cancelar", "Los términos del servicio y los datos se definen en consulta."]],
+      },
+    ],
+    active: { label: "Suscripción activa", title: "Todo activo, con el nivel de soporte de tu plan.", body: "Starter y Business incluyen todas las funciones esenciales, una asignación de créditos de IA, actualizaciones y soporte mientras están activos. Puedes comprar créditos de IA adicionales como recargas. El soporte de Business es prioritario; Enterprise incluye soporte dedicado y un SLA." },
+    local: { label: "Modo Local", title: "Qué queda disponible cuando un plan autoalojado se pausa.", body: "Si Starter o Business no está activo, tu instalación, tus datos, tus módulos y tu historial siguen disponibles en Modo Local. Operator, las automatizaciones, las integraciones, las actualizaciones y el soporte quedan en pausa hasta que reactives el servicio." },
+  },
   ownership: {
     kicker: "La ventaja que se acumula", lineOne: "Tu sistema operativo.", lineTwo: "Tus datos.", lineThree: "Tu ", emphasis: "Operator.",
     body: "Con OperateOS, el negocio controla su sistema operativo, sus datos y la forma en que Operator trabaja dentro de él, sin atar su futuro a un solo proveedor de SaaS ni a un solo modelo de IA.",
