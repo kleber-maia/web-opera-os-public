@@ -72,6 +72,13 @@ test("the GitHub Pages artifact is complete and static", () => {
   assert.match(javascript, /por negocio \/ mes/);
   assert.match(javascript, /AI credits/);
   assert.match(javascript, /créditos de IA/);
+  assert.match(javascript, /Capable models/);
+  assert.match(javascript, /Plans include powerful models built for complex, multi-step work/);
+  assert.match(javascript, /Modelos capaces/);
+  assert.match(javascript, /modelos avançados para trabalhos complexos e em várias etapas/);
+  assert.match(javascript, /modelos avanzados para trabajos complejos y de varios pasos/);
+  assert.match(javascript, /Capable models included/);
+  assert.match(javascript, /Modelos capaces incluidos/);
   assert.match(javascript, /Local Mode/);
   assert.match(javascript, /Modo Local/);
   assert.match(javascript, /Self-hosted/);
@@ -90,6 +97,7 @@ test("the GitHub Pages artifact is complete and static", () => {
   const publicCopy = ["app/i18n.ts", "index.html", "README.md"]
     .map((file) => readFileSync(file, "utf8"))
     .join("\n");
+  assert.doesNotMatch(publicCopy, /Model freedom|Liberdade de modelo|Libertad de modelo|Choose the AI provider|Escolha o provedor|Elige el proveedor/i);
   assert.doesNotMatch(publicCopy, /\bcompanies?\b/i);
   assert.doesNotMatch(publicCopy, /\bempresas?\b/i);
   assert.doesNotMatch(publicCopy, /\bempresarial(?:es)?\b/i);
