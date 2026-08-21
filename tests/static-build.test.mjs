@@ -25,4 +25,11 @@ test("the GitHub Pages artifact is complete and static", () => {
   assert.match(javascript, /Português \(Brasil\)/);
   assert.match(javascript, /Español \(Latinoamérica\)/);
   assert.match(javascript, /operaos-locale/);
+  assert.match(javascript, /OS Developer/);
+  assert.match(javascript, /OS Agent/);
+  assert.match(javascript, /AI Chat/);
+  assert.match(javascript, /Telegram/);
+  assert.match(javascript, /WhatsApp/);
+  assert.match(javascript, /iMessage/);
+  assert.doesNotMatch(javascript, /(?<!\p{L})Opera(?!\p{L})/u);
 });

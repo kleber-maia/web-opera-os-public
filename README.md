@@ -1,6 +1,6 @@
 # OperaOS website
 
-The public website for OperaOS: a self-hosted company operating system with Opera, a private AI agent, embedded inside. It is a pure client-side React site compiled by Vite into static HTML, CSS, and JavaScript for GitHub Pages.
+The public website for OperaOS: a self-hosted company operating system with two integrated companions. OS Developer customizes and expands the information system; OS Agent safely operates company data and workflows. It is a pure client-side React site compiled by Vite into static HTML, CSS, and JavaScript for GitHub Pages.
 
 ## Repository workflow
 
@@ -62,7 +62,9 @@ The two tunnels run as persistent macOS user services. Their configurations are 
 ## Copy conventions
 
 - OperaOS is the self-hosted company operating system.
-- Opera is the private AI agent embedded inside OperaOS.
+- OS Developer customizes and expands OperaOS for the company.
+- OS Agent safely operates company data and workflows.
+- Both agents are available inside OperaOS through AI Chat and through Telegram, WhatsApp, iMessage, and other messaging channels.
 - OperaOS is adaptable rather than a fixed software suite.
 - Listed modules are examples. Each company can create and extend its own modules, workflows, and capabilities.
 - Marketing changes must remain aligned across English, Brazilian Portuguese, Latin American Spanish, and the default page metadata.

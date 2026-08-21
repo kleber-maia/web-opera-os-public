@@ -198,7 +198,7 @@ export default function Home() {
             <div className="core-body">
               <p className="core-context">{copy.hero.context}</p>
               <div className="agent-message">
-                <span className="agent-avatar">Opera</span>
+                <span className="agent-avatar">{copy.hero.agentLabel}</span>
                 <p>{copy.hero.message}</p>
               </div>
               <div className="agent-action">
@@ -355,7 +355,7 @@ export default function Home() {
             </div>
             <div className="console-chat">
               <div className="chat-user">{copy.development.user}</div>
-              <div className="chat-agent"><span>Opera</span><p>{copy.development.agent}</p></div>
+              <div className="chat-agent"><span>{copy.development.agentLabel}</span><p>{copy.development.agent}</p></div>
               <div className="build-progress">
                 {copy.development.progress.map((item, index) => <span className={index === copy.development.progress.length - 1 ? "working" : undefined} key={item}><i /> {item}</span>)}
               </div>
