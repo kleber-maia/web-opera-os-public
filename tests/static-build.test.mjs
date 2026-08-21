@@ -19,6 +19,10 @@ test("the GitHub Pages artifact is complete and static", () => {
   assert.match(html, /hreflang="es-419"/);
   assert.doesNotMatch(html, /\/api\//);
 
+  const pageSource = readFileSync("app/page.tsx", "utf8");
+  assert.match(pageSource, /<div className="hero-lede">/);
+  assert.match(pageSource, /copy\.hero\.lede\.map\(\(paragraph\) => <p key=\{paragraph\}>\{paragraph\}<\/p>\)/);
+
   const javascript = readdirSync("dist/assets")
     .filter((file) => file.endsWith(".js"))
     .map((file) => readFileSync(join("dist/assets", file), "utf8"))
@@ -29,6 +33,10 @@ test("the GitHub Pages artifact is complete and static", () => {
   assert.match(javascript, /operaos-locale/);
   assert.match(javascript, /OperateOS/);
   assert.match(javascript, /Operator/);
+  assert.match(javascript, /hero-lede/);
+  assert.match(javascript, /computer of its own and a persistent place to work/);
+  assert.match(javascript, /completes real multi-step tasks/);
+  assert.match(javascript, /safely operates business data, workflows, and connected SaaS tools/);
   assert.match(javascript, /computer of its own/);
   assert.match(javascript, /open web/);
   assert.match(javascript, /browser-based/);

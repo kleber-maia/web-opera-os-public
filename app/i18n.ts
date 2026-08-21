@@ -13,7 +13,11 @@ const en = {
   hero: {
     kickerOne: "Operator · An AI agent with a computer of its own", kickerTwo: "Self-hosted business operating system",
     lineOne: "Your business.", lineTwo: "Ask Operator. ", emphasis: "Get work done.",
-    lede: "OperateOS is a self-hosted business operating system with Operator: an AI agent and a persistent place to work. Ask in AI Chat, Telegram, WhatsApp, iMessage, or another messaging channel. Operator browses and navigates the open internet, uses browser-based tools, performs real multi-step tasks, automates mundane work and errands, and safely operates business data, workflows, and connected SaaS tools—with approval where appropriate. It brings research, evidence, and results back into OperateOS to keep the business system current.",
+    lede: [
+      "OperateOS is a self-hosted business operating system with Operator: an AI agent with a computer of its own and a persistent place to work.",
+      "Ask Operator in AI Chat, Telegram, WhatsApp, iMessage, or another messaging channel. Operator browses and navigates the open web, uses browser-based tools, and completes real multi-step tasks.",
+      "Operator automates mundane work and errands, safely operates business data, workflows, and connected SaaS tools—with approval where appropriate. It brings research, evidence, and results back into OperateOS to keep the business system current.",
+    ],
     stageAria: "Operator working across OperateOS and the open web", status: "Online", context: "Working across the business", agentLabel: "Operator",
     message: "Operator researched two campaigns spending without qualified pipeline. It compared Ads, Pipeline, and the current budget policy.",
     actionLabel: "Prepared action", actionTitle: "Pause Broad Prospecting", approval: "Waiting for your approval", checked: "Context checked",
@@ -121,7 +125,11 @@ const ptBR: Copy = {
   hero: {
     kickerOne: "Operator · Um agente de IA com seu próprio computador", kickerTwo: "Sistema operacional do negócio com hospedagem própria",
     lineOne: "Seu negócio.", lineTwo: "Pergunte ao Operator. ", emphasis: "O trabalho avança.",
-    lede: "O OperateOS é um sistema operacional com hospedagem própria para o seu negócio, com o Operator: um agente de IA com seu próprio computador e um lugar persistente para trabalhar. Pergunte no AI Chat, Telegram, WhatsApp, iMessage ou outro canal de mensagens. O Operator pesquisa e navega na internet aberta, usa ferramentas no navegador, executa tarefas em várias etapas, automatiza trabalhos repetitivos e tarefas do dia a dia e opera dados, fluxos de trabalho e ferramentas SaaS conectadas com segurança — com aprovação quando necessário. Ele traz pesquisas, evidências e resultados de volta para manter o OperateOS atualizado.",
+    lede: [
+      "O OperateOS é um sistema operacional com hospedagem própria para o seu negócio, com o Operator: um agente de IA com seu próprio computador e um lugar persistente para trabalhar.",
+      "Pergunte ao Operator no AI Chat, pelo Telegram, WhatsApp, iMessage ou outro canal de mensagens. Ele pesquisa e navega na internet aberta, usa ferramentas no navegador e conclui tarefas reais em várias etapas.",
+      "O Operator automatiza trabalhos repetitivos e tarefas do dia a dia, opera com segurança dados, fluxos de trabalho e ferramentas SaaS conectadas — com aprovação quando necessário. Ele traz pesquisas, evidências e resultados de volta para manter o OperateOS atualizado.",
+    ],
     stageAria: "Operator trabalhando no OperateOS e na internet aberta", status: "Online", context: "Trabalhando em todo o negócio", agentLabel: "Operator",
     message: "O Operator pesquisou duas campanhas gerando gastos sem oportunidades qualificadas no pipeline. Comparou Anúncios, Pipeline e a política de orçamento atual.",
     actionLabel: "Ação preparada", actionTitle: "Pausar prospecção ampla", approval: "Aguardando sua aprovação", checked: "Contexto verificado",
@@ -227,7 +235,11 @@ const es419: Copy = {
   hero: {
     kickerOne: "Operator · Un agente de IA con su propia computadora", kickerTwo: "Sistema operativo autoalojado para el negocio",
     lineOne: "Tu negocio.", lineTwo: "Pregúntale a Operator. ", emphasis: "El trabajo avanza.",
-    lede: "OperateOS es un sistema operativo autoalojado para tu negocio, con Operator: un agente de IA con su propia computadora y un lugar persistente para trabajar. Pregúntale en AI Chat, Telegram, WhatsApp, iMessage u otro canal de mensajería. Operator investiga y navega por internet abierto, usa herramientas del navegador, realiza tareas de varios pasos, automatiza trabajos repetitivos y resuelve encargos del día a día, además de operar de forma segura datos, flujos de trabajo y herramientas SaaS conectadas — con aprobación cuando corresponde. Devuelve investigaciones, evidencias y resultados a OperateOS para mantener actualizado el sistema del negocio.",
+    lede: [
+      "OperateOS es un sistema operativo autoalojado para tu negocio, con Operator: un agente de IA con su propia computadora y un lugar persistente para trabajar.",
+      "Pregúntale a Operator en AI Chat, por Telegram, WhatsApp, iMessage u otro canal de mensajería. Investiga y navega por internet abierto, usa herramientas del navegador y completa tareas reales de varios pasos.",
+      "Operator automatiza trabajos repetitivos y resuelve encargos del día a día, además de operar de forma segura datos, flujos de trabajo y herramientas SaaS conectadas — con aprobación cuando corresponde. Devuelve investigaciones, evidencias y resultados a OperateOS para mantener actualizado el sistema del negocio.",
+    ],
     stageAria: "Operator trabajando en OperateOS y en internet abierto", status: "En línea", context: "Trabajando en todo el negocio", agentLabel: "Operator",
     message: "Operator investigó dos campañas con gastos pero sin oportunidades calificadas en el pipeline. Comparó Anuncios, Pipeline y la política de presupuesto actual.",
     actionLabel: "Acción preparada", actionTitle: "Pausar prospección amplia", approval: "Esperando tu aprobación", checked: "Contexto verificado",

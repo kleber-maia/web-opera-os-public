@@ -157,7 +157,9 @@ export default function Home() {
         <div className="hero-copy">
           <p className="hero-kicker"><span>{copy.hero.kickerOne}</span><i /><span>{copy.hero.kickerTwo}</span></p>
           <h1>{copy.hero.lineOne}<br />{copy.hero.lineTwo}<em>{copy.hero.emphasis}</em></h1>
-          <p className="hero-lede">{copy.hero.lede}</p>
+          <div className="hero-lede">
+            {copy.hero.lede.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+          </div>
         </div>
 
         <div

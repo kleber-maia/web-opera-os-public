@@ -118,6 +118,8 @@ button { font: inherit; }
 .hero h1 em { position: relative; color: transparent; font-style: normal; background: linear-gradient(92deg, #fff 3%, #b9b3ff 32%, #73e9fb 65%, #d8ffb0 98%); -webkit-background-clip: text; background-clip: text; }
 .hero h1 em::after { position: absolute; right: -.08em; top: -.1em; width: 7px; height: 7px; border-radius: 50%; background: white; box-shadow: 0 0 18px 6px rgba(154,226,255,.55); content: ""; animation: twinkle 3s ease-in-out infinite; }
 .hero-lede { width: min(720px, 90%); margin: 30px auto 0; color: rgba(255,255,255,.68); font-size: clamp(17px, 1.35vw, 20px); line-height: 1.55; letter-spacing: -.02em; }
+.hero-lede p { margin: 0; }
+.hero-lede p + p { margin-top: 16px; }
 
 .system-stage {
   --orbit-radius: 360px;
