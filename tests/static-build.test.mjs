@@ -12,9 +12,9 @@ test("the GitHub Pages artifact is complete and static", () => {
 
   const html = readFileSync("dist/index.html", "utf8");
   assert.match(html, /<div id="root"><\/div>/);
-  assert.match(html, /OperaOS/);
-  assert.match(html, /OperaOS — Your business\. Two agents\. One operating system\./);
-  assert.match(html, /operating system for your business/);
+  assert.match(html, /OperateOS/);
+  assert.match(html, /OperateOS — Your business\. Operator at work\./);
+  assert.match(html, /business operating system/);
   assert.match(html, /hreflang="pt-BR"/);
   assert.match(html, /hreflang="es-419"/);
   assert.doesNotMatch(html, /\/api\//);
@@ -27,8 +27,20 @@ test("the GitHub Pages artifact is complete and static", () => {
   assert.match(javascript, /Português \(Brasil\)/);
   assert.match(javascript, /Español \(Latinoamérica\)/);
   assert.match(javascript, /operaos-locale/);
-  assert.match(javascript, /OS Developer/);
-  assert.match(javascript, /OS Agent/);
+  assert.match(javascript, /OperateOS/);
+  assert.match(javascript, /Operator/);
+  assert.match(javascript, /computer of its own/);
+  assert.match(javascript, /open web/);
+  assert.match(javascript, /browser-based/);
+  assert.match(javascript, /multi-step/);
+  assert.match(javascript, /mundane/);
+  assert.match(javascript, /approval/);
+  assert.match(javascript, /computador/);
+  assert.match(javascript, /ferramentas no navegador/);
+  assert.match(javascript, /tarefas em várias etapas/);
+  assert.match(javascript, /herramientas del navegador/);
+  assert.match(javascript, /tareas de varios pasos/);
+  assert.match(javascript, /encargos/);
   assert.match(javascript, /AI Chat/);
   assert.match(javascript, /Telegram/);
   assert.match(javascript, /WhatsApp/);
