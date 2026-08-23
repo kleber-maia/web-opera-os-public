@@ -19,14 +19,25 @@ test("the GitHub Pages artifact is complete and static", () => {
   assert.match(html, /hreflang="es-419"/);
   assert.doesNotMatch(html, /\/api\//);
 
+  const i18nSource = readFileSync("app/i18n.ts", "utf8");
+  const systemPartBlocks = [...i18nSource.matchAll(/systemParts:\s*\[([\s\S]*?)\n\s*\],/g)].map(([, block]) => block);
+  assert.equal(systemPartBlocks.length, 3);
+  for (const block of systemPartBlocks) {
+    assert.equal((block.match(/^\s+\["/gm) ?? []).length, 5);
+    assert.doesNotMatch(block, /part-web|AI Chat \+ (?:channels|canais|canales)/);
+  }
+
   const pageSource = readFileSync("app/page.tsx", "utf8");
-  assert.doesNotMatch(pageSource, /hero-points|hero-traits|heroPoints/);
+  assert.doesNotMatch(pageSource, /hero-description|hero-points|hero-traits|heroPoints/);
   const heroSource = pageSource.slice(pageSource.indexOf('<div className="hero-copy">'), pageSource.indexOf('<div\n          className="system-stage"'));
-  assert.match(heroSource, /className="hero-description"/);
-  assert.match(heroSource, /copy\.hero\.description\.map/);
+  const heroSectionSource = pageSource.slice(pageSource.indexOf('<section className="hero"'), pageSource.indexOf('<section className="system-section"'));
   assert.doesNotMatch(heroSource, /hero-(?:card|point|trait)|<ul|<ol/);
+  assert.doesNotMatch(heroSectionSource, /hero-description|hero-(?:card|point|trait)|<ul|<ol/);
   assert.match(pageSource, /className="system-stage"/);
   assert.match(pageSource, /systemParts\.map/);
+  assert.match(pageSource, /<strong>\{label\}<\/strong><small>\{detail\}<\/small>/);
+  assert.match(pageSource, /const orbitStep = 360 \/ systemParts\.length;/);
+  assert.doesNotMatch(pageSource, /index \* 60/);
 
   const javascript = readdirSync("dist/assets")
     .filter((file) => file.endsWith(".js"))
@@ -40,37 +51,30 @@ test("the GitHub Pages artifact is complete and static", () => {
   assert.match(javascript, /Operator/);
   assert.match(javascript, /An operating system for your business\./);
   assert.match(javascript, /With its own AI agent\./);
-  assert.match(javascript, /OperateOS brings your business information, work, and tools together in one place\./);
-  assert.match(javascript, /Customize OperateOS around the way your business works\./);
-  assert.match(javascript, /hardware you own, keeping your system and data under your control\./);
-  assert.match(javascript, /O OperateOS reúne as informações, o trabalho e as ferramentas do seu negócio em um só lugar\./);
-  assert.match(javascript, /Personalize o OperateOS de acordo com a forma como seu negócio funciona\./);
-  assert.match(javascript, /hardware que seu negócio possui, mantendo o sistema e os dados sob seu controle\./);
-  assert.match(javascript, /OperateOS reúne la información, el trabajo y las herramientas de tu negocio en un solo lugar\./);
-  assert.match(javascript, /Personaliza OperateOS según la forma en que trabaja tu negocio\./);
-  assert.match(javascript, /hardware que tu negocio posee, manteniendo tu sistema y tus datos bajo tu control\./);
-  assert.match(javascript, /Um sistema operacional para o seu negócio\./);
-  assert.match(javascript, /Com seu próprio agente de IA\./);
-  assert.match(javascript, /Un sistema operativo para tu negocio\./);
-  assert.match(javascript, /Con su propio agente de IA\./);
-  assert.match(javascript, /Operating system for your business/);
-  assert.match(javascript, /Its own AI agent/);
-  assert.match(javascript, /Shape it around the way your business works/);
-  assert.match(javascript, /Add modules, workflows, and capabilities as the business grows/);
-  assert.match(javascript, /Hosted on hardware your business owns/);
-  assert.match(javascript, /Reach Operator wherever work starts/);
-  assert.match(javascript, /Sistema operacional para o seu negócio/);
-  assert.match(javascript, /Seu próprio agente de IA/);
-  assert.match(javascript, /Adapte o OperateOS ao jeito como o negócio trabalha/);
-  assert.match(javascript, /Adicione módulos, fluxos de trabalho e capacidades à medida que o negócio cresce/);
-  assert.match(javascript, /Hospedado no hardware próprio do negócio/);
-  assert.match(javascript, /Encontre o Operator onde o trabalho começa/);
-  assert.match(javascript, /Sistema operativo para tu negocio/);
-  assert.match(javascript, /Su propio agente de IA/);
-  assert.match(javascript, /Adapta OperateOS a la forma en que trabaja tu negocio/);
-  assert.match(javascript, /Añade módulos, flujos de trabajo y capacidades a medida que crece tu negocio/);
-  assert.match(javascript, /Alojado en el hardware de tu negocio/);
-  assert.match(javascript, /Llega a Operator donde empieza el trabajo/);
+  const floatingSquareCopy = [
+    ["Operating system for your business.", "OperateOS brings business information, work, and tools together in one place."],
+    ["Its own AI agent.", "Operator browses, handles routine work, and helps get things done."],
+    ["Customizable.", "Shape OperateOS around the way the business works."],
+    ["Extendable.", "Add modules, workflows, and capabilities as the business grows."],
+    ["Hosted on your own hardware.", "The business keeps control of its system and data."],
+    ["Sistema operacional para o seu negócio.", "O OperateOS reúne as informações, o trabalho e as ferramentas do seu negócio em um só lugar."],
+    ["Seu próprio agente de IA.", "O Operator navega, cuida do trabalho rotineiro e ajuda a fazer as coisas acontecerem."],
+    ["Personalizável.", "Adapte o OperateOS à forma como o negócio trabalha."],
+    ["Extensível.", "Adicione módulos, fluxos de trabalho e capacidades à medida que o negócio cresce."],
+    ["Hospedado no seu próprio hardware.", "O negócio mantém o controle do seu sistema e dos seus dados."],
+    ["Sistema operativo para tu negocio.", "OperateOS reúne la información, el trabajo y las herramientas de tu negocio en un solo lugar."],
+    ["Su propio agente de IA.", "Operator navega, se encarga del trabajo rutinario y ayuda a hacer las cosas."],
+    ["Personalizable.", "Adapta OperateOS a la forma en que trabaja tu negocio."],
+    ["Extensible.", "Añade módulos, flujos de trabajo y capacidades a medida que crece tu negocio."],
+    ["Alojado en tu propio hardware.", "El negocio mantiene el control de su sistema y sus datos."],
+  ];
+  for (const [title, description] of floatingSquareCopy) {
+    const sourceEntry = `["${title}", "${description}"`;
+    assert.ok(systemPartBlocks.some((block) => block.includes(sourceEntry)), `missing source floating-square copy: ${title}`);
+    assert.ok(javascript.includes(title), `missing built floating-square title: ${title}`);
+    assert.ok(javascript.includes(description), `missing built floating-square description: ${description}`);
+  }
+  assert.doesNotMatch(javascript, /hero-description/);
   assert.match(javascript, /computer of its own/);
   assert.match(javascript, /open web/);
   assert.match(javascript, /browser-based/);

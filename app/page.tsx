@@ -54,6 +54,7 @@ export default function Home() {
   const [locale, setLocale] = useState<Locale>(getInitialLocale);
   const copy = COPY[locale];
   const systemParts = copy.systemParts as Array<[string, string, string]>;
+  const orbitStep = 360 / systemParts.length;
   const capabilities = copy.capabilities as Array<[string, string, string]>;
   const layers = copy.layers as Array<[string, string, string, string]>;
   const workflowSteps = copy.work.steps as Array<[string, string]>;
@@ -157,9 +158,6 @@ export default function Home() {
         <div className="hero-copy">
           <h1>{copy.hero.title}</h1>
           <p className="hero-subtitle">{copy.hero.subtitle}</p>
-          <div className="hero-description">
-            {copy.hero.description.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-          </div>
         </div>
 
         <div
@@ -176,7 +174,7 @@ export default function Home() {
             <div className="stage-rings" aria-hidden="true"><i /><i /><i /><i /></div>
             <div className="orbit-spokes" aria-hidden="true">
               {systemParts.map(([, , className], index) => (
-                <i key={className} style={{ "--spoke-angle": `${index * 60}deg`, "--signal-delay": `${index * -0.7}s` } as CSSProperties} />
+                <i key={className} style={{ "--spoke-angle": `${index * orbitStep}deg`, "--signal-delay": `${index * -0.7}s` } as CSSProperties} />
               ))}
             </div>
             <div className="orbit-particles" aria-hidden="true">
@@ -187,10 +185,10 @@ export default function Home() {
                 className={`orbiting-part ${className}`}
                 key={className}
                 style={{
-                  "--orbit-phase": `${index * 60}deg`,
-                  "--orbit-phase-end": `${index * 60 + 360}deg`,
-                  "--orbit-phase-neg": `${index * -60}deg`,
-                  "--orbit-phase-neg-end": `${index * -60 - 360}deg`,
+                  "--orbit-phase": `${index * orbitStep}deg`,
+                  "--orbit-phase-end": `${index * orbitStep + 360}deg`,
+                  "--orbit-phase-neg": `${index * -orbitStep}deg`,
+                  "--orbit-phase-neg-end": `${index * -orbitStep - 360}deg`,
                 } as CSSProperties}
               >
                 <div className="part-billboard">
