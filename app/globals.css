@@ -242,10 +242,10 @@ button { font: inherit; }
 .system-part small { color: rgba(255,255,255,.5); font-size: 11px; }
 .part-orb { display: grid; width: 28px; height: 28px; place-items: center; border: 1px solid rgba(255,255,255,.13); border-radius: 50%; background: rgba(255,255,255,.04); }
 .part-orb i { width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 13px var(--cyan); }
-.part-agent .part-orb i, .part-memory .part-orb i { background: var(--violet); box-shadow: 0 0 13px var(--violet); }
+.part-agent .part-orb i, .part-customizable .part-orb i { background: var(--violet); box-shadow: 0 0 13px var(--violet); }
 .part-system .part-orb i, .part-web .part-orb i { background: var(--cyan); box-shadow: 0 0 13px var(--cyan); }
-.part-computer .part-orb i { background: var(--coral); box-shadow: 0 0 13px var(--coral); }
-.part-automation .part-orb i { background: var(--lime); box-shadow: 0 0 13px var(--lime); }
+.part-hardware .part-orb i { background: var(--coral); box-shadow: 0 0 13px var(--coral); }
+.part-extendable .part-orb i { background: var(--lime); box-shadow: 0 0 13px var(--lime); }
 @keyframes signal-run { 0%, 15% { left: 3%; opacity: 0; } 40%, 70% { opacity: 1; } 90%, 100% { left: 92%; opacity: 0; } }
 @keyframes orbit-turn { from { transform: rotateZ(var(--orbit-phase)); } to { transform: rotateZ(var(--orbit-phase-end)); } }
 @keyframes orbit-counter {
