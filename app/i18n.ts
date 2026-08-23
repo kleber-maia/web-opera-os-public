@@ -5,13 +5,17 @@ export type Locale = (typeof SUPPORTED_LOCALES)[number];
 const en = {
   meta: {
     title: "OperateOS — An operating system for your business.",
-    description: "OperateOS is an operating system for your business, with its own AI agent, Operator. Customize it, extend it, and host it on your own hardware while keeping control of your system and data.",
-    ogDescription: "An operating system for your business, with its own AI agent, Operator. Customize it, extend it, and host it on your own hardware while keeping control of your system and data.",
+    description: "OperateOS is the operating system for your business, with its own AI agent, Operator. Customize and extend it with new modules, workflows, and capabilities on hardware you own, keeping your system and data under your control.",
+    ogDescription: "The operating system for your business, with its own AI agent, Operator. Customize and extend it with new modules, workflows, and capabilities on hardware you own, keeping your system and data under your control.",
   },
   language: { label: "Language", en: "English", pt: "Português (Brasil)", es: "Español (Latinoamérica)" },
   nav: { aria: "Main navigation", homeAria: "OperateOS home", system: "The system", work: "How it works", modules: "Modules", pricing: "Pricing", ownership: "Ownership", access: "Early access" },
   hero: {
     title: "An operating system for your business.", subtitle: "With its own AI agent.",
+    description: [
+      "OperateOS brings your business information, work, and tools together in one place. Operator is built in to browse, handle routine work, and help get things done.",
+      "Customize OperateOS around the way your business works. Extend it with new modules, workflows, and capabilities as you grow. It runs on hardware you own, keeping your system and data under your control.",
+    ],
     stageAria: "Operator working across OperateOS and the open web", status: "Online", context: "Working across the business", agentLabel: "Operator",
     message: "Operator researched two campaigns spending without qualified pipeline. It compared Ads, Pipeline, and the current budget policy.",
     actionLabel: "Prepared action", actionTitle: "Pause Broad Prospecting", approval: "Waiting for your approval", checked: "Context checked",
@@ -35,14 +39,14 @@ const en = {
   capabilities: [
     ["Business memory", "Understands the context behind the request.", "Operator uses business memory, permissions, and approval boundaries to make its work fit the business."],
     ["Own computer", "A persistent place to browse and work.", "Operator has a computer of its own: it can navigate the open internet, use browser-based tools, and complete multi-step tasks."],
-    ["AI Chat + channels", "Reach Operator wherever work starts.", "Ask Operator inside OperateOS through the dedicated AI Chat feature or through Telegram, WhatsApp, iMessage, and other messaging channels."],
+    ["AI Chat + channels", "Reach Operator wherever work starts.", "Ask Operator inside OperateOS through the dedicated AI Chat feature or through messaging channels."],
     ["Safe operations", "Move work forward with control.", "Operator operates business data, workflows, and connected SaaS tools, automates mundane processes, runs errands, and asks for approval before consequential actions."],
   ],
   layers: [
     ["The Operator", "One agent, with a computer of its own", "Operator researches, navigates the web, uses browser-based tools, and performs real work while respecting business context, permissions, and approvals.", "violet"],
     ["The memory", "Business context that travels with the work", "OperateOS keeps business memory, data, workflows, and approval boundaries together so Operator can act with context.", "cyan"],
     ["The information system", "OperateOS, shaped around the business", "OperateOS connects the information, workflows, connected tools, and infrastructure the business controls. Modules can grow as needs change.", "lime"],
-    ["The reach", "AI Chat and messaging channels", "Start with Operator inside OperateOS or through Telegram, WhatsApp, iMessage, and other channels. Operator brings research, evidence, and results back into the system.", "coral"],
+    ["The reach", "AI Chat and messaging channels", "Start with Operator inside OperateOS or through messaging channels. Operator brings research, evidence, and results back into the system.", "coral"],
   ],
   work: {
     kicker: "Operator · Research, action, and context", titleBefore: "Operator doesn’t just answer. It works ", emphasis: "through", titleAfter: " the business.",
@@ -118,6 +122,10 @@ const ptBR: Copy = {
   nav: { aria: "Navegação principal", homeAria: "Página inicial do OperateOS", system: "O sistema", work: "Como funciona", modules: "Módulos", pricing: "Preços", ownership: "Controle", access: "Acesso antecipado" },
   hero: {
     title: "Um sistema operacional para o seu negócio.", subtitle: "Com seu próprio agente de IA.",
+    description: [
+      "O OperateOS reúne as informações, o trabalho e as ferramentas do seu negócio em um só lugar. O Operator já vem integrado para navegar, cuidar do trabalho rotineiro e ajudar a fazer as coisas acontecerem.",
+      "Personalize o OperateOS de acordo com a forma como seu negócio funciona. Estenda-o com novos módulos, fluxos de trabalho e capacidades à medida que seu negócio cresce. Ele roda no hardware que seu negócio possui, mantendo o sistema e os dados sob seu controle.",
+    ],
     stageAria: "Operator trabalhando no OperateOS e na internet aberta", status: "Online", context: "Trabalhando em todo o negócio", agentLabel: "Operator",
     message: "O Operator pesquisou duas campanhas gerando gastos sem oportunidades qualificadas no pipeline. Comparou Anúncios, Pipeline e a política de orçamento atual.",
     actionLabel: "Ação preparada", actionTitle: "Pausar prospecção ampla", approval: "Aguardando sua aprovação", checked: "Contexto verificado",
@@ -141,14 +149,14 @@ const ptBR: Copy = {
   capabilities: [
     ["Memória do negócio", "Entende o contexto por trás do pedido.", "O Operator usa a memória do negócio, permissões e limites de aprovação para adaptar o trabalho à realidade do negócio."],
     ["Próprio computador", "Um lugar persistente para navegar e trabalhar.", "O Operator tem seu próprio computador: navega na internet aberta, usa ferramentas no navegador e conclui tarefas em várias etapas."],
-    ["AI Chat + canais", "Encontre o Operator onde o trabalho começa.", "Pergunte ao Operator dentro do OperateOS pelo recurso dedicado AI Chat ou pelo Telegram, WhatsApp, iMessage e outros canais de mensagens."],
+    ["AI Chat + canais", "Encontre o Operator onde o trabalho começa.", "Pergunte ao Operator dentro do OperateOS pelo recurso dedicado AI Chat ou por canais de mensagens."],
     ["Operação segura", "Faça o trabalho avançar com controle.", "O Operator opera dados, fluxos de trabalho e ferramentas SaaS conectadas, automatiza processos repetitivos, resolve tarefas do dia a dia e pede aprovação antes de ações consequentes."],
   ],
   layers: [
     ["O Operator", "Um agente com seu próprio computador", "O Operator pesquisa, navega na web, usa ferramentas no navegador e realiza trabalho de verdade, respeitando o contexto do negócio, as permissões e as aprovações.", "violet"],
     ["A memória", "Contexto do negócio que acompanha o trabalho", "O OperateOS mantém juntos a memória do negócio, os dados, os fluxos de trabalho e os limites de aprovação para o Operator agir com contexto.", "cyan"],
     ["O sistema de informação", "OperateOS, moldado para o negócio", "O OperateOS conecta as informações, os fluxos de trabalho, as ferramentas conectadas e a infraestrutura sob controle do negócio. Os módulos crescem conforme as necessidades mudam.", "lime"],
-    ["O alcance", "AI Chat e canais de mensagens", "Comece com o Operator dentro do OperateOS ou pelo Telegram, WhatsApp, iMessage e outros canais. O Operator traz pesquisas, evidências e resultados de volta para o sistema.", "coral"],
+    ["O alcance", "AI Chat e canais de mensagens", "Comece com o Operator dentro do OperateOS ou por canais de mensagens. O Operator traz pesquisas, evidências e resultados de volta para o sistema.", "coral"],
   ],
   work: {
     kicker: "Operator · Pesquisa, ação e contexto", titleBefore: "O Operator não apenas responde. Ele trabalha ", emphasis: "em todo", titleAfter: " o negócio.",
@@ -222,6 +230,10 @@ const es419: Copy = {
   nav: { aria: "Navegación principal", homeAria: "Inicio de OperateOS", system: "El sistema", work: "Cómo funciona", modules: "Módulos", pricing: "Precios", ownership: "Control", access: "Acceso anticipado" },
   hero: {
     title: "Un sistema operativo para tu negocio.", subtitle: "Con su propio agente de IA.",
+    description: [
+      "OperateOS reúne la información, el trabajo y las herramientas de tu negocio en un solo lugar. Operator viene integrado para navegar, encargarse del trabajo rutinario y ayudarte a hacer las cosas.",
+      "Personaliza OperateOS según la forma en que trabaja tu negocio. Extiéndelo con nuevos módulos, flujos de trabajo y capacidades a medida que crece. Funciona en hardware que tu negocio posee, manteniendo tu sistema y tus datos bajo tu control.",
+    ],
     stageAria: "Operator trabajando en OperateOS y en internet abierto", status: "En línea", context: "Trabajando en todo el negocio", agentLabel: "Operator",
     message: "Operator investigó dos campañas con gastos pero sin oportunidades calificadas en el pipeline. Comparó Anuncios, Pipeline y la política de presupuesto actual.",
     actionLabel: "Acción preparada", actionTitle: "Pausar prospección amplia", approval: "Esperando tu aprobación", checked: "Contexto verificado",
@@ -245,14 +257,14 @@ const es419: Copy = {
   capabilities: [
     ["Memoria del negocio", "Entiende el contexto detrás de la solicitud.", "Operator usa la memoria del negocio, los permisos y los límites de aprobación para adaptar el trabajo a la realidad del negocio."],
     ["Su propia computadora", "Un lugar persistente para navegar y trabajar.", "Operator tiene su propia computadora: navega por internet abierto, usa herramientas del navegador y completa tareas de varios pasos."],
-    ["AI Chat + canales", "Llega a Operator donde empieza el trabajo.", "Pregúntale a Operator dentro de OperateOS mediante la función dedicada AI Chat o por Telegram, WhatsApp, iMessage y otros canales de mensajería."],
+    ["AI Chat + canales", "Llega a Operator donde empieza el trabajo.", "Pregúntale a Operator dentro de OperateOS mediante la función dedicada AI Chat o por canales de mensajería."],
     ["Operación segura", "Haz avanzar el trabajo con control.", "Operator opera datos, flujos de trabajo y herramientas SaaS conectadas, automatiza procesos repetitivos, resuelve encargos y pide aprobación antes de acciones relevantes."],
   ],
   layers: [
     ["Operator", "Un agente con su propia computadora", "Operator investiga, navega por la web, usa herramientas del navegador y realiza trabajo real respetando el contexto del negocio, los permisos y las aprobaciones.", "violet"],
     ["La memoria", "Contexto del negocio que acompaña el trabajo", "OperateOS mantiene unidos la memoria del negocio, los datos, los flujos de trabajo y los límites de aprobación para que Operator actúe con contexto.", "cyan"],
     ["El sistema de información", "OperateOS, adaptado al negocio", "OperateOS conecta la información, los flujos de trabajo, las herramientas conectadas y la infraestructura que controla el negocio. Los módulos crecen cuando cambian las necesidades.", "lime"],
-    ["El alcance", "AI Chat y canales de mensajería", "Empieza con Operator dentro de OperateOS o por Telegram, WhatsApp, iMessage y otros canales. Operator devuelve investigaciones, evidencias y resultados al sistema.", "coral"],
+    ["El alcance", "AI Chat y canales de mensajería", "Empieza con Operator dentro de OperateOS o por canales de mensajería. Operator devuelve investigaciones, evidencias y resultados al sistema.", "coral"],
   ],
   work: {
     kicker: "Operator · Investigación, acción y contexto", titleBefore: "Operator no se limita a responder. Trabaja ", emphasis: "en todo", titleAfter: " el negocio.",

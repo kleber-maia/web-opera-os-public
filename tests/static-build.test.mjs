@@ -21,6 +21,10 @@ test("the GitHub Pages artifact is complete and static", () => {
 
   const pageSource = readFileSync("app/page.tsx", "utf8");
   assert.doesNotMatch(pageSource, /hero-points|hero-traits|heroPoints/);
+  const heroSource = pageSource.slice(pageSource.indexOf('<div className="hero-copy">'), pageSource.indexOf('<div\n          className="system-stage"'));
+  assert.match(heroSource, /className="hero-description"/);
+  assert.match(heroSource, /copy\.hero\.description\.map/);
+  assert.doesNotMatch(heroSource, /hero-(?:card|point|trait)|<ul|<ol/);
   assert.match(pageSource, /className="system-stage"/);
   assert.match(pageSource, /systemParts\.map/);
 
@@ -36,6 +40,15 @@ test("the GitHub Pages artifact is complete and static", () => {
   assert.match(javascript, /Operator/);
   assert.match(javascript, /An operating system for your business\./);
   assert.match(javascript, /With its own AI agent\./);
+  assert.match(javascript, /OperateOS brings your business information, work, and tools together in one place\./);
+  assert.match(javascript, /Customize OperateOS around the way your business works\./);
+  assert.match(javascript, /hardware you own, keeping your system and data under your control\./);
+  assert.match(javascript, /O OperateOS reúne as informações, o trabalho e as ferramentas do seu negócio em um só lugar\./);
+  assert.match(javascript, /Personalize o OperateOS de acordo com a forma como seu negócio funciona\./);
+  assert.match(javascript, /hardware que seu negócio possui, mantendo o sistema e os dados sob seu controle\./);
+  assert.match(javascript, /OperateOS reúne la información, el trabajo y las herramientas de tu negocio en un solo lugar\./);
+  assert.match(javascript, /Personaliza OperateOS según la forma en que trabaja tu negocio\./);
+  assert.match(javascript, /hardware que tu negocio posee, manteniendo tu sistema y tus datos bajo tu control\./);
   assert.match(javascript, /Um sistema operacional para o seu negócio\./);
   assert.match(javascript, /Com seu próprio agente de IA\./);
   assert.match(javascript, /Un sistema operativo para tu negocio\./);
@@ -71,9 +84,9 @@ test("the GitHub Pages artifact is complete and static", () => {
   assert.match(javascript, /tareas de varios pasos/);
   assert.match(javascript, /encargos/);
   assert.match(javascript, /AI Chat/);
-  assert.match(javascript, /Telegram/);
-  assert.match(javascript, /WhatsApp/);
-  assert.match(javascript, /iMessage/);
+  assert.match(javascript, /messaging channels/);
+  assert.match(javascript, /canais de mensagens/);
+  assert.match(javascript, /canales de mensajería/);
   assert.match(javascript, /Pricing/);
   assert.match(javascript, /Preços/);
   assert.match(javascript, /Precios/);
@@ -114,6 +127,7 @@ test("the GitHub Pages artifact is complete and static", () => {
   assert.match(javascript, /Seu negócio/);
   assert.match(javascript, /Tu negocio/);
   assert.doesNotMatch(javascript, /(?<!\p{L})Opera(?!\p{L})/u);
+  assert.doesNotMatch(javascript, /[\x54]elegram|[\x57]hatsApp|[\x69]Message/);
 
   const publicCopy = ["app/i18n.ts", "index.html", "README.md"]
     .map((file) => readFileSync(file, "utf8"))
@@ -122,4 +136,5 @@ test("the GitHub Pages artifact is complete and static", () => {
   assert.doesNotMatch(publicCopy, /\bcompanies?\b/i);
   assert.doesNotMatch(publicCopy, /\bempresas?\b/i);
   assert.doesNotMatch(publicCopy, /\bempresarial(?:es)?\b/i);
+  assert.doesNotMatch(publicCopy, /[\x54]elegram|[\x57]hatsApp|[\x69]Message/);
 });

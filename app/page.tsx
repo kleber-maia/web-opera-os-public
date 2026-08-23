@@ -157,6 +157,9 @@ export default function Home() {
         <div className="hero-copy">
           <h1>{copy.hero.title}</h1>
           <p className="hero-subtitle">{copy.hero.subtitle}</p>
+          <div className="hero-description">
+            {copy.hero.description.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+          </div>
         </div>
 
         <div

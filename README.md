@@ -63,7 +63,7 @@ The two tunnels run as persistent macOS user services. Their configurations are 
 
 - OperateOS is the self-hosted business operating system.
 - Operator is the AI agent with a computer of its own: it browses the open web, performs browser-based multi-step tasks, automates mundane work and errands, and operates business data, workflows, and connected SaaS tools with approval where appropriate.
-- Operator is available inside OperateOS through the dedicated AI Chat feature and through Telegram, WhatsApp, iMessage, and other messaging channels.
+- Operator is available inside OperateOS through the dedicated AI Chat feature and through messaging channels.
 - Operator brings research, evidence, and results back into OperateOS to keep the business system current.
 - OperateOS is adaptable rather than a fixed software suite; each business can create and extend its own modules, workflows, and capabilities.
 - Marketing changes must remain aligned across English, Brazilian Portuguese, Latin American Spanish, and the default page metadata.
