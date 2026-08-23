@@ -24,8 +24,12 @@ test("the GitHub Pages artifact is complete and static", () => {
   const systemPartBlocks = [...i18nSource.matchAll(/systemParts:\s*\[([\s\S]*?)\n\s*\],/g)].map(([, block]) => block);
   assert.equal(systemPartBlocks.length, 3);
   for (const block of systemPartBlocks) {
-    assert.equal((block.match(/^\s+\["/gm) ?? []).length, 5);
+    assert.equal((block.match(/^\s+\["/gm) ?? []).length, 4);
     assert.doesNotMatch(block, /part-web|AI Chat \+ (?:channels|canais|canales)/);
+    assert.deepEqual(
+      [...block.matchAll(/"(part-[^"]+)"/g)].map(([, className]) => className),
+      ["part-system", "part-agent", "part-extendable", "part-hardware"],
+    );
   }
 
   const pageSource = readFileSync("app/page.tsx", "utf8");
@@ -38,6 +42,10 @@ test("the GitHub Pages artifact is complete and static", () => {
   assert.match(pageSource, /systemParts\.map/);
   assert.match(pageSource, /<strong>\{label\}<\/strong><small>\{detail\}<\/small>/);
   assert.match(pageSource, /const orbitStep = 360 \/ systemParts\.length;/);
+  assert.match(pageSource, /className="core-statement"/);
+  assert.match(pageSource, /className="core-facts"/);
+  assert.match(pageSource, /<dt>\{label\}<\/dt><dd>\{value\}<\/dd>/);
+  assert.doesNotMatch(pageSource, /agent-message|agent-action|context-track|core-context/);
   assert.doesNotMatch(pageSource, /index \* 60/);
 
   const javascript = readdirSync("dist/assets")
@@ -72,16 +80,13 @@ test("the GitHub Pages artifact is complete and static", () => {
   }
   const localizedHeroCopy = [
     {
-      title: "The operating system your business owns.", subtitle: "Extendable, comes with its own AI agent, hosted on your own hardware.", status: "Yours", context: "The operating system your business owns.",
-      message: "Operator is built in to browse, handle routine work, and help get things done.", actionLabel: "Built to adapt", actionTitle: "Extend around your business", supporting: "Runs on your hardware", contextLabel: "Ownership context", contextItems: ["Your business", "Operator", "Your hardware"],
+      title: "The operating system your business owns.", subtitle: "Extendable, comes with its own AI agent, hosted on your own hardware.", status: "Yours", identity: "The operating system your business owns.", factsLabel: "OperateOS ownership details", facts: [["Operator", "Built in"], ["Hardware", "Yours"]],
     },
     {
-      title: "O sistema operacional que o seu negócio possui.", subtitle: "Extensível, com seu próprio agente de IA, hospedado no seu próprio hardware.", status: "Seu", context: "O sistema operacional que o seu negócio possui.",
-      message: "O Operator vem integrado para navegar, cuidar do trabalho rotineiro e ajudar a fazer as coisas acontecerem.", actionLabel: "Feito para se adaptar", actionTitle: "Amplie para acompanhar o seu negócio", supporting: "Roda no seu hardware", contextLabel: "Contexto de propriedade", contextItems: ["Seu negócio", "Operator", "Seu hardware"],
+      title: "O sistema operacional que o seu negócio possui.", subtitle: "Extensível, com seu próprio agente de IA, hospedado no seu próprio hardware.", status: "Seu", identity: "O sistema operacional que o seu negócio possui.", factsLabel: "Detalhes de propriedade do OperateOS", facts: [["Operator", "Integrado"], ["Hardware", "Seu"]],
     },
     {
-      title: "El sistema operativo que tu negocio posee.", subtitle: "Extensible, con su propio agente de IA, alojado en tu propio hardware.", status: "Tuyo", context: "El sistema operativo que tu negocio posee.",
-      message: "Operator viene integrado para navegar, encargarse del trabajo rutinario y ayudar a hacer las cosas.", actionLabel: "Diseñado para adaptarse", actionTitle: "Amplía el sistema para tu negocio", supporting: "Funciona en tu hardware", contextLabel: "Contexto de propiedad", contextItems: ["Tu negocio", "Operator", "Tu hardware"],
+      title: "El sistema operativo que tu negocio posee.", subtitle: "Extensible, con su propio agente de IA, alojado en tu propio hardware.", status: "Tuyo", identity: "El sistema operativo que tu negocio posee.", factsLabel: "Detalles de propiedad de OperateOS", facts: [["Operator", "Integrado"], ["Hardware", "Tuyo"]],
     },
   ];
   const staleCenterCopy = /campaign|campanha|campañ|ads|anúncios|anuncios|pipeline|budget|orçamento|presupuesto|approval|aprovação|aprobación|context checked|contexto verificado/i;
@@ -91,8 +96,15 @@ test("the GitHub Pages artifact is complete and static", () => {
     assert.doesNotMatch(heroBlock, staleCenterCopy, `stale center-card copy leaked into hero: ${localizedCopy.title}`);
     for (const [field, value] of Object.entries(localizedCopy)) {
       if (Array.isArray(value)) {
-        assert.ok(heroBlock.includes(`${field}: ["${value.join('\", \"')}"]`), `missing localized hero source field: ${field}`);
-        for (const item of value) assert.ok(javascript.includes(item), `missing localized hero build copy: ${item}`);
+        if (Array.isArray(value[0])) {
+          for (const item of value) {
+            assert.ok(heroBlock.includes(`["${item[0]}", "${item[1]}"]`), `missing localized hero source field: ${field}`);
+            for (const part of item) assert.ok(javascript.includes(part), `missing localized hero build copy: ${part}`);
+          }
+        } else {
+          assert.ok(heroBlock.includes(`${field}: ["${value.join('\", \"')}"]`), `missing localized hero source field: ${field}`);
+          for (const item of value) assert.ok(javascript.includes(item), `missing localized hero build copy: ${item}`);
+        }
       } else {
         assert.ok(heroBlock.includes(`${field}: "${value}"`), `missing localized hero source field: ${field}`);
         assert.ok(javascript.includes(value), `missing localized hero build copy: ${value}`);
@@ -108,17 +120,14 @@ test("the GitHub Pages artifact is complete and static", () => {
   const floatingSquareCopy = [
     ["Operating system for your business.", "OperateOS brings business information, work, and tools together in one place."],
     ["Its own AI agent.", "Operator browses, handles routine work, and helps get things done."],
-    ["Customizable.", "Shape OperateOS around the way the business works."],
     ["Extendable.", "Add modules, workflows, and capabilities as the business grows."],
     ["Hosted on your own hardware.", "The business keeps control of its system and data."],
     ["Sistema operacional para o seu negócio.", "O OperateOS reúne as informações, o trabalho e as ferramentas do seu negócio em um só lugar."],
     ["Seu próprio agente de IA.", "O Operator navega, cuida do trabalho rotineiro e ajuda a fazer as coisas acontecerem."],
-    ["Personalizável.", "Adapte o OperateOS à forma como o negócio trabalha."],
     ["Extensível.", "Adicione módulos, fluxos de trabalho e capacidades à medida que o negócio cresce."],
     ["Hospedado no seu próprio hardware.", "O negócio mantém o controle do seu sistema e dos seus dados."],
     ["Sistema operativo para tu negocio.", "OperateOS reúne la información, el trabajo y las herramientas de tu negocio en un solo lugar."],
     ["Su propio agente de IA.", "Operator navega, se encarga del trabajo rutinario y ayuda a hacer las cosas."],
-    ["Personalizable.", "Adapta OperateOS a la forma en que trabaja tu negocio."],
     ["Extensible.", "Añade módulos, flujos de trabajo y capacidades a medida que crece tu negocio."],
     ["Alojado en tu propio hardware.", "El negocio mantiene el control de su sistema y sus datos."],
   ];

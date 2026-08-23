@@ -208,19 +208,12 @@ export default function Home() {
               <span className="core-status"><i /> {copy.hero.status}</span>
             </div>
             <div className="core-body">
-              <p className="core-context">{copy.hero.context}</p>
-              <div className="agent-message">
-                <span className="agent-avatar">{copy.hero.agentLabel}</span>
-                <p>{copy.hero.message}</p>
-              </div>
-              <div className="agent-action">
-                <span>{copy.hero.actionLabel}</span>
-                <strong>{copy.hero.actionTitle}</strong>
-                <small>{copy.hero.supporting}</small>
-              </div>
-              <div className="context-track" aria-label={copy.hero.contextLabel}>
-                <span>{copy.hero.contextItems[0]}</span><i /><span>{copy.hero.contextItems[1]}</span><i /><span>{copy.hero.contextItems[2]}</span>
-              </div>
+              <p className="core-statement">{copy.hero.identity}</p>
+              <dl className="core-facts" aria-label={copy.hero.factsLabel}>
+                {copy.hero.facts.map(([label, value]) => (
+                  <div className="core-fact" key={label}><dt>{label}</dt><dd>{value}</dd></div>
+                ))}
+              </dl>
             </div>
           </div>
 
