@@ -13,8 +13,9 @@ test("the GitHub Pages artifact is complete and static", () => {
   const html = readFileSync("dist/index.html", "utf8");
   assert.match(html, /<div id="root"><\/div>/);
   assert.match(html, /OperateOS/);
-  assert.match(html, /OperateOS — An operating system for your business\./);
-  assert.match(html, /operating system for your business/);
+  assert.match(html, /OperateOS — The operating system your business owns\./);
+  assert.match(html, /OperateOS is the operating system your business owns: extendable, comes with its own AI agent, Operator, and is hosted on your own hardware\./);
+  assert.match(html, /The operating system your business owns: extendable, comes with its own AI agent, Operator, and is hosted on your own hardware\./);
   assert.match(html, /hreflang="pt-BR"/);
   assert.match(html, /hreflang="es-419"/);
   assert.doesNotMatch(html, /\/api\//);
@@ -44,13 +45,66 @@ test("the GitHub Pages artifact is complete and static", () => {
     .map((file) => readFileSync(join("dist/assets", file), "utf8"))
     .join("\n");
 
+  const heroCopyBlocks = [...i18nSource.matchAll(/hero:\s*\{([\s\S]*?)\n\s*\},/g)].map(([, block]) => block);
+  assert.equal(heroCopyBlocks.length, 3);
+  const localizedMetaCopy = [
+    [
+      "OperateOS — The operating system your business owns.",
+      "OperateOS is the operating system your business owns: extendable, comes with its own AI agent, Operator, and is hosted on your own hardware.",
+      "The operating system your business owns: extendable, comes with its own AI agent, Operator, and is hosted on your own hardware.",
+    ],
+    [
+      "OperateOS — O sistema operacional que o seu negócio possui.",
+      "O OperateOS é o sistema operacional que o seu negócio possui: é extensível, vem com seu próprio agente de IA, o Operator, e é hospedado no seu próprio hardware.",
+      "O sistema operacional que o seu negócio possui: é extensível, vem com seu próprio agente de IA, o Operator, e é hospedado no seu próprio hardware.",
+    ],
+    [
+      "OperateOS — El sistema operativo que tu negocio posee.",
+      "OperateOS es el sistema operativo que tu negocio posee: es extensible, viene con su propio agente de IA, Operator, y está alojado en tu propio hardware.",
+      "El sistema operativo que tu negocio posee: es extensible, viene con su propio agente de IA, Operator, y está alojado en tu propio hardware.",
+    ],
+  ];
+  for (const metadata of localizedMetaCopy) {
+    for (const value of metadata) {
+      assert.ok(i18nSource.includes(value), `missing localized metadata source copy: ${value}`);
+      assert.ok(javascript.includes(value), `missing localized metadata build copy: ${value}`);
+    }
+  }
+  const localizedHeroCopy = [
+    {
+      title: "The operating system your business owns.", subtitle: "Extendable, comes with its own AI agent, hosted on your own hardware.", status: "Yours", context: "The operating system your business owns.",
+      message: "Operator is built in to browse, handle routine work, and help get things done.", actionLabel: "Built to adapt", actionTitle: "Extend around your business", supporting: "Runs on your hardware", contextLabel: "Ownership context", contextItems: ["Your business", "Operator", "Your hardware"],
+    },
+    {
+      title: "O sistema operacional que o seu negócio possui.", subtitle: "Extensível, com seu próprio agente de IA, hospedado no seu próprio hardware.", status: "Seu", context: "O sistema operacional que o seu negócio possui.",
+      message: "O Operator vem integrado para navegar, cuidar do trabalho rotineiro e ajudar a fazer as coisas acontecerem.", actionLabel: "Feito para se adaptar", actionTitle: "Amplie para acompanhar o seu negócio", supporting: "Roda no seu hardware", contextLabel: "Contexto de propriedade", contextItems: ["Seu negócio", "Operator", "Seu hardware"],
+    },
+    {
+      title: "El sistema operativo que tu negocio posee.", subtitle: "Extensible, con su propio agente de IA, alojado en tu propio hardware.", status: "Tuyo", context: "El sistema operativo que tu negocio posee.",
+      message: "Operator viene integrado para navegar, encargarse del trabajo rutinario y ayudar a hacer las cosas.", actionLabel: "Diseñado para adaptarse", actionTitle: "Amplía el sistema para tu negocio", supporting: "Funciona en tu hardware", contextLabel: "Contexto de propiedad", contextItems: ["Tu negocio", "Operator", "Tu hardware"],
+    },
+  ];
+  const staleCenterCopy = /campaign|campanha|campañ|ads|anúncios|anuncios|pipeline|budget|orçamento|presupuesto|approval|aprovação|aprobación|context checked|contexto verificado/i;
+  for (const localizedCopy of localizedHeroCopy) {
+    const heroBlock = heroCopyBlocks.find((block) => block.includes(`title: "${localizedCopy.title}"`));
+    assert.ok(heroBlock, `missing localized hero source copy: ${localizedCopy.title}`);
+    assert.doesNotMatch(heroBlock, staleCenterCopy, `stale center-card copy leaked into hero: ${localizedCopy.title}`);
+    for (const [field, value] of Object.entries(localizedCopy)) {
+      if (Array.isArray(value)) {
+        assert.ok(heroBlock.includes(`${field}: ["${value.join('\", \"')}"]`), `missing localized hero source field: ${field}`);
+        for (const item of value) assert.ok(javascript.includes(item), `missing localized hero build copy: ${item}`);
+      } else {
+        assert.ok(heroBlock.includes(`${field}: "${value}"`), `missing localized hero source field: ${field}`);
+        assert.ok(javascript.includes(value), `missing localized hero build copy: ${value}`);
+      }
+    }
+  }
+
   assert.match(javascript, /Português \(Brasil\)/);
   assert.match(javascript, /Español \(Latinoamérica\)/);
   assert.match(javascript, /operaos-locale/);
   assert.match(javascript, /OperateOS/);
   assert.match(javascript, /Operator/);
-  assert.match(javascript, /An operating system for your business\./);
-  assert.match(javascript, /With its own AI agent\./);
   const floatingSquareCopy = [
     ["Operating system for your business.", "OperateOS brings business information, work, and tools together in one place."],
     ["Its own AI agent.", "Operator browses, handles routine work, and helps get things done."],

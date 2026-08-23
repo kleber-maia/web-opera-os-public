@@ -216,9 +216,9 @@ export default function Home() {
               <div className="agent-action">
                 <span>{copy.hero.actionLabel}</span>
                 <strong>{copy.hero.actionTitle}</strong>
-                <small>{copy.hero.approval}</small>
+                <small>{copy.hero.supporting}</small>
               </div>
-              <div className="context-track" aria-label={copy.hero.checked}>
+              <div className="context-track" aria-label={copy.hero.contextLabel}>
                 <span>{copy.hero.contextItems[0]}</span><i /><span>{copy.hero.contextItems[1]}</span><i /><span>{copy.hero.contextItems[2]}</span>
               </div>
             </div>
