@@ -11,14 +11,7 @@ const en = {
   language: { label: "Language", en: "English", pt: "Português (Brasil)", es: "Español (Latinoamérica)" },
   nav: { aria: "Main navigation", homeAria: "OperateOS home", system: "The system", work: "How it works", modules: "Modules", pricing: "Pricing", ownership: "Ownership", access: "Early access" },
   hero: {
-    title: "An operating system for your business.", subtitle: "With its own AI agent.", traits: "Customizable. Extendable. Hosted on your own hardware.", pointsAria: "What OperateOS means for your business",
-    points: [
-      { label: "Operating system for your business.", detail: "OperateOS brings business information, work, and tools together in one place." },
-      { label: "Its own AI agent.", detail: "Operator browses, handles routine work, and helps get things done." },
-      { label: "Customizable.", detail: "Shape OperateOS around the way the business works." },
-      { label: "Extendable.", detail: "Add modules, workflows, and capabilities as the business grows." },
-      { label: "Hosted on your own hardware.", detail: "The business keeps control of its system and data." },
-    ],
+    title: "An operating system for your business.", subtitle: "With its own AI agent.",
     stageAria: "Operator working across OperateOS and the open web", status: "Online", context: "Working across the business", agentLabel: "Operator",
     message: "Operator researched two campaigns spending without qualified pipeline. It compared Ads, Pipeline, and the current budget policy.",
     actionLabel: "Prepared action", actionTitle: "Pause Broad Prospecting", approval: "Waiting for your approval", checked: "Context checked",
@@ -124,14 +117,7 @@ const ptBR: Copy = {
   language: { label: "Idioma", en: "English", pt: "Português (Brasil)", es: "Español (Latinoamérica)" },
   nav: { aria: "Navegação principal", homeAria: "Página inicial do OperateOS", system: "O sistema", work: "Como funciona", modules: "Módulos", pricing: "Preços", ownership: "Controle", access: "Acesso antecipado" },
   hero: {
-    title: "Um sistema operacional para o seu negócio.", subtitle: "Com seu próprio agente de IA.", traits: "Personalizável. Extensível. Hospedado no seu próprio hardware.", pointsAria: "O que o OperateOS significa para o seu negócio",
-    points: [
-      { label: "Sistema operacional para o seu negócio.", detail: "O OperateOS reúne as informações, o trabalho e as ferramentas do negócio em um só lugar." },
-      { label: "Seu próprio agente de IA.", detail: "O Operator navega, cuida do trabalho rotineiro e ajuda a fazer as coisas acontecerem." },
-      { label: "Personalizável.", detail: "Adapte o OperateOS ao jeito como o negócio trabalha." },
-      { label: "Extensível.", detail: "Adicione módulos, fluxos de trabalho e capacidades à medida que o negócio cresce." },
-      { label: "Hospedado no seu próprio hardware.", detail: "O negócio mantém o controle do sistema e dos dados." },
-    ],
+    title: "Um sistema operacional para o seu negócio.", subtitle: "Com seu próprio agente de IA.",
     stageAria: "Operator trabalhando no OperateOS e na internet aberta", status: "Online", context: "Trabalhando em todo o negócio", agentLabel: "Operator",
     message: "O Operator pesquisou duas campanhas gerando gastos sem oportunidades qualificadas no pipeline. Comparou Anúncios, Pipeline e a política de orçamento atual.",
     actionLabel: "Ação preparada", actionTitle: "Pausar prospecção ampla", approval: "Aguardando sua aprovação", checked: "Contexto verificado",
@@ -235,14 +221,7 @@ const es419: Copy = {
   language: { label: "Idioma", en: "English", pt: "Português (Brasil)", es: "Español (Latinoamérica)" },
   nav: { aria: "Navegación principal", homeAria: "Inicio de OperateOS", system: "El sistema", work: "Cómo funciona", modules: "Módulos", pricing: "Precios", ownership: "Control", access: "Acceso anticipado" },
   hero: {
-    title: "Un sistema operativo para tu negocio.", subtitle: "Con su propio agente de IA.", traits: "Personalizable. Extensible. Alojado en tu propio hardware.", pointsAria: "Lo que OperateOS significa para tu negocio",
-    points: [
-      { label: "Sistema operativo para tu negocio.", detail: "OperateOS reúne la información, el trabajo y las herramientas de tu negocio en un solo lugar." },
-      { label: "Su propio agente de IA.", detail: "Operator navega, se encarga del trabajo rutinario y ayuda a que las cosas se hagan." },
-      { label: "Personalizable.", detail: "Adapta OperateOS a la forma en que trabaja tu negocio." },
-      { label: "Extensible.", detail: "Añade módulos, flujos de trabajo y capacidades a medida que crece tu negocio." },
-      { label: "Alojado en tu propio hardware.", detail: "Tu negocio mantiene el control de su sistema y sus datos." },
-    ],
+    title: "Un sistema operativo para tu negocio.", subtitle: "Con su propio agente de IA.",
     stageAria: "Operator trabajando en OperateOS y en internet abierto", status: "En línea", context: "Trabajando en todo el negocio", agentLabel: "Operator",
     message: "Operator investigó dos campañas con gastos pero sin oportunidades calificadas en el pipeline. Comparó Anuncios, Pipeline y la política de presupuesto actual.",
     actionLabel: "Acción preparada", actionTitle: "Pausar prospección amplia", approval: "Esperando tu aprobación", checked: "Contexto verificado",

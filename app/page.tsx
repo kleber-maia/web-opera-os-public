@@ -63,7 +63,6 @@ export default function Home() {
   const modules = copy.modules as Array<[string, string]>;
   const pricingPlans = copy.pricing.plans as PricingPlan[];
   const ownershipProofs = copy.ownership.proofs as Array<[string, string]>;
-  const heroPoints = copy.hero.points as Array<{ label: string; detail: string }>;
 
   useEffect(() => {
     document.documentElement.lang = locale;
@@ -158,18 +157,6 @@ export default function Home() {
         <div className="hero-copy">
           <h1>{copy.hero.title}</h1>
           <p className="hero-subtitle">{copy.hero.subtitle}</p>
-          <p className="hero-traits">{copy.hero.traits}</p>
-          <ul className="hero-points" aria-label={copy.hero.pointsAria}>
-            {heroPoints.map((point, index) => (
-              <li className="hero-point" key={point.label}>
-                <span className="hero-point-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-                <div>
-                  <h2>{point.label}</h2>
-                  <p>{point.detail}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
         </div>
 
         <div

@@ -114,13 +114,6 @@ button { font: inherit; }
 .hero-copy { position: relative; z-index: 3; width: min(1240px, calc(100% - 40px)); margin: 112px auto 0; text-align: center; }
 .hero h1 { max-width: 1080px; margin: 0 auto; font-size: clamp(56px, 6.2vw, 96px); font-weight: 520; line-height: .94; letter-spacing: -.058em; }
 .hero-subtitle { margin: 20px auto 0; color: rgba(255,255,255,.76); font-size: clamp(22px, 2.3vw, 34px); line-height: 1.15; letter-spacing: -.04em; }
-.hero-traits { margin: 18px auto 0; color: rgba(255,255,255,.52); font: 500 12px/1.4 var(--font-geist-mono), monospace; letter-spacing: .04em; }
-.hero-points { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; width: min(1280px, 100%); margin: 52px auto 0; padding: 0; list-style: none; text-align: left; }
-.hero-point { min-width: 0; padding: 20px 18px 22px; border: 1px solid rgba(255,255,255,.14); border-radius: 16px; background: rgba(255,255,255,.045); box-shadow: 0 20px 48px rgba(0,0,0,.16); }
-.hero-point:nth-child(1) { border-top-color: rgba(141,105,255,.65); }.hero-point:nth-child(2) { border-top-color: rgba(79,220,247,.65); }.hero-point:nth-child(3) { border-top-color: rgba(255,136,119,.65); }.hero-point:nth-child(4) { border-top-color: rgba(186,248,122,.65); }.hero-point:nth-child(5) { border-top-color: rgba(255,255,255,.5); }
-.hero-point-index { display: block; color: rgba(255,255,255,.4); font: 500 11px/1 var(--font-geist-mono), monospace; letter-spacing: .08em; }
-.hero-point h2 { margin: 24px 0 10px; color: white; font-size: 17px; font-weight: 600; line-height: 1.15; letter-spacing: -.03em; }
-.hero-point p { margin: 0; color: rgba(255,255,255,.58); font-size: 13px; line-height: 1.5; }
 
 .system-stage {
   --orbit-radius: 360px;
@@ -129,7 +122,7 @@ button { font: inherit; }
   z-index: 2;
   width: min(1320px, 98vw);
   height: 570px;
-  margin: -28px auto 0;
+  margin: 54px auto 0;
   perspective: 1700px;
   perspective-origin: 50% 44%;
   transform-style: preserve-3d;
@@ -445,7 +438,7 @@ button { font: inherit; }
 
 @media (max-width: 980px) {
   .site-nav { grid-template-columns: 1fr auto; }.nav-links { display: none; }
-  .hero { min-height: 1080px; }.hero-copy { margin-top: 90px; }.hero-points { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 760px; }
+  .hero { min-height: 1080px; }.hero-copy { margin-top: 90px; }
   .system-stage { transform: scale(.83); transform-origin: top center; width: 1180px; left: 50%; margin-left: -590px; }
   .section-intro, .development-copy, .modules-heading, .ownership-copy, .pricing-heading { grid-template-columns: 1fr; gap: 26px; }
   .capability-heading { grid-template-columns: 1fr; gap: 24px; }
@@ -463,8 +456,8 @@ button { font: inherit; }
 }
 
 @media (max-width: 640px) {
-  .hero { min-height: 0; padding-bottom: 18px; }.site-nav{padding:18px 0}.nav-actions{gap:0}.language-picker select{max-width:158px;padding-left:9px}.access-label{display:none}.hero-copy{margin-top:68px}.hero h1{font-size:clamp(48px,13vw,64px)}.hero-subtitle{margin-top:17px;font-size:24px}.hero-traits{margin-top:16px;font-size:10px;line-height:1.5;letter-spacing:.05em}.hero-points{grid-template-columns:1fr;gap:8px;margin-top:32px}.hero-point{display:grid;grid-template-columns:30px 1fr;gap:12px;padding:16px}.hero-point h2{margin:0 0 7px;font-size:16px}.hero-point-index{padding-top:3px}.hero-point p{font-size:13px}
-  .system-stage { --orbit-radius: 240px; width: 760px; height: 520px; left: 50%; margin: 0 0 0 -380px; transform: none; }.company-core{width:350px;border-radius:24px}.system-part{width:250px}.system-part small{display:block;line-height:1.35}
+  .hero { min-height: 0; padding-bottom: 18px; }.site-nav{padding:18px 0}.nav-actions{gap:0}.language-picker select{max-width:158px;padding-left:9px}.access-label{display:none}.hero-copy{margin-top:68px}.hero h1{font-size:clamp(48px,13vw,64px)}.hero-subtitle{margin-top:17px;font-size:24px}
+  .system-stage { --orbit-radius: 240px; width: 760px; height: 520px; left: 50%; margin: 24px 0 0 -380px; transform: none; }.company-core{width:350px;border-radius:24px}.system-part{width:250px}.system-part small{display:block;line-height:1.35}
   .system-section,.work-section,.development-section,.modules-section,.pricing-section,.ownership-section{padding-top:100px;padding-bottom:100px}
   .section-intro{margin-bottom:55px}.section-intro h2,.work-heading h2,.development-copy h2,.modules-heading h2,.pricing-heading h2{font-size:40px}.layer-card{position:relative;top:auto;grid-template-columns:44px 1fr;min-height:340px;border-radius:20px}.layer-number{padding:22px 14px}.layer-copy{padding:34px 24px}.layer-copy h3{font-size:35px}.layer-visual{display:none}
   .agent-capabilities{margin-bottom:80px}.capability-heading{padding:32px 0 40px}.capability-heading h3{font-size:34px}.capability-grid{grid-template-columns:1fr}.capability-item{min-height:0;padding:28px 4px 32px;border-right:0;border-bottom:1px solid #d7d9de}.capability-item:last-child{border-bottom:0}.capability-meta{margin-bottom:34px}.capability-item h4{font-size:20px}.capability-item small{font-size:14px}

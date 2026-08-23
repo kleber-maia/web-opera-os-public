@@ -20,8 +20,9 @@ test("the GitHub Pages artifact is complete and static", () => {
   assert.doesNotMatch(html, /\/api\//);
 
   const pageSource = readFileSync("app/page.tsx", "utf8");
-  assert.match(pageSource, /<ul className="hero-points"/);
-  assert.match(pageSource, /heroPoints\.map\(\(point, index\) =>/);
+  assert.doesNotMatch(pageSource, /hero-points|hero-traits|heroPoints/);
+  assert.match(pageSource, /className="system-stage"/);
+  assert.match(pageSource, /systemParts\.map/);
 
   const javascript = readdirSync("dist/assets")
     .filter((file) => file.endsWith(".js"))
@@ -33,24 +34,12 @@ test("the GitHub Pages artifact is complete and static", () => {
   assert.match(javascript, /operaos-locale/);
   assert.match(javascript, /OperateOS/);
   assert.match(javascript, /Operator/);
-  assert.match(javascript, /hero-points/);
   assert.match(javascript, /An operating system for your business\./);
   assert.match(javascript, /With its own AI agent\./);
-  assert.match(javascript, /Customizable\. Extendable\. Hosted on your own hardware\./);
-  assert.match(javascript, /Operating system for your business\./);
-  assert.match(javascript, /OperateOS brings business information, work, and tools together in one place\./);
-  assert.match(javascript, /Its own AI agent\./);
-  assert.match(javascript, /Operator browses, handles routine work, and helps get things done\./);
-  assert.match(javascript, /Customizable\./);
-  assert.match(javascript, /Shape OperateOS around the way the business works\./);
-  assert.match(javascript, /Extendable\./);
-  assert.match(javascript, /Add modules, workflows, and capabilities as the business grows\./);
-  assert.match(javascript, /Hosted on your own hardware\./);
-  assert.match(javascript, /The business keeps control of its system and data\./);
-  assert.match(javascript, /Personalizável\. Extensível\. Hospedado no seu próprio hardware\./);
-  assert.match(javascript, /Extensível\./);
-  assert.match(javascript, /Personalizable\. Extensible\. Alojado en tu propio hardware\./);
-  assert.match(javascript, /Extensible\./);
+  assert.match(javascript, /Um sistema operacional para o seu negócio\./);
+  assert.match(javascript, /Com seu próprio agente de IA\./);
+  assert.match(javascript, /Un sistema operativo para tu negocio\./);
+  assert.match(javascript, /Con su propio agente de IA\./);
   assert.match(javascript, /computer of its own/);
   assert.match(javascript, /open web/);
   assert.match(javascript, /browser-based/);
