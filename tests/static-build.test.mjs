@@ -13,15 +13,15 @@ test("the GitHub Pages artifact is complete and static", () => {
   const html = readFileSync("dist/index.html", "utf8");
   assert.match(html, /<div id="root"><\/div>/);
   assert.match(html, /OperateOS/);
-  assert.match(html, /OperateOS — Your business\. Operator at work\./);
-  assert.match(html, /business operating system/);
+  assert.match(html, /OperateOS — An operating system for your business\./);
+  assert.match(html, /operating system for your business/);
   assert.match(html, /hreflang="pt-BR"/);
   assert.match(html, /hreflang="es-419"/);
   assert.doesNotMatch(html, /\/api\//);
 
   const pageSource = readFileSync("app/page.tsx", "utf8");
-  assert.match(pageSource, /<div className="hero-lede">/);
-  assert.match(pageSource, /copy\.hero\.lede\.map\(\(paragraph\) => <p key=\{paragraph\}>\{paragraph\}<\/p>\)/);
+  assert.match(pageSource, /<ul className="hero-points"/);
+  assert.match(pageSource, /heroPoints\.map\(\(point, index\) =>/);
 
   const javascript = readdirSync("dist/assets")
     .filter((file) => file.endsWith(".js"))
@@ -33,10 +33,20 @@ test("the GitHub Pages artifact is complete and static", () => {
   assert.match(javascript, /operaos-locale/);
   assert.match(javascript, /OperateOS/);
   assert.match(javascript, /Operator/);
-  assert.match(javascript, /hero-lede/);
-  assert.match(javascript, /computer of its own and a persistent place to work/);
-  assert.match(javascript, /completes real multi-step tasks/);
-  assert.match(javascript, /safely operates business data, workflows, and connected SaaS tools/);
+  assert.match(javascript, /hero-points/);
+  assert.match(javascript, /An operating system for your business\./);
+  assert.match(javascript, /With its own AI agent\./);
+  assert.match(javascript, /Customizable\. Expandable\. Hosted on your own hardware\./);
+  assert.match(javascript, /Operating system for your business\./);
+  assert.match(javascript, /OperateOS brings business information, work, and tools together in one place\./);
+  assert.match(javascript, /Its own AI agent\./);
+  assert.match(javascript, /Operator browses, handles routine work, and helps get things done\./);
+  assert.match(javascript, /Customizable\./);
+  assert.match(javascript, /Shape OperateOS around the way the business works\./);
+  assert.match(javascript, /Expandable\./);
+  assert.match(javascript, /Add modules, workflows, and capabilities as the business grows\./);
+  assert.match(javascript, /Hosted on your own hardware\./);
+  assert.match(javascript, /The business keeps control of its system and data\./);
   assert.match(javascript, /computer of its own/);
   assert.match(javascript, /open web/);
   assert.match(javascript, /browser-based/);

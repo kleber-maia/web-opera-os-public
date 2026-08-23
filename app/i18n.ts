@@ -4,19 +4,20 @@ export type Locale = (typeof SUPPORTED_LOCALES)[number];
 
 const en = {
   meta: {
-    title: "OperateOS — Your business. Operator at work.",
-    description: "OperateOS is a self-hosted business operating system with Operator, an AI agent and a computer of its own. Operator browses the open web, runs browser-based tasks, automates routine work, and safely operates business data and workflows with your approval.",
-    ogDescription: "Ask Operator in AI Chat or through Telegram, WhatsApp, iMessage, and other messaging channels. Operator researches, acts across the web and connected systems, and brings results back into OperateOS.",
+    title: "OperateOS — An operating system for your business.",
+    description: "OperateOS is an operating system for your business, with its own AI agent, Operator. Customize it, expand it, and host it on your own hardware while keeping control of your system and data.",
+    ogDescription: "An operating system for your business, with its own AI agent, Operator. Customize it, expand it, and host it on your own hardware while keeping control of your system and data.",
   },
   language: { label: "Language", en: "English", pt: "Português (Brasil)", es: "Español (Latinoamérica)" },
   nav: { aria: "Main navigation", homeAria: "OperateOS home", system: "The system", work: "How it works", modules: "Modules", pricing: "Pricing", ownership: "Ownership", access: "Early access" },
   hero: {
-    kickerOne: "Operator · An AI agent with a computer of its own", kickerTwo: "Self-hosted business operating system",
-    lineOne: "Your business.", lineTwo: "Ask Operator. ", emphasis: "Get work done.",
-    lede: [
-      "OperateOS is a self-hosted business operating system with Operator: an AI agent with a computer of its own and a persistent place to work.",
-      "Ask Operator in AI Chat, Telegram, WhatsApp, iMessage, or another messaging channel. Operator browses and navigates the open web, uses browser-based tools, and completes real multi-step tasks.",
-      "Operator automates mundane work and errands, safely operates business data, workflows, and connected SaaS tools—with approval where appropriate. It brings research, evidence, and results back into OperateOS to keep the business system current.",
+    title: "An operating system for your business.", subtitle: "With its own AI agent.", traits: "Customizable. Expandable. Hosted on your own hardware.", pointsAria: "What OperateOS means for your business",
+    points: [
+      { label: "Operating system for your business.", detail: "OperateOS brings business information, work, and tools together in one place." },
+      { label: "Its own AI agent.", detail: "Operator browses, handles routine work, and helps get things done." },
+      { label: "Customizable.", detail: "Shape OperateOS around the way the business works." },
+      { label: "Expandable.", detail: "Add modules, workflows, and capabilities as the business grows." },
+      { label: "Hosted on your own hardware.", detail: "The business keeps control of its system and data." },
     ],
     stageAria: "Operator working across OperateOS and the open web", status: "Online", context: "Working across the business", agentLabel: "Operator",
     message: "Operator researched two campaigns spending without qualified pipeline. It compared Ads, Pipeline, and the current budget policy.",
@@ -116,19 +117,20 @@ export type Copy = typeof en;
 
 const ptBR: Copy = {
   meta: {
-    title: "OperateOS — Seu negócio. Operator em ação.",
+    title: "OperateOS — Um sistema operacional para o seu negócio.",
     description: "O OperateOS é um sistema operacional para o seu negócio, com hospedagem própria e o Operator: um agente de IA com seu próprio computador. O Operator navega na internet aberta, realiza tarefas no navegador, automatiza trabalhos repetitivos e opera com segurança dados e fluxos de trabalho, com sua aprovação.",
-    ogDescription: "Pergunte ao Operator no AI Chat ou pelo Telegram, WhatsApp, iMessage e outros canais de mensagens. O Operator pesquisa, age na web e em sistemas conectados e traz os resultados de volta para o OperateOS.",
+    ogDescription: "Um sistema operacional para o seu negócio, com seu próprio agente de IA, o Operator. Personalize, expanda e hospede no seu próprio hardware, mantendo o controle do sistema e dos dados.",
   },
   language: { label: "Idioma", en: "English", pt: "Português (Brasil)", es: "Español (Latinoamérica)" },
   nav: { aria: "Navegação principal", homeAria: "Página inicial do OperateOS", system: "O sistema", work: "Como funciona", modules: "Módulos", pricing: "Preços", ownership: "Controle", access: "Acesso antecipado" },
   hero: {
-    kickerOne: "Operator · Um agente de IA com seu próprio computador", kickerTwo: "Sistema operacional do negócio com hospedagem própria",
-    lineOne: "Seu negócio.", lineTwo: "Pergunte ao Operator. ", emphasis: "O trabalho avança.",
-    lede: [
-      "O OperateOS é um sistema operacional com hospedagem própria para o seu negócio, com o Operator: um agente de IA com seu próprio computador e um lugar persistente para trabalhar.",
-      "Pergunte ao Operator no AI Chat, pelo Telegram, WhatsApp, iMessage ou outro canal de mensagens. Ele pesquisa e navega na internet aberta, usa ferramentas no navegador e conclui tarefas reais em várias etapas.",
-      "O Operator automatiza trabalhos repetitivos e tarefas do dia a dia, opera com segurança dados, fluxos de trabalho e ferramentas SaaS conectadas — com aprovação quando necessário. Ele traz pesquisas, evidências e resultados de volta para manter o OperateOS atualizado.",
+    title: "Um sistema operacional para o seu negócio.", subtitle: "Com seu próprio agente de IA.", traits: "Personalizável. Expansível. Hospedado no seu próprio hardware.", pointsAria: "O que o OperateOS significa para o seu negócio",
+    points: [
+      { label: "Sistema operacional para o seu negócio.", detail: "O OperateOS reúne as informações, o trabalho e as ferramentas do negócio em um só lugar." },
+      { label: "Seu próprio agente de IA.", detail: "O Operator navega, cuida do trabalho rotineiro e ajuda a fazer as coisas acontecerem." },
+      { label: "Personalizável.", detail: "Adapte o OperateOS ao jeito como o negócio trabalha." },
+      { label: "Expansível.", detail: "Adicione módulos, fluxos de trabalho e capacidades à medida que o negócio cresce." },
+      { label: "Hospedado no seu próprio hardware.", detail: "O negócio mantém o controle do sistema e dos dados." },
     ],
     stageAria: "Operator trabalhando no OperateOS e na internet aberta", status: "Online", context: "Trabalhando em todo o negócio", agentLabel: "Operator",
     message: "O Operator pesquisou duas campanhas gerando gastos sem oportunidades qualificadas no pipeline. Comparou Anúncios, Pipeline e a política de orçamento atual.",
@@ -226,19 +228,20 @@ const ptBR: Copy = {
 
 const es419: Copy = {
   meta: {
-    title: "OperateOS — Tu negocio. Operator en acción.",
+    title: "OperateOS — Un sistema operativo para tu negocio.",
     description: "OperateOS es un sistema operativo autoalojado para tu negocio, con Operator: un agente de IA con su propia computadora. Operator navega por internet abierto, usa herramientas del navegador, realiza tareas de varios pasos, automatiza trabajos repetitivos y opera de forma segura datos y flujos de trabajo, con aprobación cuando corresponde.",
-    ogDescription: "Pregúntale a Operator en AI Chat o por Telegram, WhatsApp, iMessage y otros canales de mensajería. Operator investiga, actúa en la web y en sistemas conectados, y devuelve los resultados a OperateOS.",
+    ogDescription: "Un sistema operativo para tu negocio, con su propio agente de IA, Operator. Personalízalo, amplíalo y alójalo en tu propio hardware, manteniendo el control de tu sistema y tus datos.",
   },
   language: { label: "Idioma", en: "English", pt: "Português (Brasil)", es: "Español (Latinoamérica)" },
   nav: { aria: "Navegación principal", homeAria: "Inicio de OperateOS", system: "El sistema", work: "Cómo funciona", modules: "Módulos", pricing: "Precios", ownership: "Control", access: "Acceso anticipado" },
   hero: {
-    kickerOne: "Operator · Un agente de IA con su propia computadora", kickerTwo: "Sistema operativo autoalojado para el negocio",
-    lineOne: "Tu negocio.", lineTwo: "Pregúntale a Operator. ", emphasis: "El trabajo avanza.",
-    lede: [
-      "OperateOS es un sistema operativo autoalojado para tu negocio, con Operator: un agente de IA con su propia computadora y un lugar persistente para trabajar.",
-      "Pregúntale a Operator en AI Chat, por Telegram, WhatsApp, iMessage u otro canal de mensajería. Investiga y navega por internet abierto, usa herramientas del navegador y completa tareas reales de varios pasos.",
-      "Operator automatiza trabajos repetitivos y resuelve encargos del día a día, además de operar de forma segura datos, flujos de trabajo y herramientas SaaS conectadas — con aprobación cuando corresponde. Devuelve investigaciones, evidencias y resultados a OperateOS para mantener actualizado el sistema del negocio.",
+    title: "Un sistema operativo para tu negocio.", subtitle: "Con su propio agente de IA.", traits: "Personalizable. Expandible. Alojado en tu propio hardware.", pointsAria: "Lo que OperateOS significa para tu negocio",
+    points: [
+      { label: "Sistema operativo para tu negocio.", detail: "OperateOS reúne la información, el trabajo y las herramientas de tu negocio en un solo lugar." },
+      { label: "Su propio agente de IA.", detail: "Operator navega, se encarga del trabajo rutinario y ayuda a que las cosas se hagan." },
+      { label: "Personalizable.", detail: "Adapta OperateOS a la forma en que trabaja tu negocio." },
+      { label: "Expandible.", detail: "Añade módulos, flujos de trabajo y capacidades a medida que crece tu negocio." },
+      { label: "Alojado en tu propio hardware.", detail: "Tu negocio mantiene el control de su sistema y sus datos." },
     ],
     stageAria: "Operator trabajando en OperateOS y en internet abierto", status: "En línea", context: "Trabajando en todo el negocio", agentLabel: "Operator",
     message: "Operator investigó dos campañas con gastos pero sin oportunidades calificadas en el pipeline. Comparó Anuncios, Pipeline y la política de presupuesto actual.",
