@@ -210,14 +210,14 @@ button { font: inherit; }
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
-.core-header { display: flex; align-items: center; gap: 10px; padding: 16px 19px; border-bottom: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.9); font-size: var(--font-size-body); font-weight: 600; }
-.core-status { display: flex; align-items: center; gap: 6px; margin-left: auto; color: rgba(255,255,255,.55); font: 500 var(--font-size-label)/1 var(--font-geist-mono), monospace; text-transform: uppercase; letter-spacing: .08em; }
+.core-header { display: flex; align-items: center; gap: 10px; padding: 16px 19px; border-bottom: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.9); font-size: 14px; font-weight: 600; }
+.core-status { display: flex; align-items: center; gap: 6px; margin-left: auto; color: rgba(255,255,255,.55); font: 500 11px/1 var(--font-geist-mono), monospace; text-transform: uppercase; letter-spacing: .08em; }
 .core-body { padding: 28px 30px 30px; }
 .core-statement { max-width: 410px; margin: 0 0 30px; color: rgba(255,255,255,.93); font-size: clamp(24px, 2.7vw, 34px); font-weight: 520; line-height: .99; letter-spacing: -.05em; }
 .core-facts { margin: 0; border-top: 1px solid rgba(255,255,255,.12); }
 .core-fact { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; padding: 13px 0; border-bottom: 1px solid rgba(255,255,255,.1); }
-.core-fact dt { color: rgba(255,255,255,.45); font: 500 var(--font-size-label)/1.2 var(--font-geist-mono), monospace; text-transform: uppercase; letter-spacing: .1em; }
-.core-fact dd { margin: 0; color: rgba(255,255,255,.84); font-size: var(--font-size-caption); font-weight: 550; text-align: right; }
+.core-fact dt { color: rgba(255,255,255,.45); font: 500 10px/1.2 var(--font-geist-mono), monospace; text-transform: uppercase; letter-spacing: .1em; }
+.core-fact dd { margin: 0; color: rgba(255,255,255,.84); font-size: 13px; font-weight: 550; text-align: right; }
 
 .orbiting-part {
   position: absolute;
@@ -236,8 +236,8 @@ button { font: inherit; }
 .system-part { display: flex; align-items: center; gap: 10px; width: 232px; padding: 11px 14px 11px 10px; border: 1px solid rgba(255,255,255,.13); border-radius: 15px; background: linear-gradient(135deg, #151620, #090a11); box-shadow: 0 18px 42px rgba(0,0,0,.34), inset 0 1px 0 rgba(255,255,255,.05); backface-visibility: hidden; -webkit-backface-visibility: hidden; transition: border-color .2s ease, background .2s ease, box-shadow .2s ease; }
 .system-part:hover { border-color: rgba(255,255,255,.38); background: rgba(20,22,35,.92); box-shadow: 0 20px 48px rgba(0,0,0,.42), 0 0 28px rgba(100,213,255,.08); }
 .system-part div { display: flex; flex-direction: column; gap: 3px; }
-.system-part strong { color: rgba(255,255,255,.88); font-size: 17px; font-weight: 590; line-height: 1.2; }
-.system-part small { color: rgba(255,255,255,.58); font-size: var(--font-size-caption); line-height: 1.4; }
+.system-part strong { color: rgba(255,255,255,.88); font-size: 13px; font-weight: 590; }
+.system-part small { color: rgba(255,255,255,.5); font-size: 11px; }
 .part-orb { display: grid; width: 28px; height: 28px; place-items: center; border: 1px solid rgba(255,255,255,.13); border-radius: 50%; background: rgba(255,255,255,.04); }
 .part-orb i { width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 13px var(--cyan); }
 .part-agent .part-orb i { background: var(--violet); box-shadow: 0 0 13px var(--violet); }
@@ -438,11 +438,6 @@ button { font: inherit; }
   .site-nav { grid-template-columns: 1fr auto; }.nav-links { display: none; }
   .hero { min-height: 1080px; }.hero-copy { margin-top: 90px; }
   .system-stage { transform: scale(.83); transform-origin: top center; width: 1180px; left: 50%; margin-left: -590px; }
-  .system-part strong { font-size: 18px; }
-  .system-part small { font-size: 17px; }
-  .core-header { font-size: 17px; }
-  .core-status, .core-fact dt { font-size: 17px; }
-  .core-fact dd { font-size: 17px; }
   .section-intro, .development-copy, .modules-heading, .ownership-copy, .pricing-heading { grid-template-columns: 1fr; gap: 26px; }
   .capability-heading { grid-template-columns: 1fr; gap: 24px; }
   .capability-grid { grid-template-columns: repeat(2,1fr); }
