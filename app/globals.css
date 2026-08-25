@@ -440,9 +440,9 @@ button { font: inherit; }
   .system-stage { transform: scale(.83); transform-origin: top center; width: 1180px; left: 50%; margin-left: -590px; }
   .system-part strong { font-size: 18px; }
   .system-part small { font-size: 17px; }
-  .core-header { font-size: var(--font-size-body); }
-  .core-status, .core-fact dt { font-size: 16px; }
-  .core-fact dd { font-size: var(--font-size-body); }
+  .core-header { font-size: 17px; }
+  .core-status, .core-fact dt { font-size: 17px; }
+  .core-fact dd { font-size: 17px; }
   .section-intro, .development-copy, .modules-heading, .ownership-copy, .pricing-heading { grid-template-columns: 1fr; gap: 26px; }
   .capability-heading { grid-template-columns: 1fr; gap: 24px; }
   .capability-grid { grid-template-columns: repeat(2,1fr); }
