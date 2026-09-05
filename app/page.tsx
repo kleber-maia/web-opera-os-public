@@ -5,16 +5,6 @@ import type { CSSProperties, PointerEvent as ReactPointerEvent } from "react";
 import { COPY, normalizeLocale } from "./i18n";
 import type { Locale } from "./i18n";
 
-type PricingPlan = {
-  name: string;
-  tag: string;
-  price: string;
-  cadence: string;
-  accent: string;
-  description: string;
-  details: Array<[string, string]>;
-};
-
 const sparkleStyles = Array.from({ length: 54 }, (_, index) => {
   const x = (index * 37 + 11) % 100;
   const y = (index * 61 + 7) % 100;
@@ -62,7 +52,7 @@ export default function Home() {
   const projectColumns = copy.structure.columns as Array<[string, Array<[string, string]>]>;
   const developmentHistory = copy.development.historyItems as Array<[string, string]>;
   const modules = copy.modules as Array<[string, string]>;
-  const pricingPlans = copy.pricing.plans as PricingPlan[];
+  const betaCards = copy.beta.cards as Array<[string, string, string, string, string]>;
   const ownershipProofs = copy.ownership.proofs as Array<[string, string]>;
 
   useEffect(() => {
@@ -139,7 +129,7 @@ export default function Home() {
             <a href="#system">{copy.nav.system}</a>
             <a href="#work">{copy.nav.work}</a>
             <a href="#modules">{copy.nav.modules}</a>
-            <a href="#pricing">{copy.nav.pricing}</a>
+            <a href="#beta">{copy.nav.beta}</a>
             <a href="#ownership">{copy.nav.ownership}</a>
           </div>
           <div className="nav-actions">
@@ -158,6 +148,10 @@ export default function Home() {
         <div className="hero-copy">
           <h1>{copy.hero.title}</h1>
           <p className="hero-subtitle">{copy.hero.subtitle}</p>
+          <div className="hero-actions" aria-label={copy.hero.ctaAria}>
+            <a className="cta-primary" href={copy.beta.cards[0][4]}>{copy.hero.primaryCta}</a>
+            <a className="cta-secondary" href={copy.beta.cards[1][4]}>{copy.hero.secondaryCta}</a>
+          </div>
         </div>
 
         <div
@@ -409,52 +403,40 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="pricing-section" id="pricing">
+      <section className="beta-section" id="beta">
         <div className="pricing-aura" aria-hidden="true" />
         <div className="pricing-heading reveal">
-          <p className="section-kicker">{copy.pricing.kicker}</p>
-          <h2>{copy.pricing.title}</h2>
-          <p>{copy.pricing.body}</p>
+          <p className="section-kicker">{copy.beta.kicker}</p>
+          <h2>{copy.beta.title}</h2>
+          <p>{copy.beta.body}</p>
         </div>
 
         <div className="pricing-promise reveal">
           <div>
-            <p className="pricing-label">{copy.pricing.promiseLabel}</p>
-            <p className="pricing-promise-copy">{copy.pricing.promise}</p>
+            <p className="pricing-label">{copy.beta.promiseLabel}</p>
+            <p className="pricing-promise-copy">{copy.beta.promise}</p>
           </div>
           <span className="pricing-promise-mark" aria-hidden="true"><i /></span>
         </div>
 
-        <div className="pricing-plans" role="list" aria-label={copy.pricing.plansAria}>
-          {pricingPlans.map((plan, index) => (
-            <article className={`pricing-card pricing-${plan.accent} reveal`} key={plan.name} role="listitem" aria-labelledby={`pricing-${plan.accent}-title`}>
+        <div className="beta-cards" role="list" aria-label={copy.beta.cardsAria}>
+          {betaCards.map(([index, title, body, action, href]) => (
+            <article className="beta-card reveal" key={title} role="listitem">
               <div className="pricing-card-top">
-                <span className="pricing-index">{String(index + 1).padStart(2, "0")}</span>
-                <span className="pricing-plan-tag">{plan.tag}</span>
+                <span className="pricing-index">{index}</span>
+                <span className="pricing-plan-tag">OperateOS</span>
               </div>
-              <h3 id={`pricing-${plan.accent}-title`}>{plan.name}</h3>
-              <div className="pricing-price"><strong>{plan.price}</strong><span>{plan.cadence}</span></div>
-              <p className="pricing-plan-description">{plan.description}</p>
-              <dl className="pricing-details" aria-label={`${plan.name} ${copy.pricing.detailsLabel}`}>
-                {plan.details.map(([label, value]) => (
-                  <div key={label}><dt>{label}</dt><dd>{value}</dd></div>
-                ))}
-              </dl>
+              <h3>{title}</h3>
+              <p>{body}</p>
+              <a href={href}>{action}<span aria-hidden="true"> →</span></a>
             </article>
           ))}
         </div>
 
-        <div className="pricing-states reveal">
-          <article className="pricing-state pricing-state-active">
-            <p className="pricing-label">{copy.pricing.active.label}</p>
-            <h3>{copy.pricing.active.title}</h3>
-            <p>{copy.pricing.active.body}</p>
-          </article>
-          <article className="pricing-state pricing-state-local">
-            <p className="pricing-label">{copy.pricing.local.label}</p>
-            <h3>{copy.pricing.local.title}</h3>
-            <p>{copy.pricing.local.body}</p>
-          </article>
+        <div className="beta-note reveal">
+          <p className="pricing-label">{copy.beta.noteLabel}</p>
+          <h3>{copy.beta.noteTitle}</h3>
+          <p>{copy.beta.noteBody}</p>
         </div>
       </section>
 
@@ -473,6 +455,10 @@ export default function Home() {
         <div className="closing-mark reveal">
           <p className="closing-brand">OperateOS</p>
           <h3>{copy.ownership.closing}<br />{copy.ownership.closingSecond}</h3>
+          <div className="closing-actions">
+            <a className="cta-primary" href={copy.beta.cards[0][4]}>{copy.ownership.primaryCta}</a>
+            <a className="cta-secondary" href={copy.beta.cards[1][4]}>{copy.ownership.secondaryCta}</a>
+          </div>
           <small>{copy.ownership.access}</small>
         </div>
       </section>

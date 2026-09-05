@@ -1,6 +1,6 @@
 # OperateOS website
 
-The public website for OperateOS: a self-hosted business operating system with Operator, an AI agent and a computer of its own. Operator browses the open web, uses browser-based tools, automates routine work, and safely operates business data and workflows with approval where appropriate. It is a pure client-side React site compiled by Vite into static HTML, CSS, and JavaScript for GitHub Pages.
+The public website for OperateOS: a private, adaptable ERP and CRM for small businesses with OS Operator for business work and OS Developer for extending the system. It is a pure client-side React site compiled by Vite into static HTML, CSS, and JavaScript for GitHub Pages.
 
 ## Repository workflow
 
@@ -62,8 +62,9 @@ The two tunnels run as persistent macOS user services. Their configurations are 
 ## Copy conventions
 
 - OperateOS is the self-hosted business operating system.
-- Operator is the AI agent with a computer of its own: it browses the open web, performs browser-based multi-step tasks, automates mundane work and errands, and operates business data, workflows, and connected SaaS tools with approval where appropriate.
-- Operator is available inside OperateOS through the dedicated AI Chat feature and through messaging channels.
-- Operator brings research, evidence, and results back into OperateOS to keep the business system current.
+- OS Operator is the business-operating agent: it handles multi-step tasks and works with business data, workflows, and connected tools, with approval where appropriate.
+- OS Operator is available inside OperateOS through the dedicated agent chat and connected channels.
+- OS Operator brings research, evidence, and results back into OperateOS to keep the business system current.
+- OS Developer acts as an engineer that modifies and extends OperateOS, returning tested changes for review.
 - OperateOS is adaptable rather than a fixed software suite; each business can create and extend its own modules, workflows, and capabilities.
 - Marketing changes must remain aligned across English, Brazilian Portuguese, Latin American Spanish, and the default page metadata.
