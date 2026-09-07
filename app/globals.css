@@ -85,7 +85,7 @@ h3 { font-size: 30px; line-height: 1.12; letter-spacing: -1.1px; }
 .product-proof { width: 450px; max-width: 100%; margin-top: 32px; }
 .device-composition { position: relative; aspect-ratio: 1.5; isolation: isolate; overflow: hidden; padding-top: 8px; }
 .device-composition::before { content: ''; position: absolute; inset: auto 4% 2% 9%; height: 9%; background: var(--accent); opacity: .12; filter: blur(14px); border-radius: 50%; }
-.device-laptop { position: absolute; width: 100%; left: 4%; top: 5%; transform: rotate(-2deg); }
+.device-laptop { position: absolute; width: 100%; left: 4%; top: 5%; }
 .device-pair .device-laptop { width: 104%; left: 15%; top: 6%; }
 .laptop-lid { position: relative; padding: 2.3% 1.7% 2%; background: linear-gradient(135deg, #46454a, #121215 18%, #252529 85%, #55545a); border: 1px solid #646269; border-radius: 13px 13px 5px 5px; box-shadow: 0 6px 12px #19171d20; }
 .laptop-lid::before { content: ''; position: absolute; width: 3px; height: 3px; border-radius: 50%; background: #44414e; top: 1.8%; left: 50%; }
