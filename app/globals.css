@@ -429,3 +429,28 @@ html { scroll-padding-top: 110px; }
   .hero-art { top: auto; bottom: 0; transform: none; height: auto; aspect-ratio: 1.5; }
   .hero-art-camera { aspect-ratio: 1.5; }
 }
+
+/* Continuous module overview, matching the original carousel behavior. */
+.module-carousel { margin-top: 55px; }
+.carousel-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 18px; }
+.carousel-toolbar p { color: var(--muted); font-size: 13px; line-height: 1.6; }
+.carousel-toolbar button { display: grid; place-items: center; width: 36px; height: 36px; flex-shrink: 0; border: 1px solid var(--line); border-radius: 50%; }
+.module-marquee { overflow: hidden; border-block: 1px solid var(--line); }
+.module-track { display: flex; width: max-content; }
+.module-track-group { display: flex; flex-shrink: 0; }
+.module-slide { width: 260px; padding: 29px 26px 32px; border-right: 1px solid var(--line); }
+.module-slide-number { color: var(--accent); font-size: 12px; }
+.module-slide h3 { font-size: 25px; margin-top: 22px; letter-spacing: -.7px; }
+.module-slide p { color: var(--muted); font-size: 14px; line-height: 1.65; margin-top: 12px; }
+@media (prefers-reduced-motion: no-preference) {
+  .module-track { animation: modules-travel 36s linear infinite; animation-play-state: paused; }
+  .module-carousel.in-view .module-track { animation-play-state: running; }
+  .module-carousel[data-stopped=true] .module-track, .module-carousel:hover .module-track, .module-carousel:focus-within .module-track { animation-play-state: paused; }
+  @keyframes modules-travel { to { transform: translateX(-50%); } }
+}
+@media (prefers-reduced-motion: reduce) {
+  .module-marquee { overflow-x: auto; }
+  .module-track-group[aria-hidden=true] { display: none; }
+  .carousel-toolbar button { display: none; }
+}
+@media (max-width: 650px) { .module-slide { width: 225px; padding: 23px 20px; } .module-carousel { margin-top: 35px; } }
