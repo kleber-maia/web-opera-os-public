@@ -14,6 +14,14 @@ function initialLocale(): Locale {
 }
 const partIcons = [DesktopTower, Stack, UsersThree];
 
+// CSS device shells keep the supplied screenshots intact and easy to replace.
+function ProductDevices({ desktop, alt, phoneAlt }: { desktop: string; alt: string; phoneAlt?: string }) {
+  return <div className={`device-composition${phoneAlt ? " device-pair" : ""}`}>
+    <div className="device-laptop"><div className="laptop-lid"><div className="laptop-display"><img src={desktop} alt={alt} loading="lazy" width="4096" height="2124" /></div></div><div className="laptop-base" /></div>
+    {phoneAlt && <div className="device-phone"><div className="phone-display"><img src="/product/inbox-mobile.png" alt={phoneAlt} loading="lazy" width="864" height="1884" /></div><span className="phone-island" aria-hidden="true" /></div>}
+  </div>;
+}
+
 export default function Home() {
   const [locale, setLocale] = useState<Locale>(initialLocale);
   const [activePart, setActivePart] = useState(1);
@@ -75,7 +83,7 @@ export default function Home() {
         <div className="system-intro reveal"><p className="eyebrow">{copy.system.kicker}</p><h2 id="system-title">{copy.system.title}</h2><p className="section-body">{copy.system.body}</p></div>
         <div className="system-body" id="modules">
           <div className="module-composition reveal"><div className="module-pieces">{copy.modules.items.map(([name], index) => <div className={`module-piece piece-${index}`} key={index}><span>{name}</span><Plus size={19} aria-hidden="true" /></div>)}<div className="module-open"><Plus size={34} aria-hidden="true" /></div></div></div>
-          <div className="module-copy reveal"><h3>{copy.modules.title}</h3><p>{copy.modules.body}</p><p className="module-note">{copy.modules.final}</p><figure className="product-proof"><div className="proof-crop"><img src="/product/home.jpg" alt={copy.system.alt[0]} width="4096" height="2124" loading="lazy" /></div><figcaption>{copy.system.caption}</figcaption></figure></div>
+          <div className="module-copy reveal"><h3>{copy.modules.title}</h3><p>{copy.modules.body}</p><p className="module-note">{copy.modules.final}</p><figure className="product-proof"><ProductDevices desktop="/product/knowledge-desktop.png" alt={copy.system.alt[0]} phoneAlt={copy.system.alt[1]} /><figcaption>{copy.system.caption}</figcaption></figure></div>
         </div>
         <div className="import-section reveal"><div className="import-copy"><h3>{copy.system.importTitle}</h3><p>{copy.system.importBody}</p></div><div className="import-flow"><div className="import-sources">{copy.system.sources.map((name, i) => { const Icon = [Table, Database, Files][i]; return <span key={name}><Icon size={18} aria-hidden="true" />{name}</span>; })}</div><ArrowRight className="import-arrow" size={29} aria-hidden="true" /><div className="import-end"><span>CompanyOS</span><small>{copy.system.destination}</small></div></div></div>
       </section>
@@ -85,7 +93,7 @@ export default function Home() {
         <div className="team-roles">{[false, true].map(dev => <article className="team-role reveal" key={String(dev)}><div className="role-title"><span className="agent-name">{dev ? "OS Dev" : "OS Agent"}</span><h3>{dev ? copy.team.devRole : copy.team.agentRole}</h3></div><p>{dev ? copy.team.devBody : copy.team.agentBody}</p><ul>{(dev ? copy.team.devTasks : copy.team.agentTasks).map(task => <li key={task}><Check size={15} aria-hidden="true" />{task}</li>)}</ul></article>)}</div><p className="team-note reveal">{copy.team.note}</p>
       </div></section>
 
-      <section className="story-section wrap section-space" aria-labelledby="story-title"><div className="story-heading reveal"><h2 id="story-title">{copy.story.title}</h2><p className="section-body">{copy.story.body}</p></div><div className="story-layout"><div className="story-request reveal"><blockquote>{copy.story.request}</blockquote><figure className="story-proof"><div className="proof-crop"><img src="/product/calendar.jpg" alt={copy.system.alt[2]} width="4096" height="2126" loading="lazy" /></div><figcaption>{copy.story.caption}</figcaption></figure></div><div className="story-steps reveal">{copy.story.steps.map(([title, body]) => <div key={title}><ArrowUpRight size={22} aria-hidden="true" /><div><h3>{title}</h3><p>{body}</p></div></div>)}</div></div></section>
+      <section className="story-section wrap section-space" aria-labelledby="story-title"><div className="story-heading reveal"><h2 id="story-title">{copy.story.title}</h2><p className="section-body">{copy.story.body}</p></div><div className="story-layout"><div className="story-request reveal"><blockquote>{copy.story.request}</blockquote><figure className="story-proof"><ProductDevices desktop="/product/calendar-desktop.png" alt={copy.system.alt[2]} /><figcaption>{copy.story.caption}</figcaption></figure></div><div className="story-steps reveal">{copy.story.steps.map(([title, body]) => <div key={title}><ArrowUpRight size={22} aria-hidden="true" /><div><h3>{title}</h3><p>{body}</p></div></div>)}</div></div></section>
 
       <section className="closing inverse" id="beta" aria-labelledby="closing-title"><div className="wrap"><h2 id="closing-title">{copy.closing.title.map(line => <span key={line}>{line}</span>)}</h2><div className="closing-bottom"><p>{copy.closing.body}</p><span className="closing-os" aria-hidden="true">OS</span></div></div></section>
     </main>
