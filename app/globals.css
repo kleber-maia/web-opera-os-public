@@ -331,3 +331,35 @@ figcaption { color: var(--muted); font-size: 10px; line-height: 1.6; margin-top:
 .hero-art[data-selection="1"] .assembly-system { transition-delay: .18s; }
 .hero-art[data-selection="2"] .assembly-agents { transition-delay: .1s; }
 @media (prefers-reduced-motion: reduce) { .hero-art .assembly-layer { transition: none !important; } }
+
+/* Restore the business argument and concrete customization process as editorial chapters. */
+.why-section { border-top: 1px solid var(--line); display: grid; grid-template-columns: 1.15fr 1fr; gap: 100px; }
+.why-heading h2 { font-size: clamp(40px, 4.5vw, 66px); }
+.why-heading .section-body { margin-top: 28px; font-size: 17px; }
+.why-points { display: flex; flex-direction: column; gap: 32px; padding-top: 42px; }
+.why-points article { display: flex; gap: 24px; padding-top: 23px; border-top: 1px solid var(--line); }
+.reason-number { color: var(--accent); font-size: 13px; padding-top: 5px; }
+.why-points h3 { font-size: 25px; letter-spacing: -.7px; }
+.why-points p { font-size: 15px; line-height: 1.8; color: var(--muted); margin-top: 12px; }
+.customization-section { margin-top: 75px; padding-top: 65px; border-top: 1px solid var(--line); display: grid; grid-template-columns: 1fr 1fr; gap: 85px; }
+.customization-intro h2 { font-size: clamp(38px, 4vw, 58px); }
+.customization-intro .section-body { margin-top: 25px; font-size: 16px; }
+.customization-intro blockquote { margin-top: 36px; padding-left: 23px; border-left: 3px solid var(--accent); font-size: 25px; line-height: 1.45; letter-spacing: -.6px; }
+.customization-process ol { margin: 0; padding: 0; list-style: none; counter-reset: change; }
+.customization-process li { position: relative; padding: 0 0 29px 44px; counter-increment: change; }
+.customization-process li::before { content: counter(change, decimal-leading-zero); position: absolute; left: 0; top: 5px; color: var(--muted); font-size: 12px; }
+.customization-process h3 { font-size: 22px; line-height: 1.35; letter-spacing: -.5px; }
+.customization-process li p { margin-top: 10px; font-size: 14px; line-height: 1.8; color: var(--muted); }
+.control-note { display: flex; align-items: flex-start; gap: 15px; border-top: 1px solid var(--line); padding-top: 24px; font-size: 13px; line-height: 1.8; color: var(--muted); }
+.control-note svg { flex-shrink: 0; color: var(--ink); margin-top: 2px; }
+@media (max-width: 900px) { .why-section { gap: 45px; } .customization-section { gap: 45px; } }
+@media (max-width: 650px) {
+  .why-section { grid-template-columns: 1fr; gap: 30px; }
+  .why-heading .section-body { font-size: 16px; }
+  .why-points { padding-top: 0; gap: 25px; }
+  .why-points article { gap: 18px; }
+  .why-points h3 { font-size: 23px; }
+  .customization-section { grid-template-columns: 1fr; gap: 35px; margin-top: 50px; padding-top: 45px; }
+  .customization-intro .section-body { font-size: 15px; }
+  .customization-intro blockquote { font-size: 23px; }
+}

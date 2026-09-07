@@ -116,6 +116,11 @@ export default function Home() {
         <p className="hero-context" aria-live="polite">{copy.hero.descriptions[activePart]}</p>
       </section>
 
+      <section className="why-section wrap section-space" aria-labelledby="why-title">
+        <div className="why-heading reveal"><p className="eyebrow">{copy.why.kicker}</p><h2 id="why-title">{copy.why.title}</h2><p className="section-body">{copy.why.body}</p></div>
+        <div className="why-points">{copy.why.points.map(([title, body], index) => <article className="reveal" key={title}><span className="reason-number" aria-hidden="true">0{index + 1}</span><div><h3>{title}</h3><p>{body}</p></div></article>)}</div>
+      </section>
+
       <section className="foundation inverse" id="ownership" aria-labelledby="foundation-title"><div className="wrap foundation-layout">
         <div className="foundation-heading reveal"><h2 id="foundation-title">{copy.hardware.title}</h2><div className="ownership-signature" aria-hidden="true"><DesktopTower size={32} /><span>CompanyOS</span></div></div>
         <div className="foundation-copy reveal"><p className="section-body">{copy.hardware.body}</p><ul className="foundation-points">{copy.hardware.points.map(([title, body], i) => { const Icon = [DesktopTower, CloudArrowUp, Stack][i]; return <li key={title}><Icon size={20} aria-hidden="true" /><div><h3>{title}</h3><p>{body}</p></div></li>; })}</ul></div>
@@ -133,6 +138,10 @@ export default function Home() {
       <section className="team-section inverse" id="work" aria-labelledby="team-title"><div className="wrap">
         <div className="team-intro"><div className="team-art motion-art"><img src="/art/companyos-team.jpg" alt="OS Agent + OS Dev" width="1536" height="1024" loading="lazy" /></div><div className="team-heading reveal"><p className="eyebrow">{copy.team.kicker}</p><h2 id="team-title">{copy.team.title}</h2><p className="section-body">{copy.team.body}</p></div></div>
         <div className="team-roles">{[false, true].map(dev => <article className="team-role reveal" key={String(dev)}><div className="role-title"><span className="agent-name">{dev ? "OS Dev" : "OS Agent"}</span><h3>{dev ? copy.team.devRole : copy.team.agentRole}</h3></div><p>{dev ? copy.team.devBody : copy.team.agentBody}</p><ul>{(dev ? copy.team.devTasks : copy.team.agentTasks).map(task => <li key={task}><Check size={15} aria-hidden="true" />{task}</li>)}</ul></article>)}</div><p className="team-note reveal">{copy.team.note}</p>
+        <section className="customization-section" aria-labelledby="customization-title">
+          <div className="customization-intro reveal"><p className="eyebrow">{copy.customization.kicker}</p><h2 id="customization-title">{copy.customization.title}</h2><p className="section-body">{copy.customization.body}</p><blockquote>{copy.customization.request}</blockquote></div>
+          <div className="customization-process"><ol>{copy.customization.steps.map(([title, body]) => <li className="reveal" key={title}><h3>{title}</h3><p>{body}</p></li>)}</ol><p className="control-note reveal"><Check size={22} aria-hidden="true" />{copy.customization.control}</p></div>
+        </section>
       </div></section>
 
       <section className="story-section wrap section-space" aria-labelledby="story-title"><div className="story-heading reveal"><h2 id="story-title">{copy.story.title}</h2><p className="section-body">{copy.story.body}</p></div><div className="story-layout"><div className="story-request reveal"><blockquote>{copy.story.request}</blockquote><figure className="story-proof"><ProductDevices desktop="/product/calendar-desktop.png" alt={copy.system.alt[2]} /><figcaption>{copy.story.caption}</figcaption></figure></div><div className="story-steps reveal">{copy.story.steps.map(([title, body]) => <div key={title}><ArrowUpRight size={22} aria-hidden="true" /><div><h3>{title}</h3><p>{body}</p></div></div>)}</div></div></section>
