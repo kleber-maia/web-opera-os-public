@@ -61,8 +61,8 @@ export default function Home() {
     const tick = (now: number) => {
       const elapsed = now - previous; previous = now;
       if (!document.hidden && page.current?.querySelector(".hero-art.in-view [data-assembly-ready=true]")) {
-        playbackTime.current = (playbackTime.current + elapsed) % 14000;
-        setActivePart(playbackTime.current < 2000 ? 0 : playbackTime.current < 6000 ? 2 : 1);
+        playbackTime.current = (playbackTime.current + elapsed) % 20000;
+        setActivePart(playbackTime.current < 6000 ? 0 : playbackTime.current < 12000 ? 2 : 1);
       }
       frame = requestAnimationFrame(tick);
     };
