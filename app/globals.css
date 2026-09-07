@@ -372,3 +372,9 @@ figcaption { color: var(--muted); font-size: 10px; line-height: 1.6; margin-top:
 
 .customization-section.wrap { margin-top: 0; padding-block: 80px; border-top: 0; border-bottom: 1px solid var(--line); }
 @media (max-width: 650px) { .customization-section.wrap { padding-block: 60px; } }
+
+
+/* Sticky navigation with a full-width ivory background. */
+.site-header { position: sticky; top: 0; z-index: 20; background: var(--paper); box-shadow: 0 0 0 100vmax var(--paper); clip-path: inset(0 -100vmax); }
+html { scroll-padding-top: 110px; }
+@media (max-width: 650px) { html { scroll-padding-top: 90px; } }
