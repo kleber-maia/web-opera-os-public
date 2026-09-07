@@ -327,7 +327,7 @@ figcaption { color: var(--muted); font-size: 10px; line-height: 1.6; margin-top:
 .hero-art[data-selection="0"] .assembly-work,
 .hero-art[data-selection="0"] .assembly-agents,
 .hero-art[data-selection="0"] .assembly-system,
-.hero-art[data-selection="1"] .assembly-agents { opacity: 0; transform: translateY(-12%); }
+.hero-art[data-selection="2"] .assembly-system { opacity: 0; transform: translateY(-12%); }
 .hero-art[data-selection="1"] .assembly-system { transition-delay: .18s; }
 .hero-art[data-selection="2"] .assembly-agents { transition-delay: .1s; }
 @media (prefers-reduced-motion: reduce) { .hero-art .assembly-layer { transition: none !important; } }

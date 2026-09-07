@@ -49,10 +49,26 @@ function HeroAssembly({ description }: { description: string }) {
 
 export default function Home() {
   const [locale, setLocale] = useState<Locale>(initialLocale);
-  const [activePart, setActivePart] = useState(1);
+  const [activePart, setActivePart] = useState(0);
   const [selectedPart, setSelectedPart] = useState<number | null>(null);
   const [paused, setPaused] = useState(false);
   const page = useRef<HTMLDivElement>(null);
+  const playbackTime = useRef(0);
+  useEffect(() => {
+    if (paused || selectedPart !== null || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let frame = 0;
+    let previous = performance.now();
+    const tick = (now: number) => {
+      const elapsed = now - previous; previous = now;
+      if (!document.hidden && page.current?.querySelector(".hero-art.in-view [data-assembly-ready=true]")) {
+        playbackTime.current = (playbackTime.current + elapsed) % 14000;
+        setActivePart(playbackTime.current < 2000 ? 0 : playbackTime.current < 6000 ? 2 : 1);
+      }
+      frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [paused, selectedPart]);
   const copy = COPY[locale];
   useEffect(() => {
     document.documentElement.lang = locale;
@@ -89,15 +105,15 @@ export default function Home() {
       <section className="hero wrap" aria-labelledby="hero-title">
         <div className="hero-main">
           <div className="hero-copy"><h1 id="hero-title">{copy.hero.title.map(line => <span key={line}>{line}</span>)}</h1><p>{copy.hero.body}</p></div>
-          <div className="hero-art motion-art" data-focus={activePart} data-selection={selectedPart ?? "auto"}>
+          <div className="hero-art motion-art" data-focus={activePart} data-selection={activePart}>
             <HeroAssembly description={copy.hero.scene} />
-            <button className="motion-toggle" type="button" onClick={() => { if (selectedPart !== null) { setSelectedPart(null); setActivePart(1); setPaused(false); } else setPaused(!paused); }} aria-label={paused || selectedPart !== null ? copy.hero.play : copy.hero.pause} aria-pressed={paused || selectedPart !== null}>{paused || selectedPart !== null ? <Play size={16} weight="fill" /> : <Pause size={16} weight="fill" />}</button>
+            <button className="motion-toggle" type="button" onClick={() => { if (selectedPart !== null) { playbackTime.current = 0; setSelectedPart(null); setActivePart(0); setPaused(false); } else setPaused(!paused); }} aria-label={paused || selectedPart !== null ? copy.hero.play : copy.hero.pause} aria-pressed={paused || selectedPart !== null}>{paused || selectedPart !== null ? <Play size={16} weight="fill" /> : <Pause size={16} weight="fill" />}</button>
           </div>
         </div>
         <div className="hero-index" role="group" aria-label={copy.hero.intro}>
-          {[0, 2, 1].map(index => { const label = copy.hero.tabs[index]; const Icon = partIcons[index]; return <button key={index} type="button" className={selectedPart === index ? "selected" : ""} aria-pressed={selectedPart === index} onClick={() => { setActivePart(index); setSelectedPart(index); setPaused(false); }}><Icon size={22} aria-hidden="true" /><span>{label}</span><ArrowUpRight size={18} aria-hidden="true" /></button>; })}
+          {[0, 2, 1].map(index => { const label = copy.hero.tabs[index]; const Icon = partIcons[index]; return <button key={index} type="button" className={activePart === index ? "selected" : ""} aria-pressed={activePart === index} onClick={() => { setActivePart(index); setSelectedPart(index); setPaused(false); }}><Icon size={22} aria-hidden="true" /><span>{label}</span><ArrowUpRight size={18} aria-hidden="true" /></button>; })}
         </div>
-        <p className="hero-context" aria-live="polite">{selectedPart === null ? copy.hero.intro : copy.hero.descriptions[activePart]}</p>
+        <p className="hero-context" aria-live="polite">{copy.hero.descriptions[activePart]}</p>
       </section>
 
       <section className="foundation inverse" id="ownership" aria-labelledby="foundation-title"><div className="wrap foundation-layout">
