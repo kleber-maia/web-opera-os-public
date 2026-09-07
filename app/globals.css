@@ -446,3 +446,10 @@ html { scroll-padding-top: 110px; }
   .hero-art { flex: 1; min-height: 285px; }
   .hero-art-camera { min-height: 285px; }
 }
+
+/* Anchor the two hero elements to opposing corners. */
+@media (min-width: 651px) {
+  .hero-main { align-items: flex-start; }
+  .hero-art { top: auto; bottom: 0; transform: none; height: auto; aspect-ratio: 1.5; }
+  .hero-art-camera { aspect-ratio: 1.5; }
+}
