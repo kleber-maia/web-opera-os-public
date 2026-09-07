@@ -1,5 +1,5 @@
 {
-  "name": "operaos-public",
+  "name": "companyos-public",
   "version": "0.1.0",
   "private": true,
   "engines": {
@@ -13,6 +13,9 @@
     "test": "npm run typecheck && npm run build && node --test tests/static-build.test.mjs"
   },
   "dependencies": {
+    "@fontsource-variable/geist": "^5.3.0",
+    "@fontsource/anton": "^5.3.0",
+    "@phosphor-icons/react": "^2.1.10",
     "react": "19.2.6",
     "react-dom": "19.2.6"
   },

@@ -1,6 +1,6 @@
-# OperateOS website
+# CompanyOS website
 
-The public website for OperateOS: a private, adaptable ERP and CRM for small businesses with OS Operator for business work and OS Developer for extending the system. It is a pure client-side React site compiled by Vite into static HTML, CSS, and JavaScript for GitHub Pages.
+The public website for CompanyOS: a private, adaptable ERP and CRM for small businesses with OS Agent for business work and OS Dev for extending the system. It is a pure client-side React site compiled by Vite into static HTML, CSS, and JavaScript for GitHub Pages.
 
 ## Repository workflow
 
@@ -61,10 +61,20 @@ The two tunnels run as persistent macOS user services. Their configurations are 
 
 ## Copy conventions
 
-- OperateOS is the self-hosted business operating system.
-- OS Operator is the business-operating agent: it handles multi-step tasks and works with business data, workflows, and connected tools, with approval where appropriate.
-- OS Operator is available inside OperateOS through the dedicated agent chat and connected channels.
-- OS Operator brings research, evidence, and results back into OperateOS to keep the business system current.
-- OS Developer acts as an engineer that modifies and extends OperateOS, returning tested changes for review.
-- OperateOS is adaptable rather than a fixed software suite; each business can create and extend its own modules, workflows, and capabilities.
-- Marketing changes must remain aligned across English, Brazilian Portuguese, Latin American Spanish, and the default page metadata.
+- CompanyOS is a company operating system for small-business owners.
+- The three parts are company-controlled infrastructure, a customizable information system, and AI agents on the team.
+- OS Agent handles business tasks. OS Dev helps customize, extend, and maintain the system.
+- CompanyOS runs on company hardware, on premises or with a company-selected cloud provider. Backups are automatic. This is a hosting claim, not a claim that all model processing happens locally.
+- Existing data can be imported. ERP and CRM modules are starting points, not fixed product boundaries.
+- This page is an informational pamphlet. It intentionally has no sales, contact, or waitlist calls to action.
+- Keep English, Brazilian Portuguese, Latin American Spanish, and default metadata aligned.
+
+## Design and product assets
+
+Approved visual direction C: bold editorial typography, ivory, blue-violet, and deliberately inverted dark sections. Locally bundled Anton and Geist fonts. Screenshots are small evidence of the real product, not a feature demo.
+
+The hero uses generated 3D artwork with subtle camera movement and selectable focal areas. It is an animated raster composition, not an interactive WebGL model. Motion pauses offscreen, on hidden tabs, with the pause control, or under reduced-motion preferences.
+
+Assets in `public/art/` were produced using the built-in image generation tool. Prompts: a matte charcoal computer with interlocking ivory business modules and blue-violet OS Agent / OS Dev components; a dark close-up of the two blue-violet agent components installed in a shared system. The approved direction uses color #7052F5 on ivory #F4F2EB and charcoal #17151E.
+
+`public/product/` contains the supplied early product screenshots. Only home and calendar are shown as secondary proof. Captions identify the evolving interface. No fictional customer endorsements or performance statistics are used.

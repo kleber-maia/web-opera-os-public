@@ -1,467 +1,94 @@
 "use client";
-
 import { useEffect, useRef, useState } from "react";
-import type { CSSProperties, PointerEvent as ReactPointerEvent } from "react";
+import { ArrowUpRight, ArrowUp, ArrowRight, Check, DesktopTower, CloudArrowUp, Stack, UsersThree, Pause, Play, Table, Database, Files, Plus, CaretDown } from "@phosphor-icons/react";
+import "@fontsource-variable/geist";
+import "@fontsource/anton/latin-400.css";
 import { COPY, normalizeLocale } from "./i18n";
 import type { Locale } from "./i18n";
 
-const sparkleStyles = Array.from({ length: 54 }, (_, index) => {
-  const x = (index * 37 + 11) % 100;
-  const y = (index * 61 + 7) % 100;
-  const size = index % 9 === 0 ? 3 : index % 4 === 0 ? 2 : 1;
-  return {
-    "--x": `${x}%`,
-    "--y": `${y}%`,
-    "--size": `${size}px`,
-    "--delay": `${(index % 12) * -0.43}s`,
-    "--duration": `${3.8 + (index % 7) * 0.55}s`,
-  } as CSSProperties;
-});
-
-const orbitParticleStyles = Array.from({ length: 18 }, (_, index) => ({
-  "--particle-angle": `${index * 20}deg`,
-  "--particle-distance": `${336 + (index % 3) * 54}px`,
-  "--particle-delay": `${index * -0.38}s`,
-} as CSSProperties));
-
-function getInitialLocale(): Locale {
-  const urlLocale = normalizeLocale(new URLSearchParams(window.location.search).get("lang"));
-  if (urlLocale) return urlLocale;
-
-  try {
-    const savedLocale = normalizeLocale(window.localStorage.getItem("operaos-locale"));
-    if (savedLocale) return savedLocale;
-  } catch {
-    // Storage can be unavailable in privacy-restricted browser contexts.
-  }
-
-  return normalizeLocale(window.navigator.language) ?? "en";
+function initialLocale(): Locale {
+  const url = normalizeLocale(new URLSearchParams(window.location.search).get("lang"));
+  if (url) return url;
+  try { const saved = normalizeLocale(localStorage.getItem("companyos-locale") ?? localStorage.getItem("operaos-locale")); if (saved) return saved; } catch { /* Storage is optional. */ }
+  return normalizeLocale(navigator.language) ?? "en";
 }
+const partIcons = [DesktopTower, Stack, UsersThree];
 
 export default function Home() {
-  const stageRef = useRef<HTMLDivElement>(null);
-  const touchSlowRef = useRef(false);
-  const [locale, setLocale] = useState<Locale>(getInitialLocale);
+  const [locale, setLocale] = useState<Locale>(initialLocale);
+  const [activePart, setActivePart] = useState(1);
+  const [paused, setPaused] = useState(false);
+  const page = useRef<HTMLDivElement>(null);
   const copy = COPY[locale];
-  const systemParts = copy.systemParts as Array<[string, string, string]>;
-  const orbitStep = 360 / systemParts.length;
-  const capabilities = copy.capabilities as Array<[string, string, string]>;
-  const layers = copy.layers as Array<[string, string, string, string]>;
-  const workflowSteps = copy.work.steps as Array<[string, string]>;
-  const projectSummary = copy.structure.summary as Array<[string, string]>;
-  const projectColumns = copy.structure.columns as Array<[string, Array<[string, string]>]>;
-  const developmentHistory = copy.development.historyItems as Array<[string, string]>;
-  const modules = copy.modules as Array<[string, string]>;
-  const betaCards = copy.beta.cards as Array<[string, string, string, string, string]>;
-  const ownershipProofs = copy.ownership.proofs as Array<[string, string]>;
-
   useEffect(() => {
     document.documentElement.lang = locale;
+    document.documentElement.dataset.theme = "editorial";
     document.title = copy.meta.title;
     document.querySelector('meta[name="description"]')?.setAttribute("content", copy.meta.description);
     document.querySelector('meta[property="og:title"]')?.setAttribute("content", copy.meta.title);
-    document.querySelector('meta[property="og:description"]')?.setAttribute("content", copy.meta.ogDescription);
+    document.querySelector('meta[property="og:description"]')?.setAttribute("content", copy.meta.description);
     document.querySelector('meta[property="og:locale"]')?.setAttribute("content", locale === "pt-BR" ? "pt_BR" : locale === "es-419" ? "es_419" : "en_US");
-
-    const url = new URL(window.location.href);
-    url.searchParams.set("lang", locale);
-    window.history.replaceState({}, "", url);
-
-    try {
-      window.localStorage.setItem("operaos-locale", locale);
-    } catch {
-      // The selected language still works for the current visit.
-    }
-  }, [copy, locale]);
-
+    const url = new URL(window.location.href); url.searchParams.set("lang", locale); window.history.replaceState({}, "", url);
+    try { localStorage.setItem("companyos-locale", locale); } catch { /* Storage is optional. */ }
+  }, [locale, copy]);
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) entry.target.classList.add("is-visible");
-        });
-      },
-      { threshold: 0.14 },
-    );
-
-    document.querySelectorAll<HTMLElement>(".reveal").forEach((element) => observer.observe(element));
-
-    return () => {
-      observer.disconnect();
-    };
+    if (!page.current || !('IntersectionObserver' in window)) return;
+    const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+      if (entry.target.classList.contains("reveal") && entry.isIntersecting) entry.target.classList.add("visible");
+      if (entry.target.classList.contains("motion-art")) entry.target.classList.toggle("in-view", entry.isIntersecting);
+    }), { threshold: .06 });
+    page.current.querySelectorAll<HTMLElement>(".reveal, .motion-art").forEach(element => { if (element.classList.contains("reveal")) element.classList.add("will-reveal"); observer.observe(element); });
+    const visibility = () => { page.current?.classList.toggle("document-hidden", document.hidden); };
+    document.addEventListener("visibilitychange", visibility);
+    return () => { observer.disconnect(); document.removeEventListener("visibilitychange", visibility); };
   }, []);
-
-  const setOrbitPlaybackRate = (rate: number) => {
-    stageRef.current?.querySelectorAll<HTMLElement>(".orbiting-part, .part-billboard").forEach((element) => {
-      element.getAnimations().forEach((animation) => animation.updatePlaybackRate(rate));
-    });
-  };
-
-  const handleStagePointerEnter = (event: ReactPointerEvent<HTMLDivElement>) => {
-    if (event.pointerType !== "touch") setOrbitPlaybackRate(0.5);
-  };
-
-  const handleStagePointerLeave = (event: ReactPointerEvent<HTMLDivElement>) => {
-    if (event.pointerType !== "touch") setOrbitPlaybackRate(touchSlowRef.current ? 0.5 : 1);
-  };
-
-  const handleStagePointerUp = (event: ReactPointerEvent<HTMLDivElement>) => {
-    if (event.pointerType !== "touch") return;
-    touchSlowRef.current = !touchSlowRef.current;
-    setOrbitPlaybackRate(touchSlowRef.current ? 0.5 : 1);
-  };
-
-  return (
-    <main>
-      <section className="hero" id="top">
-        <div className="aurora aurora-one" aria-hidden="true" />
-        <div className="aurora aurora-two" aria-hidden="true" />
-        <div className="aurora aurora-three" aria-hidden="true" />
-        <div className="sparkle-field" aria-hidden="true">
-          {sparkleStyles.map((style, index) => (
-            <span className="sparkle" style={style} key={index} />
-          ))}
-        </div>
-
-        <nav className="site-nav" aria-label={copy.nav.aria}>
-          <a className="brand" href="#top" aria-label={copy.nav.homeAria}>OperateOS</a>
-          <div className="nav-links">
-            <a href="#system">{copy.nav.system}</a>
-            <a href="#work">{copy.nav.work}</a>
-            <a href="#modules">{copy.nav.modules}</a>
-            <a href="#beta">{copy.nav.beta}</a>
-            <a href="#ownership">{copy.nav.ownership}</a>
-          </div>
-          <div className="nav-actions">
-            <label className="language-picker">
-              <span>{copy.language.label}</span>
-              <select value={locale} onChange={(event) => setLocale(event.target.value as Locale)} aria-label={copy.language.label}>
-                <option value="en">{copy.language.en}</option>
-                <option value="pt-BR">{copy.language.pt}</option>
-                <option value="es-419">{copy.language.es}</option>
-              </select>
-            </label>
-            <span className="access-label"><i /> {copy.nav.access}</span>
-          </div>
-        </nav>
-
-        <div className="hero-copy">
-          <h1>{copy.hero.title}</h1>
-          <p className="hero-subtitle">{copy.hero.subtitle}</p>
-          <div className="hero-actions" aria-label={copy.hero.ctaAria}>
-            <a className="cta-primary" href={copy.beta.cards[0][4]}>{copy.hero.primaryCta}</a>
-            <a className="cta-secondary" href={copy.beta.cards[1][4]}>{copy.hero.secondaryCta}</a>
+  return <div ref={page} className="site" data-paused={paused}>
+    <a className="skip-link" href="#content">{copy.skip}</a>
+    <header className="site-header wrap" id="top">
+      <a className="brand" href="#top" aria-label="CompanyOS">Company<span>OS</span></a>
+      <nav aria-label={locale === "en" ? "Main navigation" : locale === "pt-BR" ? "Navegação principal" : "Navegación principal"}>
+        {copy.nav.map((label, index) => <a key={index} href={["#ownership", "#system", "#work"][index]}>{label}</a>)}
+      </nav>
+      <label className="language"><span className="sr-only">{copy.language}</span><select aria-label={copy.language} value={locale} onChange={event => setLocale(event.target.value as Locale)}><option value="en">EN</option><option value="pt-BR">PT</option><option value="es-419">ES</option></select><CaretDown size={13} aria-hidden="true" /></label>
+    </header>
+    <main id="content">
+      <section className="hero wrap" aria-labelledby="hero-title">
+        <div className="hero-main">
+          <div className="hero-copy"><h1 id="hero-title">{copy.hero.title.map(line => <span key={line}>{line}</span>)}</h1><p>{copy.hero.body}</p></div>
+          <div className="hero-art motion-art" data-focus={activePart}>
+            <div className="hero-art-camera"><picture><source media="(max-width: 650px)" srcSet="/art/companyos-sculpture-mobile.jpg" /><img src="/art/companyos-sculpture.jpg" alt={copy.hero.scene} width="1536" height="1024" fetchPriority="high" /></picture></div>
+            <button className="motion-toggle" type="button" onClick={() => setPaused(!paused)} aria-label={paused ? copy.hero.play : copy.hero.pause} aria-pressed={paused}>{paused ? <Play size={16} weight="fill" /> : <Pause size={16} weight="fill" />}</button>
           </div>
         </div>
-
-        <div
-          className="system-stage"
-          aria-label={copy.hero.stageAria}
-          ref={stageRef}
-          onPointerEnter={handleStagePointerEnter}
-          onPointerLeave={handleStagePointerLeave}
-          onPointerUp={handleStagePointerUp}
-        >
-          <div className="orbit-haze" aria-hidden="true" />
-          <div className="cross-orbit" aria-hidden="true"><i /><i /><span /></div>
-          <div className="orbital-scene">
-            <div className="stage-rings" aria-hidden="true"><i /><i /><i /><i /></div>
-            <div className="orbit-spokes" aria-hidden="true">
-              {systemParts.map(([, , className], index) => (
-                <i key={className} style={{ "--spoke-angle": `${index * orbitStep}deg`, "--signal-delay": `${index * -0.7}s` } as CSSProperties} />
-              ))}
-            </div>
-            <div className="orbit-particles" aria-hidden="true">
-              {orbitParticleStyles.map((style, index) => <i key={index} style={style} />)}
-            </div>
-            {systemParts.map(([label, detail, className], index) => (
-              <div
-                className={`orbiting-part ${className}`}
-                key={className}
-                style={{
-                  "--orbit-phase": `${index * orbitStep}deg`,
-                  "--orbit-phase-end": `${index * orbitStep + 360}deg`,
-                  "--orbit-phase-neg": `${index * -orbitStep}deg`,
-                  "--orbit-phase-neg-end": `${index * -orbitStep - 360}deg`,
-                } as CSSProperties}
-              >
-                <div className="part-billboard">
-                  <div className="system-part">
-                    <span className="part-orb" aria-hidden="true"><i /></span>
-                    <div><strong>{label}</strong><small>{detail}</small></div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="core-glow" aria-hidden="true"><i /></div>
-
-          <div className="company-core">
-            <div className="core-header">
-              <span>OperateOS</span>
-              <span className="core-status"><i /> {copy.hero.status}</span>
-            </div>
-            <div className="core-body">
-              <p className="core-statement">{copy.hero.identity}</p>
-              <dl className="core-facts" aria-label={copy.hero.factsLabel}>
-                {copy.hero.facts.map(([label, value]) => (
-                  <div className="core-fact" key={label}><dt>{label}</dt><dd>{value}</dd></div>
-                ))}
-              </dl>
-            </div>
-          </div>
-
+        <div className="hero-index" role="group" aria-label={copy.hero.intro}>
+          {copy.hero.tabs.map((label, index) => { const Icon = partIcons[index]; return <button key={index} type="button" className={activePart === index ? "selected" : ""} aria-pressed={activePart === index} onClick={() => setActivePart(index)}><Icon size={22} aria-hidden="true" /><span>{label}</span><ArrowUpRight size={18} aria-hidden="true" /></button>; })}
         </div>
-
+        <p className="hero-context" aria-live="polite">{copy.hero.descriptions[activePart]}</p>
       </section>
 
-      <section className="system-section" id="system">
-        <div className="section-intro reveal">
-          <p className="section-kicker">{copy.system.kicker}</p>
-          <h2>{copy.system.title}</h2>
-          <p>{copy.system.body}</p>
-        </div>
+      <section className="foundation inverse" id="ownership" aria-labelledby="foundation-title"><div className="wrap foundation-layout">
+        <div className="foundation-heading reveal"><h2 id="foundation-title">{copy.hardware.title}</h2><div className="ownership-signature" aria-hidden="true"><DesktopTower size={32} /><span>CompanyOS</span></div></div>
+        <div className="foundation-copy reveal"><p className="section-body">{copy.hardware.body}</p><ul className="foundation-points">{copy.hardware.points.map(([title, body], i) => { const Icon = [DesktopTower, CloudArrowUp, Stack][i]; return <li key={title}><Icon size={20} aria-hidden="true" /><div><h3>{title}</h3><p>{body}</p></div></li>; })}</ul></div>
+      </div></section>
 
-        <div className="agent-capabilities reveal" aria-label={copy.system.capabilitiesAria}>
-          <div className="capability-heading">
-            <p className="section-kicker">{copy.system.advantage}</p>
-            <h3>{copy.system.advantageTitle}</h3>
-            <p>{copy.system.advantageBody}</p>
-          </div>
-          <div className="capability-grid">
-            {capabilities.map(([eyebrow, title, body], index) => (
-              <article className="capability-item" key={index}>
-                <div className="capability-meta"><span>{String(index + 1).padStart(2, "0")}</span><i aria-hidden="true" /></div>
-                <p>{eyebrow}</p>
-                <h4>{title}</h4>
-                <small>{body}</small>
-              </article>
-            ))}
-          </div>
+      <section className="system-section wrap section-space" id="system" aria-labelledby="system-title">
+        <div className="system-intro reveal"><p className="eyebrow">{copy.system.kicker}</p><h2 id="system-title">{copy.system.title}</h2><p className="section-body">{copy.system.body}</p></div>
+        <div className="system-body" id="modules">
+          <div className="module-composition reveal"><div className="module-pieces">{copy.modules.items.map(([name], index) => <div className={`module-piece piece-${index}`} key={index}><span>{name}</span><Plus size={19} aria-hidden="true" /></div>)}<div className="module-open"><Plus size={34} aria-hidden="true" /></div></div></div>
+          <div className="module-copy reveal"><h3>{copy.modules.title}</h3><p>{copy.modules.body}</p><p className="module-note">{copy.modules.final}</p><figure className="product-proof"><div className="proof-crop"><img src="/product/home.jpg" alt={copy.system.alt[0]} width="4096" height="2124" loading="lazy" /></div><figcaption>{copy.system.caption}</figcaption></figure></div>
         </div>
-
-        <div className="layer-stack">
-          {layers.map(([eyebrow, title, body, accent], index) => (
-            <article className={`layer-card layer-${accent} reveal`} key={accent} style={{ "--layer-top": `${20 + index * 15}px` } as CSSProperties}>
-              <div className="layer-number">{String(index + 1).padStart(2, "0")}</div>
-              <div className="layer-copy">
-                <p>{eyebrow}</p>
-                <h3>{title}</h3>
-                <span>{body}</span>
-              </div>
-              <div className="layer-visual" aria-hidden="true">
-                <span className="layer-sphere"><i /><i /><i /></span>
-              </div>
-            </article>
-          ))}
-        </div>
+        <div className="import-section reveal"><div className="import-copy"><h3>{copy.system.importTitle}</h3><p>{copy.system.importBody}</p></div><div className="import-flow"><div className="import-sources">{copy.system.sources.map((name, i) => { const Icon = [Table, Database, Files][i]; return <span key={name}><Icon size={18} aria-hidden="true" />{name}</span>; })}</div><ArrowRight className="import-arrow" size={29} aria-hidden="true" /><div className="import-end"><span>CompanyOS</span><small>{copy.system.destination}</small></div></div></div>
       </section>
 
-      <section className="work-section" id="work">
-        <div className="work-heading reveal">
-          <p className="section-kicker">{copy.work.kicker}</p>
-          <h2>{copy.work.titleBefore}<em>{copy.work.emphasis}</em>{copy.work.titleAfter}</h2>
-        </div>
+      <section className="team-section inverse" id="work" aria-labelledby="team-title"><div className="wrap">
+        <div className="team-intro"><div className="team-art motion-art"><img src="/art/companyos-team.jpg" alt="OS Agent + OS Dev" width="1536" height="1024" loading="lazy" /></div><div className="team-heading reveal"><p className="eyebrow">{copy.team.kicker}</p><h2 id="team-title">{copy.team.title}</h2><p className="section-body">{copy.team.body}</p></div></div>
+        <div className="team-roles">{[false, true].map(dev => <article className="team-role reveal" key={String(dev)}><div className="role-title"><span className="agent-name">{dev ? "OS Dev" : "OS Agent"}</span><h3>{dev ? copy.team.devRole : copy.team.agentRole}</h3></div><p>{dev ? copy.team.devBody : copy.team.agentBody}</p><ul>{(dev ? copy.team.devTasks : copy.team.agentTasks).map(task => <li key={task}><Check size={15} aria-hidden="true" />{task}</li>)}</ul></article>)}</div><p className="team-note reveal">{copy.team.note}</p>
+      </div></section>
 
-        <div className="workflow reveal">
-          <div className="workflow-question">
-            <span>{copy.work.you}</span>
-            <p>{copy.work.question}</p>
-          </div>
-          <div className="workflow-rail" aria-hidden="true">
-            <span className="rail-light" />
-          </div>
-          <div className="workflow-steps">
-            {workflowSteps.map(([title, detail], index) => (
-              <div key={title}><span>{String(index + 1).padStart(2, "0")}</span><strong>{title}</strong><small>{detail}</small></div>
-            ))}
-          </div>
-          <div className="workflow-result">
-            <div>
-              <span>{copy.work.recommended}</span>
-              <strong>{copy.work.action}</strong>
-              <small>{copy.work.result}</small>
-            </div>
-            <button type="button" aria-label={copy.work.approveAria}>{copy.work.approve}</button>
-            <p>{copy.work.confirmation}</p>
-          </div>
-        </div>
+      <section className="story-section wrap section-space" aria-labelledby="story-title"><div className="story-heading reveal"><h2 id="story-title">{copy.story.title}</h2><p className="section-body">{copy.story.body}</p></div><div className="story-layout"><div className="story-request reveal"><blockquote>{copy.story.request}</blockquote><figure className="story-proof"><div className="proof-crop"><img src="/product/calendar.jpg" alt={copy.system.alt[2]} width="4096" height="2126" loading="lazy" /></div><figcaption>{copy.story.caption}</figcaption></figure></div><div className="story-steps reveal">{copy.story.steps.map(([title, body]) => <div key={title}><ArrowUpRight size={22} aria-hidden="true" /><div><h3>{title}</h3><p>{body}</p></div></div>)}</div></div></section>
 
-        <div className="structure-story reveal">
-          <div className="structure-copy">
-            <p className="section-kicker">{copy.structure.kicker}</p>
-            <h3>{copy.structure.title}</h3>
-            <p>{copy.structure.body}</p>
-            <div className="structure-prompt">
-              <span>{copy.work.you}</span>
-              <p>{copy.structure.prompt}</p>
-            </div>
-          </div>
-
-          <div className="structure-output" aria-label={copy.structure.outputAria}>
-            <div className="structure-topbar">
-              <span>{copy.structure.created}</span>
-              <small><i /> {copy.structure.ready}</small>
-            </div>
-            <div className="created-board-heading">
-              <div>
-                <span>{copy.structure.newProject}</span>
-                <h4>{copy.structure.project}</h4>
-              </div>
-              <small>{copy.structure.owner}</small>
-            </div>
-            <div className="created-summary">
-              {projectSummary.map(([value, label]) => <span key={label}><strong>{value}</strong> {label}</span>)}
-            </div>
-            <div className="created-columns">
-              {projectColumns.map(([heading, cards]) => (
-                <div key={heading}>
-                  <p>{heading}</p>
-                  {cards.map(([title, detail]) => <article key={title}><strong>{title}</strong><small>{detail}</small></article>)}
-                </div>
-              ))}
-            </div>
-            <div className="structure-update">
-              <span>{copy.structure.later}</span>
-              <p>{copy.structure.update}</p>
-              <small>{copy.structure.updated}</small>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="development-section">
-        <div className="development-aura" aria-hidden="true" />
-        <div className="development-copy reveal">
-          <p className="section-kicker">{copy.development.kicker}</p>
-          <h2>{copy.development.title}</h2>
-          <p>{copy.development.body}</p>
-        </div>
-
-        <div className="development-console reveal">
-          <div className="console-topbar">
-            <span>OperateOS</span>
-            <strong>{copy.development.mode}</strong>
-            <span className="console-ready"><i /> {copy.development.connected}</span>
-          </div>
-          <div className="console-grid">
-            <div className="console-history">
-              <p>{copy.development.history}</p>
-              <h3>{copy.development.next}</h3>
-              {developmentHistory.map(([title, detail], index) => (
-                <div className={`history-line${index === 0 ? " active" : ""}`} key={title}><i /><span><strong>{title}</strong><small>{detail}</small></span></div>
-              ))}
-            </div>
-            <div className="console-chat">
-              <div className="chat-user">{copy.development.user}</div>
-              <div className="chat-agent"><span>{copy.development.agentLabel}</span><p>{copy.development.agent}</p></div>
-              <div className="build-progress">
-                {copy.development.progress.map((item, index) => <span className={index === copy.development.progress.length - 1 ? "working" : undefined} key={item}><i /> {item}</span>)}
-              </div>
-            </div>
-            <div className="new-module">
-              <span>{copy.development.newCapability}</span>
-              <div className="module-glyph" aria-hidden="true"><i /><i /><i /></div>
-              <h3>{copy.development.module}</h3>
-              <p>{copy.development.moduleBody}</p>
-              <small><i /> {copy.development.appears}</small>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="modules-section" id="modules">
-        <div className="modules-heading reveal">
-          <p className="section-kicker">{copy.modulesSection.kicker}</p>
-          <h2>{copy.modulesSection.title}</h2>
-          <p>{copy.modulesSection.body}</p>
-        </div>
-        <div className="module-marquee" aria-label={copy.modulesSection.aria}>
-          <div className="module-track">
-            {[...modules, ...modules].map(([name, detail], index) => (
-              <div className="module-item" key={`${name}-${index}`} aria-hidden={index >= modules.length}>
-                <span>{String((index % modules.length) + 1).padStart(2, "0")}</span>
-                <strong>{name}</strong>
-                <small>{detail}</small>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="workspace-story reveal">
-          <div className="workspace-copy">
-            <p className="section-kicker">{copy.modulesSection.workspaceKicker}</p>
-            <h3>{copy.modulesSection.workspaceTitle}</h3>
-            <p>{copy.modulesSection.workspaceBody}</p>
-          </div>
-          <div className="workspace-universe" aria-label={copy.modulesSection.workspaceAria}>
-            <div className="workspace-orbit orbit-a"><span>North & Coast<small>{copy.modulesSection.workspaceTypes[0]}</small></span></div>
-            <div className="workspace-orbit orbit-b"><span>Vela Studio<small>{copy.modulesSection.workspaceTypes[1]}</small></span></div>
-            <div className="workspace-orbit orbit-c"><span>Fieldwork<small>{copy.modulesSection.workspaceTypes[2]}</small></span></div>
-            <div className="workspace-center"><span>OperateOS<small>{copy.modulesSection.sharedAdmin}</small></span></div>
-          </div>
-        </div>
-      </section>
-
-      <section className="beta-section" id="beta">
-        <div className="pricing-aura" aria-hidden="true" />
-        <div className="pricing-heading reveal">
-          <p className="section-kicker">{copy.beta.kicker}</p>
-          <h2>{copy.beta.title}</h2>
-          <p>{copy.beta.body}</p>
-        </div>
-
-        <div className="pricing-promise reveal">
-          <div>
-            <p className="pricing-label">{copy.beta.promiseLabel}</p>
-            <p className="pricing-promise-copy">{copy.beta.promise}</p>
-          </div>
-          <span className="pricing-promise-mark" aria-hidden="true"><i /></span>
-        </div>
-
-        <div className="beta-cards" role="list" aria-label={copy.beta.cardsAria}>
-          {betaCards.map(([index, title, body, action, href]) => (
-            <article className="beta-card reveal" key={title} role="listitem">
-              <div className="pricing-card-top">
-                <span className="pricing-index">{index}</span>
-                <span className="pricing-plan-tag">OperateOS</span>
-              </div>
-              <h3>{title}</h3>
-              <p>{body}</p>
-              <a href={href}>{action}<span aria-hidden="true"> →</span></a>
-            </article>
-          ))}
-        </div>
-
-        <div className="beta-note reveal">
-          <p className="pricing-label">{copy.beta.noteLabel}</p>
-          <h3>{copy.beta.noteTitle}</h3>
-          <p>{copy.beta.noteBody}</p>
-        </div>
-      </section>
-
-      <section className="ownership-section" id="ownership">
-        <div className="ownership-stars" aria-hidden="true">
-          {sparkleStyles.slice(0, 28).map((style, index) => <span className="sparkle" style={style} key={index} />)}
-        </div>
-        <div className="ownership-copy reveal">
-          <p className="section-kicker">{copy.ownership.kicker}</p>
-          <h2>{copy.ownership.lineOne}<br />{copy.ownership.lineTwo}<br />{copy.ownership.lineThree}<em>{copy.ownership.emphasis}</em></h2>
-          <p>{copy.ownership.body}</p>
-        </div>
-        <div className="ownership-proof reveal">
-          {ownershipProofs.map(([title, detail], index) => <div key={title}><span>{String(index + 1).padStart(2, "0")}</span><strong>{title}</strong><small>{detail}</small></div>)}
-        </div>
-        <div className="closing-mark reveal">
-          <p className="closing-brand">OperateOS</p>
-          <h3>{copy.ownership.closing}<br />{copy.ownership.closingSecond}</h3>
-          <div className="closing-actions">
-            <a className="cta-primary" href={copy.beta.cards[0][4]}>{copy.ownership.primaryCta}</a>
-            <a className="cta-secondary" href={copy.beta.cards[1][4]}>{copy.ownership.secondaryCta}</a>
-          </div>
-          <small>{copy.ownership.access}</small>
-        </div>
-      </section>
+      <section className="closing inverse" id="beta" aria-labelledby="closing-title"><div className="wrap"><h2 id="closing-title">{copy.closing.title.map(line => <span key={line}>{line}</span>)}</h2><div className="closing-bottom"><p>{copy.closing.body}</p><span className="closing-os" aria-hidden="true">OS</span></div></div></section>
     </main>
-  );
+    <footer className="site-footer wrap"><a className="brand" href="#top">Company<span>OS</span></a><p>{copy.closing.note}</p><a className="back-top" href="#top" aria-label={copy.closing.top}><ArrowUp size={22} /></a></footer>
+  </div>;
 }
