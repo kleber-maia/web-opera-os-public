@@ -95,7 +95,7 @@ export default function Home() {
           </div>
         </div>
         <div className="hero-index" role="group" aria-label={copy.hero.intro}>
-          {copy.hero.tabs.map((label, index) => { const Icon = partIcons[index]; return <button key={index} type="button" className={selectedPart === index ? "selected" : ""} aria-pressed={selectedPart === index} onClick={() => { setActivePart(index); setSelectedPart(index); setPaused(false); }}><Icon size={22} aria-hidden="true" /><span>{label}</span><ArrowUpRight size={18} aria-hidden="true" /></button>; })}
+          {[0, 2, 1].map(index => { const label = copy.hero.tabs[index]; const Icon = partIcons[index]; return <button key={index} type="button" className={selectedPart === index ? "selected" : ""} aria-pressed={selectedPart === index} onClick={() => { setActivePart(index); setSelectedPart(index); setPaused(false); }}><Icon size={22} aria-hidden="true" /><span>{label}</span><ArrowUpRight size={18} aria-hidden="true" /></button>; })}
         </div>
         <p className="hero-context" aria-live="polite">{selectedPart === null ? copy.hero.intro : copy.hero.descriptions[activePart]}</p>
       </section>
