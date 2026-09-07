@@ -138,11 +138,11 @@ export default function Home() {
       <section className="team-section inverse" id="work" aria-labelledby="team-title"><div className="wrap">
         <div className="team-intro"><div className="team-art motion-art"><img src="/art/companyos-team.jpg" alt="OS Agent + OS Dev" width="1536" height="1024" loading="lazy" /></div><div className="team-heading reveal"><p className="eyebrow">{copy.team.kicker}</p><h2 id="team-title">{copy.team.title}</h2><p className="section-body">{copy.team.body}</p></div></div>
         <div className="team-roles">{[false, true].map(dev => <article className="team-role reveal" key={String(dev)}><div className="role-title"><span className="agent-name">{dev ? "OS Dev" : "OS Agent"}</span><h3>{dev ? copy.team.devRole : copy.team.agentRole}</h3></div><p>{dev ? copy.team.devBody : copy.team.agentBody}</p><ul>{(dev ? copy.team.devTasks : copy.team.agentTasks).map(task => <li key={task}><Check size={15} aria-hidden="true" />{task}</li>)}</ul></article>)}</div><p className="team-note reveal">{copy.team.note}</p>
-        <section className="customization-section" aria-labelledby="customization-title">
+        </div></section>
+        <section className="customization-section wrap section-space" aria-labelledby="customization-title">
           <div className="customization-intro reveal"><p className="eyebrow">{copy.customization.kicker}</p><h2 id="customization-title">{copy.customization.title}</h2><p className="section-body">{copy.customization.body}</p><blockquote>{copy.customization.request}</blockquote></div>
           <div className="customization-process"><ol>{copy.customization.steps.map(([title, body]) => <li className="reveal" key={title}><h3>{title}</h3><p>{body}</p></li>)}</ol><p className="control-note reveal"><Check size={22} aria-hidden="true" />{copy.customization.control}</p></div>
         </section>
-      </div></section>
 
       <section className="story-section wrap section-space" aria-labelledby="story-title"><div className="story-heading reveal"><h2 id="story-title">{copy.story.title}</h2><p className="section-body">{copy.story.body}</p></div><div className="story-layout"><div className="story-request reveal"><blockquote>{copy.story.request}</blockquote><figure className="story-proof"><ProductDevices desktop="/product/calendar-desktop.png" alt={copy.system.alt[2]} /><figcaption>{copy.story.caption}</figcaption></figure></div><div className="story-steps reveal">{copy.story.steps.map(([title, body]) => <div key={title}><ArrowUpRight size={22} aria-hidden="true" /><div><h3>{title}</h3><p>{body}</p></div></div>)}</div></div></section>
 

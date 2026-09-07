@@ -369,3 +369,6 @@ figcaption { color: var(--muted); font-size: 10px; line-height: 1.6; margin-top:
 @media (max-width: 1200px) { .hero-copy > .hero-context { max-width: 300px; } }
 @media (max-width: 900px) { .hero-copy > .hero-context { max-width: 270px; } }
 @media (max-width: 650px) { .hero-copy > .hero-context { font-size: 17px; max-width: 100%; min-height: 4.5em; margin: 18px 0 8px; } .hero-index { margin-bottom: 30px; } }
+
+.customization-section.wrap { margin-top: 0; padding-block: 80px; border-top: 0; border-bottom: 1px solid var(--line); }
+@media (max-width: 650px) { .customization-section.wrap { padding-block: 60px; } }
