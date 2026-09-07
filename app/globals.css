@@ -283,3 +283,51 @@ figcaption { color: var(--muted); font-size: 10px; line-height: 1.6; margin-top:
 
 /* One brand violet on every surface; small inverse labels use neutral ink for contrast. */
 .inverse .eyebrow, .inverse .agent-name { color: var(--ink); }
+
+/* Independent artwork layers assemble bottom-up, then hold for reading. */
+.hero-art-camera { position: relative; }
+.assembly-still { display: block; width: 100%; height: 100%; }
+.assembly-stage { position: absolute; inset: 0; display: none; }
+.hero-art .assembly-layer { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; mask-image: none; animation: none; }
+@media (prefers-reduced-motion: no-preference) {
+  [data-assembly-ready=true] .assembly-still { visibility: hidden; }
+  [data-assembly-ready=true] .assembly-stage { display: block; }
+  .hero-art .assembly-still img { animation: none; }
+  .hero-art .assembly-work { animation: assemble-work 14s infinite both; }
+  .hero-art .assembly-agents { animation: assemble-agents 14s infinite both; }
+  .hero-art .assembly-system { animation: assemble-system 14s infinite both; }
+  .hero-art .assembly-layer { animation-play-state: paused; animation-timing-function: cubic-bezier(.22,.7,.2,1); }
+  .hero-art.in-view .assembly-layer { animation-play-state: running; }
+  @keyframes assemble-work {
+    0%, 8%, 100% { opacity: 0; transform: translateY(-9%); }
+    18%, 84% { opacity: 1; transform: translateY(0); }
+    95% { opacity: 0; transform: translateY(-9%); }
+  }
+  @keyframes assemble-agents {
+    0%, 21%, 100% { opacity: 0; transform: translateY(-12%); }
+    33%, 81% { opacity: 1; transform: translateY(0); }
+    92% { opacity: 0; transform: translateY(-12%); }
+  }
+  @keyframes assemble-system {
+    0%, 36%, 100% { opacity: 0; transform: translateY(-15%); }
+    49%, 78% { opacity: 1; transform: translateY(0); }
+    89% { opacity: 0; transform: translateY(-15%); }
+  }
+}
+
+.assembly-stage { top: 50%; bottom: auto; height: auto; aspect-ratio: 1.5; transform: translateY(-50%); }
+.hero-art .assembly-computer { clip-path: url(#cut-computer); }
+.hero-art .assembly-work { clip-path: url(#cut-work); }
+.hero-art .assembly-agents { clip-path: url(#cut-agents); }
+.hero-art .assembly-system { clip-path: url(#cut-system); }
+.hero-art .assembly-work { translate: 0 6%; }
+
+/* The hero index takes over the assembly; Play returns to the automatic story. */
+.hero-art:not([data-selection="auto"]) .assembly-layer { animation: none; transition: opacity .5s ease, transform .8s cubic-bezier(.22,.7,.2,1); opacity: 1; transform: translateY(0); }
+.hero-art[data-selection="0"] .assembly-work,
+.hero-art[data-selection="0"] .assembly-agents,
+.hero-art[data-selection="0"] .assembly-system,
+.hero-art[data-selection="1"] .assembly-agents { opacity: 0; transform: translateY(-12%); }
+.hero-art[data-selection="1"] .assembly-system { transition-delay: .18s; }
+.hero-art[data-selection="2"] .assembly-agents { transition-delay: .1s; }
+@media (prefers-reduced-motion: reduce) { .hero-art .assembly-layer { transition: none !important; } }

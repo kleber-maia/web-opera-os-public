@@ -73,8 +73,10 @@ The two tunnels run as persistent macOS user services. Their configurations are 
 
 Approved visual direction C: bold editorial typography, ivory, blue-violet, and deliberately inverted dark sections. Locally bundled Anton and Geist fonts. Screenshots are small evidence of the real product, not a feature demo.
 
-The hero uses generated 3D artwork with subtle camera movement and selectable focal areas. It is an animated raster composition, not an interactive WebGL model. Motion pauses offscreen, on hidden tabs, with the pause control, or under reduced-motion preferences.
+The hero assembles four independently masked artwork layers bottom-up: computer, work, agents, then the upper system modules. The 14-second sequence holds the completed stack before repeating; the hero index selects computer-only, business layers, or the complete team, and Play returns to automatic assembly. The original still is retained for reduced motion and failed layer loads. It is an animated raster composition, not an interactive WebGL model. Motion pauses offscreen, on hidden tabs, with the pause control, or under reduced-motion preferences.
 
 Assets in `public/art/` were produced using the built-in image generation tool. Prompts: a matte charcoal computer with interlocking ivory business modules and blue-violet OS Agent / OS Dev components; a dark close-up of the two blue-violet agent components installed in a shared system. The approved direction uses color #7052F5 on ivory #F4F2EB and charcoal #17151E.
 
 `public/product/` contains the supplied early product screenshots. Only home and calendar are shown as secondary proof. Captions identify the evolving interface. No fictional customer endorsements or performance statistics are used.
+
+Assembly assets: `public/art/assembly-{computer,work,agents,system}.jpg`. Generated with the built-in image tool from the original sculpture, then encoded for delivery. Prompt: isolate only the named component, retaining canvas, perspective, materials, lettering, and position; remove all other objects. The generated background is excluded with SVG outline masks in the component.
