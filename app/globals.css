@@ -1,6 +1,6 @@
 /* Approved direction C: editorial type, ivory, blue-violet, and deliberate dark chapters.
    Design variance 8 / motion 6 / density 3. No site-wide theme toggle: section inversion is intentional. */
-:root { color-scheme: light; --paper: #f4f2eb; --ink: #19171d; --muted: #605d65; --line: #cfccc6; --accent: #7052f5; --accent-text: #593acb; --display: 'Anton', Impact, sans-serif; font-family: 'Geist Variable', Arial, sans-serif; font-synthesis: none; }
+:root { color-scheme: light; --paper: #f4f2eb; --ink: #19171d; --muted: #605d65; --line: #cfccc6; --accent: #6f50f3; --accent-text: var(--accent); --display: 'Anton', Impact, sans-serif; font-family: 'Geist Variable', Arial, sans-serif; font-synthesis: none; }
 * { box-sizing: border-box; }
 html { background: var(--paper); scroll-behavior: smooth; scroll-padding-top: 24px; }
 body { margin: 0; background: var(--paper); color: var(--ink); -webkit-font-smoothing: antialiased; font-size: 16px; }
@@ -51,7 +51,7 @@ h1 > span { display: block; white-space: nowrap; }
 .hero-index button.selected { color: var(--accent-text); }
 .hero-index button:hover { color: var(--accent-text); }
 .hero-context { font-size: 13px; line-height: 1.65; color: var(--muted); min-height: 22px; margin: 0 0 46px; }
-.inverse { color-scheme: dark; --ink: #f4f2eb; --muted: #b9b4c2; --line: #48424f; --accent-text: #9d7bea; background: #17151e; color: var(--ink); }
+.inverse { color-scheme: dark; --ink: #f4f2eb; --muted: #b9b4c2; --line: #48424f; --accent-text: var(--accent); background: #17151e; color: var(--ink); }
 h2 { font-size: clamp(44px, 5.1vw, 76px); line-height: 1.03; letter-spacing: -.055em; }
 h3 { font-size: 30px; line-height: 1.12; letter-spacing: -1.1px; }
 .section-body { font-size: 18px; color: var(--muted); line-height: 1.7; letter-spacing: -.3px; }
@@ -74,7 +74,7 @@ h3 { font-size: 30px; line-height: 1.12; letter-spacing: -1.1px; }
 .module-pieces { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; transform: rotateX(26deg) rotateZ(-10deg); width: 91%; padding-bottom: 40px; }
 .module-piece { background: #e5e1d8; border: 1px solid #d9d4c9; border-radius: 6px; padding: 25px 22px; min-height: 93px; box-shadow: 0 8px 0 #c7c0b3, 5px 13px 12px rgba(48,36,18,.07); display: flex; justify-content: space-between; align-items: center; gap: 20px; font-size: 18px; letter-spacing: -.6px; }
 .module-piece svg { flex-shrink: 0; }
-.piece-2, .piece-3 { background: #7052f5; border-color: #7356ec; color: #faf9f6; box-shadow: 0 8px 0 #4c35a9, 5px 13px 12px rgba(48,36,18,.07); }
+.piece-2, .piece-3 { background: var(--accent); border-color: var(--accent); color: #faf9f6; box-shadow: 0 8px 0 #4c35a9, 5px 13px 12px rgba(48,36,18,.07); }
 .piece-4 { transform: translateX(-8px); }
 .piece-5 { transform: translateX(9px); }
 .module-open { height: 77px; border: 1px dashed #afa79a; grid-column: 1 / -1; display: grid; place-items: center; color: var(--accent-text); margin-top: 12px; border-radius: 6px; }
@@ -84,7 +84,7 @@ h3 { font-size: 30px; line-height: 1.12; letter-spacing: -1.1px; }
 /* Cropped space-black laptop and phone: real product pixels, responsive shells. */
 .product-proof { width: 450px; max-width: 100%; margin-top: 32px; }
 .device-composition { position: relative; aspect-ratio: 1.5; isolation: isolate; overflow: hidden; padding-top: 8px; }
-.device-composition::before { content: ''; position: absolute; inset: auto 4% 2% 9%; height: 9%; background: #7052f5; opacity: .12; filter: blur(14px); border-radius: 50%; }
+.device-composition::before { content: ''; position: absolute; inset: auto 4% 2% 9%; height: 9%; background: var(--accent); opacity: .12; filter: blur(14px); border-radius: 50%; }
 .device-laptop { position: absolute; width: 100%; left: 4%; top: 5%; transform: rotate(-2deg); }
 .device-pair .device-laptop { width: 104%; left: 15%; top: 6%; }
 .laptop-lid { position: relative; padding: 2.3% 1.7% 2%; background: linear-gradient(135deg, #46454a, #121215 18%, #252529 85%, #55545a); border: 1px solid #646269; border-radius: 13px 13px 5px 5px; box-shadow: 0 6px 12px #19171d20; }
@@ -138,10 +138,10 @@ figcaption { color: var(--muted); font-size: 10px; line-height: 1.6; margin-top:
 .closing { background: #28203c; padding-block: 85px 55px; }
 .closing h2 { font-family: var(--display); font-weight: 400; font-size: clamp(65px, 8.5vw, 130px); line-height: 1.1; letter-spacing: -.02em; }
 .closing h2 > span { display: block; }
-.closing h2 > span:last-child { color: #9d7bea; }
+.closing h2 > span:last-child { color: var(--accent); }
 .closing-bottom { display: flex; justify-content: space-between; align-items: flex-end; margin-top: 45px; }
 .closing-bottom > p { color: var(--muted); font-size: 16px; line-height: 1.7; max-width: 360px; }
-.closing-os { font-family: var(--display); font-size: 80px; line-height: .85; letter-spacing: -5px; color: #9d7bea; }
+.closing-os { font-family: var(--display); font-size: 80px; line-height: .85; letter-spacing: -5px; color: var(--accent); }
 .site-footer { min-height: 120px; display: flex; align-items: center; gap: 30px; }
 .site-footer .brand { font-size: 23px; }
 .site-footer > p { margin-left: auto; color: var(--muted); font-size: 12px; }
@@ -280,3 +280,6 @@ figcaption { color: var(--muted); font-size: 10px; line-height: 1.6; margin-top:
   .back-top { margin-left: auto; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } .will-reveal { opacity: 1; transform: none; } }
+
+/* One brand violet on every surface; small inverse labels use neutral ink for contrast. */
+.inverse .eyebrow, .inverse .agent-name { color: var(--ink); }
