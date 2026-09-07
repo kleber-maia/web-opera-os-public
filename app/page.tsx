@@ -16,7 +16,7 @@ const partIcons = [DesktopTower, Stack, UsersThree];
 
 // CSS device shells keep the supplied screenshots intact and easy to replace.
 function ProductDevices({ desktop, alt, phoneAlt }: { desktop: string; alt: string; phoneAlt?: string }) {
-  return <div className={`device-composition${phoneAlt ? " device-pair" : ""}`}>
+  return <div className={`device-composition scroll-art${phoneAlt ? " device-pair" : ""}`}>
     <div className="device-laptop"><div className="laptop-lid"><div className="laptop-display"><img src={desktop} alt={alt} loading="lazy" width="4096" height="2124" /></div></div><div className="laptop-base" /></div>
     {phoneAlt && <div className="device-phone"><div className="phone-display"><img src="/product/inbox-mobile.png" alt={phoneAlt} loading="lazy" width="864" height="1884" /></div><span className="phone-island" aria-hidden="true" /></div>}
   </div>;
@@ -88,9 +88,14 @@ export default function Home() {
       if (entry.target.classList.contains("motion-art")) entry.target.classList.toggle("in-view", entry.isIntersecting);
     }), { threshold: .06 });
     page.current.querySelectorAll<HTMLElement>(".reveal, .motion-art").forEach(element => { if (element.classList.contains("reveal")) element.classList.add("will-reveal"); observer.observe(element); });
+    const artObserver = new IntersectionObserver(entries => entries.forEach(entry => {
+      if (entry.intersectionRatio >= .2) entry.target.classList.add("scroll-active");
+      else if (!entry.isIntersecting) entry.target.classList.remove("scroll-active");
+    }), { threshold: [0, .2] });
+    page.current.querySelectorAll(".scroll-art").forEach(element => artObserver.observe(element));
     const visibility = () => { page.current?.classList.toggle("document-hidden", document.hidden); };
     document.addEventListener("visibilitychange", visibility);
-    return () => { observer.disconnect(); document.removeEventListener("visibilitychange", visibility); };
+    return () => { observer.disconnect(); artObserver.disconnect(); document.removeEventListener("visibilitychange", visibility); };
   }, []);
   return <div ref={page} className="site" data-paused={paused}>
     <a className="skip-link" href="#content">{copy.skip}</a>
@@ -136,7 +141,7 @@ export default function Home() {
       </section>
 
       <section className="team-section inverse" id="work" aria-labelledby="team-title"><div className="wrap">
-        <div className="team-intro"><div className="team-art motion-art"><img src="/art/companyos-team.jpg" alt="OS Agent + OS Dev" width="1536" height="1024" loading="lazy" /></div><div className="team-heading reveal"><p className="eyebrow">{copy.team.kicker}</p><h2 id="team-title">{copy.team.title}</h2><p className="section-body">{copy.team.body}</p></div></div>
+        <div className="team-intro"><div className="team-art scroll-art"><img src="/art/companyos-team.jpg" alt="OS Agent + OS Dev" width="1536" height="1024" loading="lazy" /></div><div className="team-heading reveal"><p className="eyebrow">{copy.team.kicker}</p><h2 id="team-title">{copy.team.title}</h2><p className="section-body">{copy.team.body}</p></div></div>
         <div className="team-roles">{[false, true].map(dev => <article className="team-role reveal" key={String(dev)}><div className="role-title"><span className="agent-name">{dev ? "OS Dev" : "OS Agent"}</span><h3>{dev ? copy.team.devRole : copy.team.agentRole}</h3></div><p>{dev ? copy.team.devBody : copy.team.agentBody}</p><ul>{(dev ? copy.team.devTasks : copy.team.agentTasks).map(task => <li key={task}><Check size={15} aria-hidden="true" />{task}</li>)}</ul></article>)}</div><p className="team-note reveal">{copy.team.note}</p>
         </div></section>
         <section className="customization-section wrap section-space" aria-labelledby="customization-title">
