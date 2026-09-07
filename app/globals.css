@@ -400,3 +400,25 @@ html { scroll-padding-top: 110px; }
   .module-composition.scroll-active .module-open { animation-delay: .48s; }
   @keyframes module-settle { from { translate: 0 36px; } to { translate: 0 0; } }
 }
+
+/* Full page navigation, with an expandable menu on narrower screens. */
+.site-header nav { gap: 24px; }
+.site-header nav a { font-size: 13px; }
+.menu-toggle { display: none; }
+@media (max-width: 1100px) {
+  .site-header { flex-wrap: wrap; height: auto; min-height: 75px; padding-block: 20px; column-gap: 22px; row-gap: 0; }
+  .menu-toggle { display: inline-flex; align-items: center; gap: 8px; margin-left: auto; padding: 7px 0; font-size: 14px; }
+  .menu-toggle[aria-expanded=true] svg { transform: rotate(180deg); }
+  .site-header .language { margin-left: 0; }
+  .site-header nav { display: none; order: 4; width: 100%; margin: 18px 0 0; padding-top: 14px; border-top: 1px solid var(--line); }
+  .site-header nav[data-open=true] { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
+  .site-header nav a { padding-block: 12px; font-size: 15px; }
+}
+@media (max-width: 650px) { .site-header { min-height: 70px; padding-block: 17px; } .site-header nav[data-open=true] { grid-template-columns: 1fr; } }
+
+/* Fill the opening viewport; content can grow beyond it on short screens. */
+.hero { min-height: calc(100svh - 86px); display: flex; flex-direction: column; }
+.hero-main { flex: 1; }
+.hero-index { flex-shrink: 0; }
+@media (max-width: 1100px) { .hero { min-height: calc(100svh - 78px); } }
+@media (max-width: 650px) { .hero { min-height: calc(100svh - 72px); } .hero-main { justify-content: space-between; } }

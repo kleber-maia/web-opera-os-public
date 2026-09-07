@@ -52,6 +52,12 @@ export default function Home() {
   const [activePart, setActivePart] = useState(0);
   const [selectedPart, setSelectedPart] = useState<number | null>(null);
   const [paused, setPaused] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  useEffect(() => {
+    const closeOnEscape = (event: KeyboardEvent) => { if (event.key === "Escape") setMenuOpen(false); };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, []);
   const page = useRef<HTMLDivElement>(null);
   const playbackTime = useRef(0);
   useEffect(() => {
@@ -101,8 +107,9 @@ export default function Home() {
     <a className="skip-link" href="#content">{copy.skip}</a>
     <header className="site-header wrap" id="top">
       <a className="brand" href="#top" aria-label="CompanyOS">Company<span>OS</span></a>
-      <nav aria-label={locale === "en" ? "Main navigation" : locale === "pt-BR" ? "Navegação principal" : "Navegación principal"}>
-        {copy.nav.map((label, index) => <a key={index} href={["#ownership", "#system", "#work"][index]}>{label}</a>)}
+      <button className="menu-toggle" type="button" aria-expanded={menuOpen} aria-controls="main-nav" onClick={() => setMenuOpen(!menuOpen)}>{copy.menu}<CaretDown size={16} aria-hidden="true" /></button>
+      <nav id="main-nav" data-open={menuOpen} aria-label={locale === "en" ? "Main navigation" : locale === "pt-BR" ? "Navegação principal" : "Navegación principal"}>
+        {copy.nav.map((label, index) => <a key={index} href={["#why", "#ownership", "#system", "#work", "#customization", "#story"][index]} onClick={() => setMenuOpen(false)}>{label}</a>)}
       </nav>
       <label className="language"><span className="sr-only">{copy.language}</span><select aria-label={copy.language} value={locale} onChange={event => setLocale(event.target.value as Locale)}><option value="en">EN</option><option value="pt-BR">PT</option><option value="es-419">ES</option></select><CaretDown size={13} aria-hidden="true" /></label>
     </header>
@@ -121,7 +128,7 @@ export default function Home() {
         
       </section>
 
-      <section className="why-section wrap section-space" aria-labelledby="why-title">
+      <section id="why" className="why-section wrap section-space" aria-labelledby="why-title">
         <div className="why-heading reveal"><p className="eyebrow">{copy.why.kicker}</p><h2 id="why-title">{copy.why.title}</h2><p className="section-body">{copy.why.body}</p></div>
         <div className="why-points">{copy.why.points.map(([title, body], index) => <article className="reveal" key={title}><span className="reason-number" aria-hidden="true">0{index + 1}</span><div><h3>{title}</h3><p>{body}</p></div></article>)}</div>
       </section>
@@ -144,12 +151,12 @@ export default function Home() {
         <div className="team-intro"><div className="team-art scroll-art"><img src="/art/companyos-team.jpg" alt="OS Agent + OS Dev" width="1536" height="1024" loading="lazy" /></div><div className="team-heading reveal"><p className="eyebrow">{copy.team.kicker}</p><h2 id="team-title">{copy.team.title}</h2><p className="section-body">{copy.team.body}</p></div></div>
         <div className="team-roles">{[false, true].map(dev => <article className="team-role reveal" key={String(dev)}><div className="role-title"><span className="agent-name">{dev ? "OS Dev" : "OS Agent"}</span><h3>{dev ? copy.team.devRole : copy.team.agentRole}</h3></div><p>{dev ? copy.team.devBody : copy.team.agentBody}</p><ul>{(dev ? copy.team.devTasks : copy.team.agentTasks).map(task => <li key={task}><Check size={15} aria-hidden="true" />{task}</li>)}</ul></article>)}</div><p className="team-note reveal">{copy.team.note}</p>
         </div></section>
-        <section className="customization-section wrap section-space" aria-labelledby="customization-title">
+        <section id="customization" className="customization-section wrap section-space" aria-labelledby="customization-title">
           <div className="customization-intro reveal"><p className="eyebrow">{copy.customization.kicker}</p><h2 id="customization-title">{copy.customization.title}</h2><p className="section-body">{copy.customization.body}</p><blockquote>{copy.customization.request}</blockquote></div>
           <div className="customization-process"><ol>{copy.customization.steps.map(([title, body]) => <li className="reveal" key={title}><h3>{title}</h3><p>{body}</p></li>)}</ol><p className="control-note reveal"><Check size={22} aria-hidden="true" />{copy.customization.control}</p></div>
         </section>
 
-      <section className="story-section wrap section-space" aria-labelledby="story-title"><div className="story-heading reveal"><h2 id="story-title">{copy.story.title}</h2><p className="section-body">{copy.story.body}</p></div><div className="story-layout"><div className="story-request reveal"><blockquote>{copy.story.request}</blockquote><figure className="story-proof"><ProductDevices desktop="/product/calendar-desktop.png" alt={copy.system.alt[2]} /><figcaption>{copy.story.caption}</figcaption></figure></div><div className="story-steps reveal">{copy.story.steps.map(([title, body]) => <div key={title}><ArrowUpRight size={22} aria-hidden="true" /><div><h3>{title}</h3><p>{body}</p></div></div>)}</div></div></section>
+      <section id="story" className="story-section wrap section-space" aria-labelledby="story-title"><div className="story-heading reveal"><h2 id="story-title">{copy.story.title}</h2><p className="section-body">{copy.story.body}</p></div><div className="story-layout"><div className="story-request reveal"><blockquote>{copy.story.request}</blockquote><figure className="story-proof"><ProductDevices desktop="/product/calendar-desktop.png" alt={copy.system.alt[2]} /><figcaption>{copy.story.caption}</figcaption></figure></div><div className="story-steps reveal">{copy.story.steps.map(([title, body]) => <div key={title}><ArrowUpRight size={22} aria-hidden="true" /><div><h3>{title}</h3><p>{body}</p></div></div>)}</div></div></section>
 
       <section className="closing inverse" id="beta" aria-labelledby="closing-title"><div className="wrap"><h2 id="closing-title">{copy.closing.title.map(line => <span key={line}>{line}</span>)}</h2><div className="closing-bottom"><p>{copy.closing.body}</p><span className="closing-os" aria-hidden="true">OS</span></div></div></section>
     </main>
