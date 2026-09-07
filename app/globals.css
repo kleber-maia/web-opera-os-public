@@ -363,3 +363,9 @@ figcaption { color: var(--muted); font-size: 10px; line-height: 1.6; margin-top:
   .customization-intro .section-body { font-size: 15px; }
   .customization-intro blockquote { font-size: 23px; }
 }
+
+.hero-copy > .hero-context { color: var(--accent); font-size: clamp(16px, 1.4vw, 20px); font-weight: 450; line-height: 1.5; letter-spacing: -.3px; max-width: 370px; min-height: 4.5em; margin: 20px 0 28px; padding: 0; border: 0; }
+.hero-index { margin-bottom: 40px; }
+@media (max-width: 1200px) { .hero-copy > .hero-context { max-width: 300px; } }
+@media (max-width: 900px) { .hero-copy > .hero-context { max-width: 270px; } }
+@media (max-width: 650px) { .hero-copy > .hero-context { font-size: 17px; max-width: 100%; min-height: 4.5em; margin: 18px 0 8px; } .hero-index { margin-bottom: 30px; } }
