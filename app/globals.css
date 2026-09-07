@@ -422,3 +422,27 @@ html { scroll-padding-top: 110px; }
 .hero-index { flex-shrink: 0; }
 @media (max-width: 1100px) { .hero { min-height: calc(100svh - 78px); } }
 @media (max-width: 650px) { .hero { min-height: calc(100svh - 72px); } .hero-main { justify-content: space-between; } }
+
+/* Let the composition occupy the viewport-height hero, not just its wrapper. */
+@media (min-width: 651px) {
+  .hero-main { display: flex; align-items: center; }
+  .hero-copy { padding-block: 35px; }
+  .hero-art { top: 50%; transform: translateY(-50%); height: 100%; width: 78%; right: -10%; }
+  .hero-art-camera { display: grid; place-items: center; }
+  .hero-art .assembly-stage { width: 100%; }
+  .hero-copy > p { max-width: 390px; }
+  .hero-copy > .hero-context { max-width: 390px; }
+}
+@media (min-width: 901px) and (min-height: 850px) {
+  .hero h1 { font-size: clamp(100px, 11.7vw, 180px); }
+  html:lang(es-419) .hero h1 { font-size: clamp(90px, 10.7vw, 165px); }
+  .hero-copy > p { font-size: clamp(21px, 1.85vw, 28px); }
+  .hero-copy > .hero-context { font-size: clamp(18px, 1.55vw, 23px); }
+}
+@media (min-width: 651px) and (max-width: 900px) {
+  .hero-copy > p, .hero-copy > .hero-context { max-width: 270px; }
+}
+@media (max-width: 650px) {
+  .hero-art { flex: 1; min-height: 285px; }
+  .hero-art-camera { min-height: 285px; }
+}
