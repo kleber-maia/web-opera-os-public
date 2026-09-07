@@ -97,7 +97,7 @@ h3 { font-size: 30px; line-height: 1.12; letter-spacing: -1.1px; }
 .phone-display { height: 100%; overflow: hidden; position: relative; border-radius: 15px; background: #edeef0; }
 .phone-display img { position: absolute; width: 100%; height: auto; top: -4%; }
 .phone-island { position: absolute; width: 31%; height: 5px; border-radius: 6px; background: #111114; left: 34.5%; top: 7px; }
-figcaption { color: var(--muted); font-size: 10px; line-height: 1.6; margin-top: 10px; max-width: 340px; }
+figcaption { color: var(--muted); font-size: 12px; line-height: 1.6; margin-top: 10px; max-width: 340px; }
 .import-section { display: grid; grid-template-columns: 1fr 1.15fr; gap: 100px; border-top: 1px solid var(--line); padding-top: 50px; margin-top: 70px; align-items: center; }
 .import-copy h3 { max-width: 390px; }
 .import-copy p { margin-top: 19px; color: var(--muted); font-size: 15px; line-height: 1.8; }
@@ -221,7 +221,7 @@ figcaption { color: var(--muted); font-size: 10px; line-height: 1.6; margin-top:
   .hero-art img { object-fit: contain; }
   .motion-toggle { right: 23px; bottom: 8px; width: 30px; height: 30px; }
   .hero-index { border-top-width: 1px; }
-  .hero-index button { font-size: 11px; line-height: 1.4; gap: 8px; padding: 18px 10px; justify-content: center; }
+  .hero-index button { font-size: 12px; line-height: 1.4; gap: 8px; padding: 18px 10px; justify-content: center; }
   .hero-index button svg:first-child { width: 18px; height: 18px; flex-shrink: 0; }
   .hero-index button svg:last-child { display: none; }
   .hero-context { font-size: 17px; line-height: 1.55; min-height: 4.65em; padding-left: 14px; margin: 8px 0 32px; }
@@ -249,11 +249,11 @@ figcaption { color: var(--muted); font-size: 10px; line-height: 1.6; margin-top:
   .import-copy h3 { font-size: 29px; }
   .import-flow { gap: 10px; justify-content: flex-start; }
   .import-sources { gap: 14px; }
-  .import-sources span { font-size: 11px; gap: 8px; }
+  .import-sources span { font-size: 12px; gap: 8px; }
   .import-arrow { width: 24px; }
   .import-end { min-width: 0; }
   .import-end > span { font-size: 18px; }
-  .import-end small { font-size: 10px; max-width: 100px; line-height: 1.6; }
+  .import-end small { font-size: 12px; max-width: 100px; line-height: 1.6; }
   .team-section { padding-block: 60px; }
   .team-intro { display: flex; flex-direction: column-reverse; gap: 20px; }
   .team-heading h2 { font-size: 42px; }
@@ -276,7 +276,7 @@ figcaption { color: var(--muted); font-size: 10px; line-height: 1.6; margin-top:
   .closing-bottom > p { max-width: 245px; font-size: 14px; }
   .closing-os { font-size: 60px; letter-spacing: -3px; }
   .site-footer { padding-block: 28px; flex-wrap: wrap; gap: 24px; }
-  .site-footer > p { order: 3; width: 100%; margin: 0; font-size: 11px; line-height: 1.7; }
+  .site-footer > p { order: 3; width: 100%; margin: 0; font-size: 12px; line-height: 1.7; }
   .back-top { margin-left: auto; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } .will-reveal { opacity: 1; transform: none; } }
