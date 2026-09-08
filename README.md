@@ -1,6 +1,6 @@
-# CompanyOS website
+# CompanyONE website
 
-The public website for CompanyOS: a private, adaptable ERP and CRM for small businesses with OS Agent for business work and OS Dev for extending the system. It is a pure client-side React site compiled by Vite into static HTML, CSS, and JavaScript for GitHub Pages.
+The public website for CompanyONE: a private, adaptable ERP and CRM for small businesses with Agent One for business work and Dev One for extending the system. It is a pure client-side React site compiled by Vite into static HTML, CSS, and JavaScript for GitHub Pages.
 
 ## Repository workflow
 
@@ -61,10 +61,10 @@ The two tunnels run as persistent macOS user services. Their configurations are 
 
 ## Copy conventions
 
-- CompanyOS is a company operating system for small-business owners.
+- CompanyONE is a company-owned information system for small-business owners.
 - The three parts are company-controlled infrastructure, a customizable information system, and AI agents on the team.
-- OS Agent handles business tasks. OS Dev helps customize, extend, and maintain the system.
-- CompanyOS runs on company hardware, on premises or with a company-selected cloud provider. Backups are automatic. This is a hosting claim, not a claim that all model processing happens locally.
+- Agent One handles business tasks. Dev One helps customize, extend, and maintain the system.
+- CompanyONE runs on company hardware, on premises or with a company-selected cloud provider. Backups are automatic. This is a hosting claim, not a claim that all model processing happens locally.
 - Existing data can be imported. ERP and CRM modules are starting points, not fixed product boundaries.
 - This page is an informational pamphlet. It intentionally has no sales, contact, or waitlist calls to action.
 - Keep English, Brazilian Portuguese, Latin American Spanish, and default metadata aligned.
@@ -75,7 +75,7 @@ Approved visual direction C: bold editorial typography, ivory, blue-violet, and 
 
 The hero assembles four independently masked artwork layers bottom-up: computer, team (work and agent layers), then the upper system modules. The 20-second sequence holds the completed stack before repeating; the hero index selects computer-only, team layers, or the complete system, and Play returns to automatic assembly. The original still is retained for reduced motion and failed layer loads. It is an animated raster composition, not an interactive WebGL model. Motion pauses offscreen, on hidden tabs, with the pause control, or under reduced-motion preferences.
 
-Assets in `public/art/` were produced using the built-in image generation tool. Prompts: a matte charcoal computer with interlocking ivory business modules and blue-violet OS Agent / OS Dev components; a dark close-up of the two blue-violet agent components installed in a shared system. The approved direction uses color #7052F5 on ivory #F4F2EB and charcoal #17151E.
+Assets in `public/art/` were produced using the built-in image generation tool. Prompts: a matte charcoal computer with interlocking ivory business modules and blue-violet Agent One / Dev One components; a dark close-up of the two blue-violet agent components installed in a shared system. The approved direction uses color #7052F5 on ivory #F4F2EB and charcoal #17151E.
 
 `public/product/` contains the supplied early product screenshots. Only home and calendar are shown as secondary proof. Captions identify the evolving interface. No fictional customer endorsements or performance statistics are used.
 
