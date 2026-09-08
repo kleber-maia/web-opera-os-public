@@ -93,6 +93,8 @@ export default function Home() {
     document.querySelector('meta[name="description"]')?.setAttribute("content", copy.meta.description);
     document.querySelector('meta[property="og:title"]')?.setAttribute("content", copy.meta.title);
     document.querySelector('meta[property="og:description"]')?.setAttribute("content", copy.meta.description);
+    document.querySelector('meta[name="twitter:title"]')?.setAttribute("content", copy.meta.title);
+    document.querySelector('meta[name="twitter:description"]')?.setAttribute("content", copy.meta.description);
     document.querySelector('meta[property="og:locale"]')?.setAttribute("content", locale === "pt-BR" ? "pt_BR" : locale === "es-419" ? "es_419" : "en_US");
     const url = new URL(window.location.href); url.searchParams.set("lang", locale); window.history.replaceState({}, "", url);
     try { localStorage.setItem("companyone-locale", locale); } catch { /* Storage is optional. */ }
