@@ -471,6 +471,11 @@ html { scroll-padding-top: 110px; }
 /* Leave room to scroll controls clear of floating mobile browser chrome. */
 @media (max-width: 650px) {
   html { scroll-padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px)); }
-  .hero { padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px)); }
   .site-footer { padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px)); }
+}
+
+@supports (height: 100dvh) {
+  @media (max-width: 650px) {
+    .hero { min-height: calc(100dvh - 70px); }
+  }
 }
